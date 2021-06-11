@@ -1,0 +1,63 @@
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.2rem;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  border-radius: 0.8rem;
+  font-weight: 500;
+
+  &-desc {
+    font-weight: 700;
+
+    > span {
+      display: block;
+      margin-top: 0.5rem;
+      font-weight: 400;
+    }
+  }
+
+  &-light {
+    background-color: #fff;
+    color: #161421;
+
+    &:hover,
+    &:focus {
+      color: rgba($color: #161421, $alpha: 0.7);
+    }
+  }
+
+  &-primary {
+    background-color: $primary;
+    color: #fff;
+
+    &:hover,
+    &:focus {
+      color: rgba($color: #fff, $alpha: 0.7);
+    }
+  }
+
+  &-opacity-primary {
+    background-color: rgba($color: $primary, $alpha: 0.3);
+    color: $primary;
+
+    &:hover,
+    &:focus {
+      background-color: rgba($color: $primary, $alpha: 0.5);
+    }
+  }
+
+  &-opacity-light {
+    background-color: rgba($color: #fff, $alpha: 0.4);
+    color: rgba($color: #fff, $alpha: 0.8);
+
+    &:hover,
+    &:focus {
+      background-color: rgba($color: #fff, $alpha: 0.5);
+    }
+  }
+}
