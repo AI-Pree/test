@@ -1,0 +1,24 @@
+{
+  "name": "ds-consulting",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "core-js": "^3.9.1",
+    "normalize.css": "^8.0.1",
+    "nuxt": "^2.15.3",
+    "nuxt-i18n": "^6.27.0",
+    "sass-loader": "10"
+  },
+  "devDependencies": {
+    "@nuxtjs/style-resources": "^1.1.0",
+    "fibers": "^5.0.0",
+    "node-sass": "^6.0.0",
+    "sass": "^1.34.1"
+  }
+}
