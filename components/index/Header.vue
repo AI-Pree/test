@@ -1,7 +1,7 @@
 <template>
   <section class="header">
     <div class="container">
-      <h2 class="section-title">(logo) (company_name) helps your FAMILY</h2>
+      <h2 class="section-title">(logo) NEXFIN helps your FAMILY</h2>
       <div class="total-deposited">
         <h3>$ 000.000.000.000</h3>
         <p>Total Deposited Value at HGEN</p>
