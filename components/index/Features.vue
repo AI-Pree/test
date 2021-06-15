@@ -1,7 +1,7 @@
 <template>
   <section class="features">
     <div class="container">
-      <h3 class="section-title">DeFi FEATURES</h3>
+      <h3 class="section-title">DEFi FEATURES</h3>
       <div class="feature-items">
         <div class="feature-item">
           <div class="feature-item-icon">
@@ -73,9 +73,11 @@ export default {
           justify-content: center;
           margin: 0 auto;
           padding: 1rem;
-          background: #1A194A;
-          box-shadow: 0px 0px 80px rgba(255, 255, 255, 0.3), 0px 0px 10px #793AFF;
-          border-radius: 2rem;
+          background: #14143A;
+          border: 1px solid #A634FF;
+          box-sizing: border-box;
+          box-shadow: 0 0 10px #B556FF;
+          border-radius: 8px;
 
           img {
             width: 70px;

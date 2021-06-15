@@ -4,7 +4,7 @@
       <div class="roadmap-content">
         <h3 class="section-title">Roadmap</h3>
         <p class="text-gray">
-          We have a strong integrated solution to bring our world to DeFi online platform, greatly reduces risks and environmental pollution, and results in more reliable power through the utilization of existing engineering art. 
+          We have a strong integrated solution to bring our world to DeFi online platform, greatly reduces risks and environmental pollution, and results in more reliable power through the utilization of existing engineering art.
         </p>
       </div>
       <div class="roadmap-steps">
@@ -61,18 +61,19 @@ export default {
       width: 70%;
       display: flex;
       background: linear-gradient(100.8deg, rgba(255, 255, 255, 0.11) 1.43%, rgba(255, 255, 255, 0) 101.28%);
-      border-radius: 4rem;
+      border-radius: 14px;
     }
 
     &-step {
       position: relative;
       width: 33.33%;
-      border-radius: 4rem;
+      border-radius: 14px;
       padding: 2rem;
 
       &.active {
-        background: #252242;
-        box-shadow: 0px 0px 80px rgba(255, 255, 255, 0.3), 0px 0px 10px #793AFF;
+        background: #151433;
+        box-shadow: 0 0 10px #8F00FF;
+        border-radius: 14px;
       }
 
       > img {

@@ -10,14 +10,16 @@
         <nav class="nav">
           <a href="#" @click.prevent.stop="toggle()" class="navbar-close"></a>
 
-          <a href="#" class="nav-link">{{ $t('nav.dashboard') }}</a>
-          <a href="#" class="nav-link">{{ $t('nav.participate') }}</a>
-          <a href="#" class="nav-link">{{ $t('nav.beginners_guide') }}</a>
-          <a href="#" class="nav-link">{{ $t('nav.documentation') }}</a>
-          <a href="#" class="nav-link">{{ $t('nav.whitepaper') }}</a>
+          <div class="nav-links">
+            <a href="#" class="nav-link">{{ $t('nav.dashboard') }}</a>
+            <a href="#" class="nav-link">{{ $t('nav.participate') }}</a>
+            <a href="#" class="nav-link">{{ $t('nav.beginners_guide') }}</a>
+            <a href="#" class="nav-link">{{ $t('nav.documentation') }}</a>
+            <a href="#" class="nav-link">{{ $t('nav.whitepaper') }}</a>
+          </div>
 
           <div class="nav-actions">
-            <a href="#" class="btn btn-light">{{ $t('nav.connect_wallet') }}</a>
+            <a href="#" class="btn btn-primary">{{ $t('nav.connect_wallet') }}</a>
             <LangDropdown />
           </div>
         </nav>
@@ -45,27 +47,39 @@ export default {
 <style lang="scss" scoped>
   .navbar {
     display: block;
-    
+
     .nav {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
       padding: 1.5rem 0;
 
-      &-link {
-        display: block;
-        padding: 0.5rem 0.8rem;
-        color: rgba($color: #fff, $alpha: 0.4);
-        text-decoration: none;
+      &-links {
+        @media (max-width: map-get($breakpoints, md)) {
+          display: flex;
+          flex-direction: column;
+          margin-top: 2vw;
+          margin-left: 0;
+        }
+        .nav-link {
+          text-transform: uppercase;
+          padding: 0.5rem 0.8rem;
+          color: rgba($color: #fff, $alpha: 0.4);
+          text-decoration: none;
 
-        &:hover,
-        &:focus {
-          color: rgba($color: #fff, $alpha: 0.5)
+          &:hover,
+          &:focus {
+            color: rgba($color: #fff, $alpha: 0.5)
+          }
         }
       }
 
       &-actions {
         margin-left: 2.5rem;
+        @media (max-width: map-get($breakpoints, md)) {
+          margin-top: 2vw;
+          margin-left: 0;
+        }
       }
     }
 

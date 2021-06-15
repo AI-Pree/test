@@ -28,7 +28,7 @@ export default {
       display: inline-block;
       font-size: 2.3rem;
       text-align: center;
-      background: linear-gradient(90deg, #2BDBBB 0%, #C260F4 100%);
+      background: linear-gradient(90deg, #00FFF0 0%, #A900FF 100%);
       color: transparent;
       -webkit-background-clip: text;
       background-clip: text;

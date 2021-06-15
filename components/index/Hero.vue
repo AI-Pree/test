@@ -10,7 +10,7 @@
             <a href="#" class="btn btn-opacity-primary">HGEN story on Medium</a>
           </div>
         </div>
-        <img src="~/assets/images/hero.png" alt="">
+        <img src="~/assets/images/hero1.png" alt="">
       </div>
     </div>
   </section>
@@ -28,7 +28,7 @@ export default {
     padding: 4rem;
     background: linear-gradient(100.8deg, rgba(255, 255, 255, 0.11) 1.43%, rgba(255, 255, 255, 0) 101.28%);
     border: solid 1px rgba($color: #fff, $alpha: 0.2);
-    border-radius: 3.5rem;
+    border-radius: 18px;
 
     &-content {
       width: 40%;
@@ -44,9 +44,9 @@ export default {
 
     > img {
       position: absolute;
-      right: 0;
-      top: -140px;
-      max-width: 570px;
+      right: -50px;
+      top: -145px;
+      max-width: 640px;
     }
 
     &-actions {
@@ -54,7 +54,7 @@ export default {
 
       > * {
         margin-bottom: 1rem;
-        
+
         &:not(:last-child) {
           margin-right: 1rem;
         }

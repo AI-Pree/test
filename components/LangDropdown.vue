@@ -1,6 +1,6 @@
 <template>
   <div :class="['dropdown', { open }]">
-    <a class="btn btn-opacity-light dropdown-toggle" href="#" @click.prevent="toggle()">
+    <a class="btn btn-opacity-primary dropdown-toggle" style="color: #fff" href="#" @click.prevent="toggle()">
       {{ $t('currentLang') }}
     </a>
 

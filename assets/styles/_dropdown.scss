@@ -2,6 +2,12 @@
   position: relative;
   display: inline-block;
 
+  @media (max-width: map-get($breakpoints, md)) {
+    width: 100%;
+    margin-top: 2vw;
+    margin-left: 0;
+  }
+
   &-toggle {
     padding-right: 2.2rem;
 
@@ -28,7 +34,7 @@
     left: 0;
     background-color: rgba($color: #fff, $alpha: 0.5);
     padding: 0.5rem 1rem;
-    border-radius: 0.8rem;
+    border-radius: 4px;
     list-style: none;
     margin: 2px 0 0 0;
     min-width: 100%;

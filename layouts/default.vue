@@ -1,10 +1,10 @@
 <template>
   <div>
-    <img src="~/assets/images/top-right.png" alt="" class="top-right-bg" />
+<!--    <img src="~/assets/images/top-right.png" alt="" class="top-right-bg" />-->
     <Nav />
     <Nuxt />
     <Footer />
-    <img src="~/assets/images/footer-bg.png" alt="" class="footer-bg" />
+<!--    <img src="~/assets/images/footer-bg.png" alt="" class="footer-bg" />-->
   </div>
 </template>
 

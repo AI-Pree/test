@@ -8,8 +8,14 @@
   cursor: pointer;
   user-select: none;
   background-color: transparent;
-  border-radius: 0.8rem;
+  box-shadow: 0 0 10px #B556FF;
+  border-radius: 4px;
   font-weight: 500;
+  text-transform: uppercase;
+
+  @media (max-width: map-get($breakpoints, md)) {
+    width: 100%;
+  }
 
   &-desc {
     font-weight: 700;
@@ -33,7 +39,7 @@
 
   &-primary {
     background-color: $primary;
-    color: #fff;
+    color: #141434;
 
     &:hover,
     &:focus {
@@ -42,8 +48,8 @@
   }
 
   &-opacity-primary {
-    background-color: rgba($color: $primary, $alpha: 0.3);
-    color: $primary;
+    background-color: rgba($color: $opacity-primary, $alpha: 0.9);
+    color: $opacity-primary-color;
 
     &:hover,
     &:focus {
