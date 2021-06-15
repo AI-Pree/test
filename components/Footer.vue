@@ -3,8 +3,8 @@
     <div class="container">
       <div class="footer-row">
         <div class="footer-company">
-          <h3>(logo) (company_name)</h3>
-          <p>Copyright © 2021 (company_name) All rights reserved.</p>
+          <h3>(logo) NEXFIN</h3>
+          <p>Copyright © 2021 NEXFIN All rights reserved.</p>
         </div>
         <div class="footer-social">
           <a href="#">
