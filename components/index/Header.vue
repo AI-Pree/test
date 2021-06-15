@@ -1,10 +1,13 @@
 <template>
   <section class="header">
     <div class="container">
-      <h2 class="section-title">(logo) (company_name) helps your FAMILY</h2>
+      <h2 class="section-title">(logo) NEXFIN helps your FAMILY</h2>
       <div class="total-deposited">
         <h3>$ 000.000.000.000</h3>
         <p>Total Deposited Value at HGEN</p>
+      </div>
+      <div class="launch-app">
+        <a href="#" class="btn btn-primary">Launch App</a>
       </div>
     </div>
   </section>
@@ -21,7 +24,7 @@ export default {
   }
 
   .total-deposited {
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     text-align: center;
 
     h3 {
@@ -45,5 +48,10 @@ export default {
         font-size: 1.8rem;
       }
     }
+  }
+
+  .launch-app {
+    margin-bottom: 4rem;
+    text-align: center;
   }
 </style>

@@ -19,7 +19,7 @@
           </div>
 
           <div class="nav-actions">
-            <a href="#" class="btn btn-primary">{{ $t('nav.connect_wallet') }}</a>
+            <a href="#" class="btn btn-primary"><small>SOL</small> {{ $t('nav.connect_wallet') }}</a>
             <LangDropdown />
           </div>
         </nav>
