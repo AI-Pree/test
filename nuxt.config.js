@@ -1,4 +1,4 @@
-import i18n from './i18n'
+import i18n from './src/i18n'
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -20,6 +20,8 @@ export default {
       }
     ]
   },
+
+  srcDir: './src/',
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['normalize.css/normalize.css', '~/assets/styles/main.scss'],
