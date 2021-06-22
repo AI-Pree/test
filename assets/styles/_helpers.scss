@@ -15,11 +15,13 @@
 }
 
 .close {
+  cursor: pointer;
+
   &:before,
   &:after {
     position: absolute;
     left: 10px;
-    content: " ";
+    content: ' ';
     height: 20px;
     width: 2px;
     background-color: #fff;

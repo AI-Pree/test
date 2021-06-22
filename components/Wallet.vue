@@ -5,13 +5,13 @@
     </button>
 
     <Modal ref="walletsModal">
-      <template v-slot:header>
+      <template #header>
         <h3>Conntect Wallet</h3>
       </template>
 
-      <template v-slot:body>
+      <template #body>
         <div class="wallets-list">
-          <button class="btn btn-opacity-primary" v-for="wallet in wallets" :key="wallet">
+          <button v-for="wallet in wallets" :key="wallet" class="btn btn-opacity-primary">
             {{ wallet }}
           </button>
         </div>
@@ -20,7 +20,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   data() {
     return {
@@ -32,19 +32,19 @@ export default {
         'Ledger',
         'MathWallet',
         'Phantom',
-        'Bonfida',
-      ],
+        'Bonfida'
+      ] as string[]
     }
   }
 }
 </script>
 
 <style lang="scss">
-  .wallets-list {
-    > .btn {
-      display: block;
-      width: 100%;
-      margin-bottom: 1rem;
-    }
+.wallets-list {
+  > .btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
   }
+}
 </style>
