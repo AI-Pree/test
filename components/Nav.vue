@@ -8,7 +8,7 @@
           </a>
         </div>
         <nav class="nav">
-          <a href="#" @click.prevent.stop="toggle()" class="navbar-close"></a>
+          <a href="#" @click.prevent.stop="toggle()" class="navbar-close close"></a>
 
           <div class="nav-links">
             <a href="#" class="nav-link">{{ $t('nav.dashboard') }}</a>
@@ -19,7 +19,7 @@
           </div>
 
           <div class="nav-actions">
-            <a href="#" class="btn btn-primary"><small>SOL</small> {{ $t('nav.connect_wallet') }}</a>
+            <Wallet />
             <LangDropdown />
           </div>
         </nav>
@@ -75,7 +75,13 @@ export default {
       }
 
       &-actions {
+        display: flex;
         margin-left: 2.5rem;
+
+        & > *:last-child {
+          margin-left: 0.5rem;
+        }
+        
         @media (max-width: map-get($breakpoints, md)) {
           margin-top: 2vw;
           margin-left: 0;
@@ -108,20 +114,6 @@ export default {
 
         &:hover {
           opacity: 1;
-        }
-        &:before, &:after {
-          position: absolute;
-          left: 10px;
-          content: ' ';
-          height: 20px;
-          width: 2px;
-          background-color: #fff;
-        }
-        &:before {
-          transform: rotate(45deg);
-        }
-        &:after {
-          transform: rotate(-45deg);
         }
       }
 
