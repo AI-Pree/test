@@ -1,7 +1,7 @@
 <template>
   <div>
     <button class="btn btn-primary" @click="$refs.walletsModal.openModal()">
-      <small>SOL</small> {{ $t('nav.connect_wallet') }}
+      <small>SOL</small> {{ shortWallet || $t('nav.connect_wallet') }}
     </button>
 
     <Modal ref="walletsModal">
@@ -10,10 +10,20 @@
       </template>
 
       <template #body>
-        <h3>{{ connectedWallet }}</h3>
-        <div class="wallets-list">
-          <button v-for="wallet in wallets" :key="wallet" class="btn btn-opacity-primary" @click="connect(wallet)">
-            {{ wallet }}
+        <div v-if="wallet" class="text-center">
+          <h3>{{ wallet }}</h3>
+          <div>
+            <button class="btn btn-opacity-primary" @click="disconnect()">Disconnect</button>
+          </div>
+        </div>
+        <div v-else class="wallets-list">
+          <button
+            v-for="provider in providers"
+            :key="provider.name"
+            class="btn btn-opacity-primary"
+            @click="connect(provider.name)"
+          >
+            {{ provider.name }}
           </button>
         </div>
       </template>
@@ -22,28 +32,39 @@
 </template>
 
 <script lang="ts">
+import Vue from 'vue'
 import SolanaWalletAdapter from '@project-serum/sol-wallet-adapter'
-import { WalletAdapter, walletProviders } from '../wallets'
 
-export default {
+import { ENDPOINT, WalletAdapter, WALLET_PROVIDERS } from '../wallets'
+
+export default Vue.extend({
   data() {
     return {
-      connectedWallet: '',
-      wallets: ['Sollet', 'Sollet Extension', 'Solong', 'Ledger', 'MathWallet', 'Phantom', 'Bonfida'] as string[]
+      wallet: ''
+    }
+  },
+
+  computed: {
+    shortWallet(): string {
+      const address = this.wallet
+
+      return address ? `${address.substring(0, 5)}...${address.substring(address.length - 5, address.length)}` : ''
+    },
+    providers() {
+      return WALLET_PROVIDERS
     }
   },
 
   methods: {
-    connect(walletName: string) {
-      const endpoint = 'http://127.0.0.1:8899'
-      const provider = walletProviders.find((p) => p.name === walletName)
+    connect(providerName: string) {
+      const provider = WALLET_PROVIDERS.find((p) => p.name === providerName)
       let wallet: WalletAdapter
 
       if (!provider) {
         return
       }
 
-      if (walletName === 'Sollet Extension') {
+      if (providerName === 'Sollet Extension') {
         if ((window as any).sollet === undefined) {
           console.warn({
             message: 'Connect wallet failed',
@@ -51,14 +72,16 @@ export default {
           })
           return
         }
-        wallet = new SolanaWalletAdapter((window as any).sollet, endpoint)
+        wallet = new SolanaWalletAdapter((window as any).sollet, ENDPOINT)
       } else {
-        wallet = provider.adapter ? provider.adapter() : new SolanaWalletAdapter(provider.url, endpoint)
+        wallet = provider.adapter ? provider.adapter() : new SolanaWalletAdapter(provider.url, ENDPOINT)
       }
 
       wallet.on('connect', () => {
-        console.log(wallet.publicKey?.toBase58())
-        // this.connectedWallet = wallet.publicKey?.toBase58() || ''
+        console.log('CONNECTED', wallet.publicKey?.toBase58())
+        this.wallet = wallet.publicKey?.toBase58() || ''
+        Vue.prototype.$wallet = wallet
+        ;(this.$refs as any).walletsModal.closeModal()
       })
 
       wallet.on('disconnect', () => {
@@ -70,9 +93,15 @@ export default {
       } catch (error) {
         console.error(error.message)
       }
+    },
+
+    disconnect() {
+      this.wallet = ''
+      Vue.prototype.$wallet?.disconnect()
+      Vue.prototype.$wallet = null
     }
   }
-}
+})
 </script>
 
 <style lang="scss">

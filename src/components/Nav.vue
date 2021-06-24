@@ -3,12 +3,12 @@
     <div class="container">
       <div :class="['navbar', { open }]">
         <div class="text-right">
-          <a href="#" @click.prevent.stop="toggle()" class="navbar-toggler">
+          <a href="#" class="navbar-toggler" @click.prevent.stop="toggle()">
             <img src="~/assets/icons/menu-toggler.svg" alt="" />
           </a>
         </div>
         <nav class="nav">
-          <a href="#" @click.prevent.stop="toggle()" class="navbar-close close"></a>
+          <a href="#" class="navbar-close close" @click.prevent.stop="toggle()"></a>
 
           <div class="nav-links">
             <a href="#" class="nav-link">{{ $t('nav.dashboard') }}</a>
@@ -28,8 +28,10 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+
+export default Vue.extend({
   data() {
     return {
       open: false
@@ -41,7 +43,7 @@ export default {
       this.open = !this.open
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

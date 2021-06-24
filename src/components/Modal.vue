@@ -21,8 +21,10 @@
   </transition>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+
+export default Vue.extend({
   data() {
     return {
       show: false
@@ -37,7 +39,7 @@ export default {
       this.show = false
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

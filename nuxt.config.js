@@ -23,7 +23,7 @@ export default {
 
   srcDir: './src/',
 
-  ssr: false,
+  // ssr: false,
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['normalize.css/normalize.css', '~/assets/styles/main.scss'],
@@ -47,5 +47,7 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {
+    transpile: ['@project-serum/sol-wallet-adapter']
+  }
 }
