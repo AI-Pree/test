@@ -9,6 +9,8 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@ledgerhq/hw-transport": "^6.0.2",
+    "@ledgerhq/hw-transport-webusb": "^6.0.2",
     "@project-serum/sol-wallet-adapter": "^0.2.4",
     "@solana/web3.js": "^1.18.0",
     "core-js": "^3.9.1",

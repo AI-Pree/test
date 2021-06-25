@@ -4,6 +4,7 @@ import EventEmitter from 'eventemitter3'
 import { MathWalletAdapter } from './adapters/math'
 import { PhantomWalletAdapter } from './adapters/phantom'
 import { SolongWalletAdapter } from './adapters/solong'
+import { LedgerWalletAdapter } from './adapters/ledger'
 
 export interface WalletAdapter extends EventEmitter {
   publicKey: PublicKey | null
@@ -37,11 +38,12 @@ export const WALLET_PROVIDERS: WalletProvider[] = [
     icon: 'todo',
     adapter: () => new SolongWalletAdapter()
   },
-  // {
-  //   name: 'Ledger',
-  //   url: 'https://www.ledger.com',
-  //   icon: 'todo'
-  // },
+  {
+    name: 'Ledger',
+    url: 'https://www.ledger.com',
+    icon: 'todo',
+    adapter: () => new LedgerWalletAdapter()
+  },
   {
     name: 'MathWallet',
     url: 'https://mathwallet.org',
