@@ -4,9 +4,21 @@ module.exports = {
     browser: true,
     node: true
   },
-  extends: ['@nuxtjs/eslint-config-typescript', 'prettier', 'plugin:nuxt/recommended'],
+  extends: [
+    '@nuxtjs/eslint-config-typescript',
+    'prettier',
+    'prettier/vue',
+    // 'plugin:prettier/recommended',
+    'plugin:nuxt/recommended'
+  ],
+  plugins: ['prettier', 'import'],
+  // add your custom rules here
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off'
-  },
-  plugins: ['prettier']
+    'import/order': [
+      'error',
+      {
+        groups: ['index', 'sibling', 'parent', 'internal', 'external', 'builtin']
+      }
+    ]
+  }
 }
