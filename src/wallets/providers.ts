@@ -1,10 +1,9 @@
-import { Transaction, PublicKey } from '@solana/web3.js'
-import EventEmitter from 'eventemitter3'
-
 import { MathWalletAdapter } from './adapters/math'
 import { PhantomWalletAdapter } from './adapters/phantom'
 import { SolongWalletAdapter } from './adapters/solong'
 import { LedgerWalletAdapter } from './adapters/ledger'
+import EventEmitter from 'eventemitter3'
+import { Transaction, PublicKey } from '@solana/web3.js'
 
 export interface WalletAdapter extends EventEmitter {
   publicKey: PublicKey | null
@@ -24,7 +23,7 @@ export interface WalletProvider {
 export const WALLET_PROVIDERS: WalletProvider[] = [
   {
     name: 'Sollet',
-    url: 'https://sollet.io',
+    url: 'https://www.sollet.io',
     icon: 'todo'
   },
   {
