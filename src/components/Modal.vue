@@ -54,7 +54,7 @@ export default Vue.extend({
   z-index: 99;
 
   &-backdrop {
-    background-color: rgba($color: #000000, $alpha: 0.3);
+    background-color: rgba($color: #000, $alpha: 0.3);
     position: fixed;
     top: 0;
     right: 0;
@@ -64,7 +64,7 @@ export default Vue.extend({
   }
 
   &-dialog {
-    background-color: rgba($color: #000000, $alpha: 0.95);
+    background-color: rgba($color: #000, $alpha: 0.95);
     position: relative;
     width: 600px;
     margin: 50px auto;

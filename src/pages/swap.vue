@@ -223,7 +223,7 @@
             </div>
           </div>
         </div>
-        <Button v-if="!wallet.connected" size="large" ghost @click="$refs.walletsModalMiddle.openModal()">
+        <Button v-if="!wallet.connected" size="large" ghost @click="$accessor.wallet.openModal">
           Connect Wallet
         </Button>
 
@@ -307,32 +307,6 @@
       </div>
     </div>
 
-
-    <Modal ref="walletsModalMiddle">
-      <template #header>
-        <h3>Connect Wallet</h3>
-      </template>
-
-      <template #body>
-        <div v-if="wallet" class="text-center">
-          <h3>{{ wallet }}</h3>
-          <div>
-            <button class="btn btn-opacity-primary" @click="disconnect()">Disconnect</button>
-          </div>
-        </div>
-        <div v-else class="wallets-list">
-          <button
-            v-for="provider in providers"
-            :key="provider.name"
-            class="btn btn-opacity-primary"
-            @click="connect(provider.name)"
-          >
-            {{ provider.name }}
-          </button>
-        </div>
-      </template>
-    </Modal>
-
     <div
       v-if="(!baseSymbol && !quoteSymbol && isFetchingUnsettled) || baseUnsettledAmount || quoteUnsettledAmount"
       class="card extra"
@@ -400,10 +374,6 @@ import {
   isOfficalMarket,
   LiquidityPoolInfo
 } from '@/utils/pools'
-
-
-import SolanaWalletAdapter from "@project-serum/sol-wallet-adapter";
-import {ENDPOINT, WALLET_PROVIDERS, WalletAdapter} from "~/wallets";
 
 const RAY = getTokenBySymbol('RAY')
 
@@ -498,15 +468,7 @@ export default Vue.extend({
   },
 
   computed: {
-    ...mapState(['wallet', 'swap', 'liquidity', 'url', 'setting']),
-    shortWallet(): string {
-      const address = this.wallet
-
-      return address ? `${address.substring(0, 5)}...${address.substring(address.length - 5, address.length)}` : ''
-    },
-    providers() {
-      return WALLET_PROVIDERS
-    }
+    ...mapState(['wallet', 'swap', 'liquidity', 'url', 'setting'])
   },
 
   watch: {
@@ -630,51 +592,6 @@ export default Vue.extend({
   methods: {
     gt,
     get,
-
-    connect(providerName: string) {
-      const provider = WALLET_PROVIDERS.find((p) => p.name === providerName)
-      let wallet: WalletAdapter
-
-      if (!provider) {
-        return
-      }
-
-      if (providerName === 'Sollet Extension') {
-        if ((window as any).sollet === undefined) {
-          console.warn({
-            message: 'Connect wallet failed',
-            description: 'Please install and initialize Sollet wallet extension first'
-          })
-          return
-        }
-        wallet = new SolanaWalletAdapter((window as any).sollet, ENDPOINT)
-      } else {
-        wallet = provider.adapter ? provider.adapter() : new SolanaWalletAdapter(provider.url, ENDPOINT)
-      }
-
-      wallet.on('connect', () => {
-        console.log('CONNECTED', wallet.publicKey?.toBase58())
-        this.wallet = wallet.publicKey?.toBase58() || ''
-        Vue.prototype.$wallet = wallet
-        ;(this.$refs as any).walletsModal.closeModal()
-      })
-
-      wallet.on('disconnect', () => {
-        console.log('disconnected')
-      })
-
-      try {
-        wallet.connect()
-      } catch (error) {
-        console.error(error.message)
-      }
-    },
-
-    disconnect() {
-      this.wallet = ''
-      Vue.prototype.$wallet?.disconnect()
-      Vue.prototype.$wallet = null
-    },
 
     openFromCoinSelect() {
       this.selectFromCoin = true
@@ -1464,7 +1381,7 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="less" sxcoped>
+<style lang="less" scoped>
 .container {
   max-width: 450px;
 

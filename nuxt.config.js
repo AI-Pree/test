@@ -1,6 +1,6 @@
 import i18n from './src/i18n'
-import path from "path";
 import lessToJson from 'less-to-json'
+import path from 'path'
 
 const lessVariables = lessToJson('src/styles/variables.less')
 
@@ -39,7 +39,10 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'normalize.css/normalize.css',
-    '~/assets/styles/main.scss',
+    {
+      src: '@/styles/scss/main.scss',
+      lang: 'scss'
+    },
     {
       src: '@/styles/antd.less',
       lang: 'less'
@@ -58,7 +61,6 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    '@nuxt/typescript-build',
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
@@ -83,7 +85,7 @@ export default {
   i18n,
 
   styleResources: {
-    scss: ['./assets/styles/main.scss']
+    scss: ['./styles/scss/main.scss']
   },
 
   clipboard: {
