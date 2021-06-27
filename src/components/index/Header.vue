@@ -7,7 +7,9 @@
         <p>Total Deposited Value at HGEN</p>
       </div>
       <div class="launch-app">
-        <a href="#" class="btn btn-primary">Launch App</a>
+        <a href="/swap" class="btn btn-primary">
+          Launch App
+        </a>
       </div>
     </div>
   </section>

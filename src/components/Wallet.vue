@@ -6,7 +6,7 @@
 
     <Modal ref="walletsModal">
       <template #header>
-        <h3>Conntect Wallet</h3>
+        <h3>Connect Wallet</h3>
       </template>
 
       <template #body>
@@ -32,10 +32,11 @@
 </template>
 
 <script lang="ts">
+
+import { ENDPOINT, WalletAdapter, WALLET_PROVIDERS } from '../wallets'
 import Vue from 'vue'
 import SolanaWalletAdapter from '@project-serum/sol-wallet-adapter'
 
-import { ENDPOINT, WalletAdapter, WALLET_PROVIDERS } from '../wallets'
 
 export default Vue.extend({
   data() {
