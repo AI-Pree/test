@@ -1381,7 +1381,7 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="less" sxcoped>
+<style lang="less" scoped>
 .container {
   max-width: 450px;
 

@@ -39,7 +39,10 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'normalize.css/normalize.css',
-    '~/assets/styles/main.scss',
+    {
+      src: '@/styles/scss/main.scss',
+      lang: 'scss'
+    },
     {
       src: '@/styles/antd.less',
       lang: 'less'
@@ -82,7 +85,7 @@ export default {
   i18n,
 
   styleResources: {
-    scss: ['./assets/styles/main.scss']
+    scss: ['./styles/scss/main.scss']
   },
 
   clipboard: {
