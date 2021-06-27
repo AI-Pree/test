@@ -2,22 +2,14 @@
   <div class="container">
     <div>
       <Logo />
-      <h1 class="title">
-        About
-      </h1>
+      <h1 class="title">About</h1>
       <div class="links">
-        <NuxtLink to='/' class="button--grey">Home</NuxtLink>
+        <NuxtLink to="/" class="button--grey">Home</NuxtLink>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
-
-<style>
-
-</style>
