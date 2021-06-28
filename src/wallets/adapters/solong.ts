@@ -1,29 +1,32 @@
+import { WalletAdapter } from '..'
 import EventEmitter from 'eventemitter3'
 import { PublicKey, Transaction } from '@solana/web3.js'
 
-import { WalletAdapter } from '..'
-
 export class SolongWalletAdapter extends EventEmitter implements WalletAdapter {
-  publicKey: PublicKey | null = null
+  _publicKey?: PublicKey
   _onProcess: boolean
-
+  _connected: boolean
   constructor() {
     super()
     this._onProcess = false
+    this._connected = false
+    this.connect = this.connect.bind(this)
   }
 
-  signTransaction(transaction: Transaction) {
-    return (window as any).solong.signTransaction(transaction)
+  get connected() {
+    return this._connected
   }
 
-  async signAllTransactions(transactions: Transaction[]) {
+  get autoApprove() {
+    return false
+  }
+
+  public async signAllTransactions(transactions: Transaction[]): Promise<Transaction[]> {
     const solong = (window as any).solong
-
     if (solong.signAllTransactions) {
       return solong.signAllTransactions(transactions)
     } else {
       const result: Transaction[] = []
-
       for (let i = 0; i < transactions.length; i++) {
         const transaction = transactions[i]
         const signed = await solong.signTransaction(transaction)
@@ -34,13 +37,16 @@ export class SolongWalletAdapter extends EventEmitter implements WalletAdapter {
     }
   }
 
+  get publicKey() {
+    return this._publicKey
+  }
+
+  signTransaction(transaction: Transaction) {
+    return (window as any).solong.signTransaction(transaction)
+  }
+
   connect() {
     if (this._onProcess) {
-      return
-    }
-
-    if ((window as any).solong === undefined) {
-      console.warn('Please install solong wallet from Chrome ')
       return
     }
 
@@ -48,8 +54,9 @@ export class SolongWalletAdapter extends EventEmitter implements WalletAdapter {
     ;(window as any).solong
       .selectAccount()
       .then((account: any) => {
-        this.publicKey = new PublicKey(account)
-        this.emit('connect', this.publicKey)
+        this._publicKey = new PublicKey(account)
+        this._connected = true
+        this.emit('connect', this._publicKey)
       })
       .catch(() => {
         this.disconnect()
@@ -60,8 +67,9 @@ export class SolongWalletAdapter extends EventEmitter implements WalletAdapter {
   }
 
   disconnect() {
-    if (this.publicKey) {
-      this.publicKey = null
+    if (this._publicKey) {
+      this._publicKey = undefined
+      this._connected = false
       this.emit('disconnect')
     }
   }
