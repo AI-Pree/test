@@ -6,7 +6,7 @@ import EventEmitter from 'eventemitter3'
 import { Transaction, PublicKey } from '@solana/web3.js'
 
 export interface WalletAdapter extends EventEmitter {
-  publicKey: PublicKey | null
+  publicKey: PublicKey | null | undefined
   signTransaction: (transaction: Transaction) => Promise<Transaction>
   signAllTransactions: (transactions: Transaction[]) => Promise<Transaction[]>
   connect: () => any
