@@ -1,0 +1,1 @@
+export const englishPasswordValidation = (value) => /[a-z]{2,}/gi.test(value);

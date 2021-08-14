@@ -1,0 +1,64 @@
+@import '../variables';
+
+*,*::before,*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.us{
+  user-select: none;
+}
+.ts-3{
+  transition: 0.3s;
+}
+.hv:hover{
+  opacity: 0.6;
+}
+.ovh{
+  overflow: hidden;
+}
+.ovh-x-a{
+  overflow-x: auto;
+}
+.ovh-y-a{
+  overflow-y: auto;
+}
+
+@media (max-width: $small) {
+  .container{width: 100%;}
+}
+@media (min-width: $small) {
+  .container{width: 100%;}
+}
+@media (min-width: $medium) {
+  .container{width: 100%;}
+}
+@media (min-width: $large) {
+  .container{width: $containerSize;}
+}
+@media (min-width: $xlarge) {
+  .container{width: $containerSize;}
+}
+
+// Import Styles
+@import './size.scss';
+@import './position.scss';
+@import './padding.scss';
+@import './margin.scss';
+@import './flex.scss';
+@import './border.scss';
+@import './display.scss';
+@import './font.scss';
+@import './radius.scss';
+@import './zindex.scss';
+@import './borderPallete.scss';
+@import './backgroundPallete.scss';
+@import './colorPallete.scss';
+@import './svgPallete.scss';
