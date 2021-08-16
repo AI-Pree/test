@@ -1,7 +1,7 @@
 <template>
-  <div class="w-a-M w-100-S w-100-XS d-ib tt-u rad-fix-2 shadow-purple-100 amButton br-4 brs-s" :class="[color, `f-${colorText}`, `br-${bColor}`, {opacity: opacityEffect, scale: scaleEffect}]">
+  <div class="w-100-S w-100-XS d-ib tt-u rad-fix-2 shadow-purple-100 amButton br-4 brs-s" :class="[color, `f-${colorText}`, `br-${bColor}`, {'w-100-M': full, 'w-a-M': !full, opacity: opacityEffect, scale: scaleEffect}]">
     <span class="w-100 h-100 p-a l-0 t-0 amButtonHover" :class="[colorHover, `f-${colorTextHover}`]" v-if="hover" />
-    <nuxt-link :to="to" v-if="to" class="w-a-M w-100-S w-100-XS d-f ai-c jc-c ta-c h-fix-25min px-8 py-2 fs-5 fw-500 z-2">
+    <nuxt-link :to="to" v-if="to" class="w-100-S w-100-XS d-f ai-c jc-c ta-c px-8 py-1 fs-5 fw-500 z-2" :class="{'h-fix-25min': height, 'w-100-M': full, 'w-a-M': !full}">
       <span v-if="label">
         {{ label }}
       </span>
@@ -9,7 +9,7 @@
         <slot />
       </span>
     </nuxt-link>
-    <a :href="link" v-else-if="link" class="w-a-M w-100-S w-100-XS d-f ai-c jc-c ta-c h-fix-25min px-8 py-2 fs-5 fw-500 z-2">
+    <a :href="link" v-else-if="link" class="w-100-S w-100-XS d-f ai-c jc-c ta-c px-8 py-1 fs-5 fw-500 z-2" :class="{'h-fix-25min': height, 'w-100-M': full, 'w-a-M': !full}">
       <span v-if="label">
         {{ label }}
       </span>
@@ -17,7 +17,7 @@
         <slot />
       </span>
     </a>
-    <span class="w-a-M w-100-S w-100-XS d-f ai-c jc-c ta-c h-fix-25min px-6 py-2 fs-5 fw-500 z-2" v-else @click="$emit('click')" :class="getHover">
+    <span class="w-a-M w-100-S w-100-XS d-f ai-c jc-c ta-c px-6 py-1 fs-5 fw-500 z-2" v-else @click="$emit('click')" :class="[getHover, {'h-fix-25min': height, 'w-100-M': full, 'w-a-M': !full}]">
       <span v-if="label">
         {{ label }}
       </span>
@@ -41,7 +41,9 @@ export default {
     to: {type: String, default: null},
     link: {type: String, default: null},
     opacityEffect: {type: Boolean, default: false},
-    scaleEffect: {type: Boolean, default: false}
+    scaleEffect: {type: Boolean, default: false},
+    height: {type: Boolean, default: true},
+    full: {type: Boolean, default: false}
   },
   computed: {
     getHover () {

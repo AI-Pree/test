@@ -12,39 +12,38 @@ a {
   color: inherit;
 }
 
-.us{
-  user-select: none;
-}
-.ts-3{
-  transition: 0.3s;
-}
-.hv:hover{
-  opacity: 0.6;
-}
-.ovh{
-  overflow: hidden;
-}
-.ovh-x-a{
-  overflow-x: auto;
-}
-.ovh-y-a{
-  overflow-y: auto;
-}
+.us{user-select: none;}
+.ts-3{transition: 0.3s;}
+.hv:hover{opacity: 0.6;}
+.ovh{overflow: hidden;}
+.ovh-x-a{overflow-x: auto;}
+.ovh-y-a{overflow-y: auto;}
+.ovh-y-v{overflow-y: visible;}
 
 @media (max-width: $small) {
   .container{width: 100%;}
+  .ovh-y-a-XS{overflow-y: auto;}
+  .ovh-y-v-XS{overflow-y: visible;}
 }
 @media (min-width: $small) {
   .container{width: 100%;}
+  .ovh-y-a-S{overflow-y: auto;}
+  .ovh-y-v-S{overflow-y: visible;}
 }
 @media (min-width: $medium) {
   .container{width: 100%;}
+  .ovh-y-a-M{overflow-y: auto;}
+  .ovh-y-v-M{overflow-y: visible;}
 }
 @media (min-width: $large) {
   .container{width: $containerSize;}
+  .ovh-y-a-L{overflow-y: auto;}
+  .ovh-y-v-L{overflow-y: visible;}
 }
 @media (min-width: $xlarge) {
   .container{width: $containerSize;}
+  .ovh-y-a-XL{overflow-y: auto;}
+  .ovh-y-v-XL{overflow-y: visible;}
 }
 
 // Import Styles
