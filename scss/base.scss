@@ -27,7 +27,7 @@ html {
 .mcolor-100 {
   background: rgba(143, 0, 255, 1);
 }
-.br-mcolor-300 {
+.br-mcolor-400 {
   border-color: #CF68FF;
 }
 .br-mcolor-100 {
@@ -35,6 +35,9 @@ html {
 }
 .f-mcolor-100 {
   color: rgba(143, 0, 255, 1);
+}
+.f-mcolor-300 {
+  color: #CF68FF;
 }
 .svg-f-mcolor-100 {
   fill: rgba(143, 0, 255, 1);
@@ -108,4 +111,17 @@ html {
   .amSelectboxOption {
     text-transform: uppercase;
   }
+}
+
+
+.wb-br-all {
+  word-break: break-all;
+}
+.jc-sb{justify-content: space-between}
+
+.tr-all-ease {
+  transition: all ease .2s;
+}
+.r-45deg {
+  transform: rotate(45deg);
 }
