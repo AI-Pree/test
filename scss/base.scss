@@ -39,6 +39,9 @@ html {
 .f-mcolor-300 {
   color: #CF68FF;
 }
+.f-mcolor-500 {
+  color: #8F00FF
+}
 .svg-f-mcolor-100 {
   fill: rgba(143, 0, 255, 1);
 }
@@ -76,6 +79,10 @@ html {
   background: linear-gradient(91.29deg, #00FFF0 -16.04%, #A900FF 75.37%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+.white-on-gradient {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #FFFFFF;
 }
 .gradient-200 {
   background: linear-gradient(103.86deg, rgba(209, 187, 255, 0.11) 1.36%, rgba(201, 175, 255, 0) 99.58%);
@@ -124,4 +131,17 @@ html {
 }
 .r-45deg {
   transform: rotate(45deg);
+}
+
+.sub-ml-4 + .sub-ml-4 {
+  margin-left: 64px;
+}
+.sub-mt-1 + .sub-mt-1 {
+  margin-top: 16px;
+}
+.min-w-20 {
+  min-width: 200px;
+}
+.m-0-auto {
+  margin: 0 auto;
 }
