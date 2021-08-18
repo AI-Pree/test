@@ -8,7 +8,7 @@
         </nuxt-link>
       </div>
       <div class="w-a-L w-50-M w-100-S w-100-XS fsh-0 mt-0-L mt-4-S mt-4-XS px-0-M px-4-S px-4-XS">
-        <AmButton color="mcolor-100" opacityEffect scaleEffect :full="mobile">
+        <AmButton color="mcolor-100" opacityEffect scaleEffect :full="mobile" @click="$emit('connect', 'connect')">
           Connect Wallet
         </AmButton>
       </div>
@@ -70,7 +70,7 @@ export default {
       } else {
         this.mobile = false
       }
-      if (window.innerWidth < 1028) {
+      if (window.innerWidth < 1024) {
         this.open = false
       } else {
         this.open = true

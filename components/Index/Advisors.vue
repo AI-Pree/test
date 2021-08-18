@@ -4,7 +4,7 @@
       Advisors
     </div>
     <div class="w-100 pt-10-M pt-7-S pt-7-XS fd-r jc-c fw-w">
-      <div class="w-25-M w-50-S w-50-XS fd-c ai-c p-2" v-for="(item, i) in items" key="i">
+      <div class="w-25-M w-50-S w-50-XS fd-c ai-c p-2" v-for="(item, i) in items" :key="i">
         <div class="w-fix-85-M w-45-S w-fix-45-XS h-fix-85-M h-fix-65-S h-fix-45-XS brs-s br-mcolor-100 shadow-purple-100 ovh rad-fix-6">
           <img :src="require('@/static/' + item.img)" class="w-100 h-100min" />
         </div>

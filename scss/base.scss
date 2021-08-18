@@ -21,6 +21,12 @@ html {
 .shadow-purple-200 {
   box-shadow: 0 0 0.3rem 0 rgba(143, 0, 255, 1);
 }
+.shadow-purple-300 {
+  box-shadow: 0 0 1.8rem #B556FF;
+}
+.shadow-red-100 {
+  box-shadow: 0 0 1.8rem #FF006B;
+}
 .mcolor {
   background-color: #151433;
 }
@@ -66,6 +72,15 @@ html {
 .f-mcolor-400 {
   color: rgba(228, 194, 255, 1);
 }
+.mcolor-500 {
+  background-color: #151433;
+}
+.f-mcolor-500 {
+  color: rgba(255, 0, 107, 1);
+}
+.mcolor-600 {
+  background: rgba(255, 0, 107, 0.1);
+}
 .gradient {
   background: linear-gradient(91.29deg, #00FFF0 -16.04%, #A900FF 75.37%);
   -webkit-background-clip: text;
@@ -96,6 +111,9 @@ html {
 }
 .gradient-500 {
   background: linear-gradient(118.53deg, #8F00FF 3.99%, rgba(240, 217, 255, 0.5) 35.25%, #8F00FF 100%);
+}
+.gradient-600 {
+  background: linear-gradient(108.98deg, rgba(28, 0, 50, 0.7) 0%, rgba(49, 0, 88, 0.7) 97.64%);
 }
 
 .amSelectboxBlock {

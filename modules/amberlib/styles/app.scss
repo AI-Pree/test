@@ -14,7 +14,8 @@ a {
 
 .us{user-select: none;}
 .ts-3{transition: 0.3s;}
-.hv:hover{opacity: 0.6;}
+.hv:hover{opacity: 0.6; cursor: pointer;}
+.hvw:hover{color: #FFFFFF; cursor: pointer;}
 .ovh{overflow: hidden;}
 .ovh-x-a{overflow-x: auto;}
 .ovh-y-a{overflow-y: auto;}

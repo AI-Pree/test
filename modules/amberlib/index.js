@@ -16,7 +16,8 @@ export default function (moduleOptions) {
     '~/modules/amberlib/components/AmInput.vue',
     '~/modules/amberlib/components/AmSelectbox.vue',
     '~/modules/amberlib/components/AmDatePicker.vue',
-    '~/modules/amberlib/components/AmButton.vue'
+    '~/modules/amberlib/components/AmButton.vue',
+    '~/modules/amberlib/components/AmModal.vue'
   ]
 
 }
