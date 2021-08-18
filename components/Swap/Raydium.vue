@@ -33,8 +33,9 @@
                 </span>
             </span>
             <span class="f-mcolor-100 ta-r">1 <span class="f-white-200">%</span></span>
-            <span class="f-white-200">Slippage Tolerance 
-                <span class="f-white-200">Slippage Tolerance 
+            <span class="f-white-200">Slippage Tolerance</span>
+            <span class="f-white-200 ta-r">Serum DEX</span>
+            <span class="f-white-200">Minimum Received 
                 <span class="tooltip">
                     <img src="/img/icons/question.svg" alt="question" class="va-m">
                     <span class="tooltiptext tooltip-bottom">
@@ -42,9 +43,6 @@
                     </span>
                 </span>
             </span>
-            </span>
-            <span class="f-white-200 ta-r">Serum DEX</span>
-            <span class="f-white-200">Minimum Received</span>
             <span class="f-mcolor-100 ta-r">0.0983070000 <span class="f-white-200">SOL</span></span>
             <span class="f-white-200">Price Impact 
                 <span class="tooltip">
