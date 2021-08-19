@@ -1,6 +1,6 @@
 <template>
   <div class="container px-0-L px-4-M px-3-S px-3-XS m-0-auto">
-    <div class="w-80-L w-90-M w-100-S gradient-200 rad-fix-8 p-6-M p-6-S p-6-XS m-0-auto">
+    <div class="w-80-L w-90-M w-100-S gradient-200 rad-fix-8 p-6-M p-6-S p-6-XS m-0-auto br-mcolor-400 br-1 brs-">
       <div class="fw-700 f-white-200 fs-10 mb-5">Borrowing</div>
       <div class="d-f fd-r">
         <div>
@@ -91,11 +91,6 @@
 </template>
 
 <script>
-import InfoLabel from '@/components/admin/InfoLabel.vue'
-
 export default {
-  components: {
-    InfoLabel
-  }
 }
 </script>
