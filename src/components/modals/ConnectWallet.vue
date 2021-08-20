@@ -19,19 +19,17 @@
     <div class="w-100 ta-c fs-8 f-gray-500 fw-400 pt-4 pb-2">
       Solana Blockchain
     </div>
-    <div class="w-100 fd-c ai-c" v-if="!loader">
-      <span class="my-2 fs-8 f-gray-700 hvw ts-3" v-for="(wallet, i) in wallets" :key="i" @click="$emit('set', wallet.id)">
+    <div class="w-100 fd-c ai-c py-4" v-if="!loader">
+      <span class="my-2 fs-8 f-gray-700 hvw ts-3" v-for="(wallet, i) in wallets" :key="i" @click="$emit('set', wallet)">
         {{ wallet.name }}
       </span>
     </div>
-    <transition name="fade">
-      <div class="w-100 fd-c ai-c pt-10 pb-8" v-if="loader">
-        <Loader />
-        <div class="w-100 ta-c fs-6 f-white-200 pt-4">
-          Connection...
-        </div>
+    <div class="w-100 fd-c ai-c pt-10 pb-8" v-if="loader">
+      <Loader />
+      <div class="w-100 ta-c fs-6 f-white-200 pt-4">
+        Connection...
       </div>
-    </transition>
+    </div>
     <div class="w-100 fd-r jc-c px-15 pt-4">
       <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full @click="$emit('cancel', false)">
         Cancel
@@ -56,7 +54,7 @@ export default {
     wallets: {type: Array, default: null},
     error: {type: Boolean, default: false},
     loader: {type: Boolean, default: false}
-  },
+  }
 }
 </script>
 

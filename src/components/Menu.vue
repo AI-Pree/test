@@ -8,8 +8,11 @@
         </nuxt-link>
       </div>
       <div class="w-a-L w-50-M w-100-S w-100-XS fsh-0 mt-0-L mt-4-S mt-4-XS px-0-M px-4-S px-4-XS">
-        <AmButton color="mcolor-100" opacityEffect scaleEffect :full="mobile" @click="$emit('connect', 'connect')">
+        <AmButton color="mcolor-100" opacityEffect scaleEffect :full="mobile" @click="$emit('connect', 'connect')" v-if="!wallet">
           Connect Wallet
+        </AmButton>
+        <AmButton color="mcolor-100" opacityEffect scaleEffect :full="mobile" to="/my" v-if="wallet" :title="wallet">
+          SOL {{ wallet.substr(0, 6) }} ...... {{ wallet.substr(-4) }}
         </AmButton>
       </div>
       <div class="w-fix-70-L w-50-M w-100-S w-100-XS fsh-0 ml-2-L ml-0-S ml-0-XS mt-0-L mt-4-S mt-4-XS px-0-M px-4-S px-4-XS pb-0-M pb-10-S pb-10-XS">
@@ -27,6 +30,7 @@
 <script>
 export default {
   props: {
+    wallet: {type: String, default: null}
   },
   data () {
     return {
