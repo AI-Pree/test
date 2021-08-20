@@ -14,7 +14,37 @@ html {
 .op-7 {
   opacity: 0.7;
 }
-
+.text-purple-200 {
+  color: #CF68FF;
+}
+.text-green-400 {
+  color: #00AF12;
+}
+.text-red-400 {
+  color: #FF006B;
+}
+.d-g  {
+  display: grid;
+}
+.grid-columns-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.gap-2 {
+  gap: 1rem;
+}
+.badge-red-400 {
+  background: rgba(255, 0, 107, 0.1);
+  border-radius: 10px;
+}
+.text-shadow-purple-100 {
+  text-shadow: 0px 0px .1rem #8F00FF;
+}
+.bg-gradient-purple{
+  background: linear-gradient(118.53deg, #8F00FF 3.99%, rgba(240, 217, 255, 0.5) 35.25%, #8F00FF 100%);
+}
+.va-m {
+  vertical-align: middle;
+}
 .shadow-purple-100 {
   box-shadow: 0 0 0.5rem #B556FF;
 }
@@ -41,6 +71,11 @@ html {
 }
 .svg-f-mcolor-100 {
   fill: rgba(143, 0, 255, 1);
+}
+.divide-line {
+  border-style: solid;
+  border-color: #fff;
+  opacity: .2;
 }
 .mcolor-200 {
   background-color: rgba(67, 24, 118, 1);
@@ -123,4 +158,98 @@ html {
   .amSelectboxOption {
     text-transform: uppercase;
   }
+}
+
+.jc-sb{justify-content: space-between}
+
+.lq-input {
+  background: #12112D;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.lq-input input {
+ border: 0;
+ background: transparent;
+ padding: .7rem 0;
+ width: 100%;
+ font-size: 1rem;
+}
+.lq-input input:focus {
+  outline: none;
+}
+.mx-auto {
+  margin: 0 auto;
+}
+.bg-transparent {
+  background: transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  position: absolute;
+  
+  width: 260px;
+  background: #151433;
+  border: 1px solid #A93CFF;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 9px #8F00FF;
+  color: #fff;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: 4px;
+  z-index: 1;
+  opacity: 0;
+  font-weight: 300;
+  font-size: 14px;
+  transition: opacity .6s;
+  line-height: 1.5rem;
+}
+.tooltip-bottom {
+  top: 135%;
+  left: 50%;
+  margin-left: -60px;
+}
+.tooltip-bottom::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #151433 transparent;
+}
+
+#confirm[type=checkbox] {
+  display: none;
+}
+
+#confirm[type=checkbox] + label:before {
+  content: "\2714";
+  border: 0.1em solid #cdcdcd;
+  border-radius: 0.2em;
+  display: inline-block;
+  width: 1.1rem;
+  height: 1.1rem;
+  padding-left: 0.2em;
+  padding-bottom: 0.3em;
+  margin-right: 0.2em;
+  vertical-align: bottom;
+  color: transparent;
+  transition: .2s;
+}
+
+#confirm[type=checkbox] + label:active:before {
+  transform: scale(0);
+}
+
+#confirm[type=checkbox]:checked + label:before {
+  background-color: #CF68FF;
+  border-color: #CF68FF;
+  color: #fff;
 }

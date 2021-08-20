@@ -7,7 +7,7 @@
         <div class="w-20 d-f-L d-n-S d-n-XS">
           <Sidebar class="r-fix-s-15" />
         </div>
-        <div class="w-85-L w-100-S w-100-XS mcolor rad-fix-10 p-8-M p-3-S p-3-XS">
+        <div class="w-85-L w-100-S w-100-XS mcolor rad-fix-10 p-8-M p-3-S p-3-XS swap-bg">
           <Nuxt />
         </div>
       </div>
