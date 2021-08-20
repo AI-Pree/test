@@ -1,78 +1,56 @@
 <template>
   <div class="w-100 h-100min">
     <div class="w-100 h-100min p-f l-0 t-0 ovh-y-a bg-l" />
-    <Menu @connect="modalWallet" :wallet="wallet" />
-    <Nuxt class="layout" />
+    <Menu @connect="setModalFunc" />
+    <Nuxt />
     <Footer />
     <AmModal
       :show="modal === 'connect'"
-      :shadow="error ? 'shadow-red-100' : 'shadow-purple-300'"
+      :shadow="errorConnect ? 'shadow-red-100' : 'shadow-purple-300'"
       max="w-fix-250-S w-90-XS"
-      @closed="modalWallet">
+      @closed="setModalFunc">
         <ConnectWallet
-          @cancel="modalWallet"
-          @set="connectWallet"
+          @cancel="setModalFunc"
+          @set="connectWalletFunc"
           :wallets="wallets"
-          :error="error"
-          :loader="loader" />
-    </AmModal>
-    <AmModal
-      :show="modal === 'connectError'"
-      shadow="shadow-red-100"
-      max="w-fix-250-S w-90-XS"
-      @closed="modalWallet">
-        <ConnectError />
+          :error="errorConnect"
+          :loader="loaderConnect" />
     </AmModal>
   </div>
 </template>
 
 <script>
+import Menu from '@/components/Menu'
+import Footer from '@/components/Footer'
 import ConnectWallet from '@/components/modals/ConnectWallet'
-import ConnectError from '@/components/modals/ConnectError'
-
-import { mapState, mapActions } from 'vuex'
 
 export default {
-
   components: {
-    ConnectWallet,
-    ConnectError
+    Menu,
+    Footer,
+    ConnectWallet
   },
-
   computed: {
-    ...mapState([
-      'modal',
-    ]),
-    ...mapState('wallet', [
-      'wallet',
-      'wallets',
-      'error',
-      'loader'
-    ])
+    modal () {
+      return this.$accessor.modal
+    },
+    wallets () {
+      return this.$accessor.wallet.wallets
+    },
+    errorConnect () {
+      return this.$accessor.wallet.errorConnect
+    },
+    loaderConnect () {
+      return this.$accessor.wallet.loaderConnect
+    }
   },
-
   methods: {
-    ...mapActions([
-      'modalWallet'
-    ]),
-    ...mapActions('wallet', [
-      'connectWallet'
-    ])
+    setModalFunc (value) {
+      this.$accessor.setModal(value)
+    },
+    connectWalletFunc (value) {
+      this.$accessor.wallet.connectWallet(value)
+    }
   }
-
 }
 </script>
-
-<style>
-.slide-fade-enter-active {
-  transition: all .3s ease;
-}
-.slide-fade-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active до версии 2.1.8 */ {
-  transform: translateX(10px);
-  opacity: 0;
-}
-</style>

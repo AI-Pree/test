@@ -1,12 +1,11 @@
 export default {
 
   srcDir: './src/',
-
-  // Global page headers: https://go.nuxtjs.dev/config-head
   ssr: false,
 
+  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'yamco-front',
+    title: 'la-front-temp',
     htmlAttrs: {
       lang: 'en'
     },
@@ -28,8 +27,6 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/init',
-    '@/plugins/components'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -37,31 +34,26 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    '@/modules/amberlib'
+    // https://go.nuxtjs.dev/typescript
+    '@nuxt/typescript-build',
+    // lib amber
+    '@modules/amberlib',
+    // https://typed-vuex.roe.dev
+    'nuxt-typed-vuex'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/svg',
+    '@nuxtjs/svg'
   ],
-
-  axios: {
-    baseUrl: process.env.BASE_URL
-  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  },
-
-  // ENV
-  env: {
-    baseUrl: process.env.BASE_URL || null
   },
 
   server:{
     host: '0.0.0.0',
     port: 3000
   }
-
 }

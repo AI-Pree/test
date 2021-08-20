@@ -44,14 +44,15 @@
 </template>
 
 <script>
-import Loader from '@/components/Loader'
+import Loading from '@/components/Loading'
+
 
 export default {
   components: {
-    Loader
+    Loading
   },
   props: {
-    wallets: {type: Array, default: null},
+    wallets: {type: Boolean, default: Array},
     error: {type: Boolean, default: false},
     loader: {type: Boolean, default: false}
   }

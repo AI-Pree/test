@@ -12,14 +12,14 @@
 </template>
 
 <script>
-import Header from '@/components/Index/Header'
-import Future from '@/components/Index/Future'
-import DefiFeatures from '@/components/Index/DefiFeatures'
-import Hgen from '@/components/Index/Hgen'
-import Gens from '@/components/Index/Gens'
-import Statistic from '@/components/Index/Statistic'
-import Roadmap from '@/components/Index/Roadmap'
-import Advisors from '@/components/Index/Advisors'
+import Header from '@/components/HomeScreen/Header'
+import Future from '@/components/HomeScreen/Future'
+import DefiFeatures from '@/components/HomeScreen/DefiFeatures'
+import Hgen from '@/components/HomeScreen/Hgen'
+import Gens from '@/components/HomeScreen/Gens'
+import Statistic from '@/components/HomeScreen/Statistic'
+import Roadmap from '@/components/HomeScreen/Roadmap'
+import Advisors from '@/components/HomeScreen/Advisors'
 
 export default {
   components: {

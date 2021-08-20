@@ -1,5 +1,5 @@
 {
-  "name": "yamco-front",
+  "name": "la-front-temp",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -9,26 +9,27 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@ledgerhq/hw-transport": "^6.0.2",
-    "@ledgerhq/hw-transport-webusb": "^6.0.2",
-    "@nuxtjs/axios": "^5.12.5",
-    "@nuxtjs/dayjs": "^1.4.0",
-    "@nuxtjs/sentry": "^5.0.2",
+    "@ledgerhq/hw-transport": "^6.3.0",
+    "@ledgerhq/hw-transport-webusb": "^6.3.0",
+    "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/svg": "^0.1.12",
-    "@project-serum/borsh": "^0.1.0",
-    "@project-serum/serum": "^0.13.37",
-    "@project-serum/sol-wallet-adapter": "^0.2.4",
+    "@project-serum/sol-wallet-adapter": "^0.2.5",
     "@solana/wallet-base": "0.0.1",
-    "@solana/web3.js": "^1.24.0",
-    "bignumber.js": "^9.0.1",
-    "core-js": "^3.9.1",
-    "nuxt": "^2.15.3",
-    "nuxt-i18n": "^6.27.1",
-    "sass": "^1.35.0",
+    "@solana/web3.js": "^1.24.1",
+    "core-js": "^3.15.1",
+    "eventemitter3": "^4.0.7",
+    "nuxt": "^2.15.7",
+    "nuxt-i18n": "^6.28.1",
+    "nuxt-property-decorator": "^2.9.1",
+    "nuxt-typed-vuex": "^0.2.0",
+    "sass": "^1.38.0",
     "sass-loader": "^10.1.0",
+    "typed-vuex": "^0.2.0",
     "v-mask": "^2.2.4",
-    "vue3-touch-events": "^4.1.0",
     "vuescroll": "^4.17.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@nuxt/types": "^2.15.7",
+    "@nuxt/typescript-build": "^2.1.0"
+  }
 }
