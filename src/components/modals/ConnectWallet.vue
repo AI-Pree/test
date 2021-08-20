@@ -25,7 +25,7 @@
       </span>
     </div>
     <div class="w-100 fd-c ai-c pt-10 pb-8" v-if="loader">
-      <Loader />
+      <Loading />
       <div class="w-100 ta-c fs-6 f-white-200 pt-4">
         Connection...
       </div>
@@ -52,7 +52,7 @@ export default {
     Loading
   },
   props: {
-    wallets: {type: Boolean, default: Array},
+    wallets: {type: Array, default: null},
     error: {type: Boolean, default: false},
     loader: {type: Boolean, default: false}
   }

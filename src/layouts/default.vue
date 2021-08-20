@@ -1,7 +1,7 @@
 <template>
   <div class="w-100 h-100min">
     <div class="w-100 h-100min p-f l-0 t-0 ovh-y-a bg-l" />
-    <Menu @connect="setModalFunc" />
+    <Menu @connect="setModalFunc" :publicKey="publicKey" />
     <Nuxt />
     <Footer />
     <AmModal
@@ -33,6 +33,9 @@ export default {
   computed: {
     modal () {
       return this.$accessor.modal
+    },
+    publicKey () {
+      return this.$accessor.wallet.publicKey
     },
     wallets () {
       return this.$accessor.wallet.wallets

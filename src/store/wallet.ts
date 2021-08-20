@@ -6,8 +6,8 @@ import { Wallets, WalletInfo } from '../utils/wallets'
 
 // State
 export const state = () => ({
+  publicKey: '',
   wallets: Wallets,
-  wallet: '',
   errorConnect: false,
   loaderConnect: false
 })
@@ -18,8 +18,8 @@ export const getters = getterTree(state, {})
 // Mutation
 export const mutations = mutationTree(state, {
 
-  setWallet (state, newValue: string) {
-    state.wallet = newValue
+  setPublicKey (state, newValue: string | null) {
+    state.publicKey = newValue
   },
 
   setErrorConnect (state, newValue: boolean) {
@@ -37,19 +37,24 @@ export const actions = actionTree(
   { state, getters, mutations },
   {
     async connectWallet ({ commit }, wallet: WalletInfo) {
+      commit('setLoaderConnect', true)
       const adapter = await wallet.getAdapter({ providerUrl: wallet.url, endpoint: 'https://api.mainnet-beta.solana.com' })
       if (!adapter) {
         return
       }
+      (this as any)._vm.$wallet = adapter
       adapter.on('connect', () => {
         if (adapter.publicKey) {
-          alert(adapter.publicKey)
+          commit('setPublicKey', adapter.publicKey.toBase58())
+          commit('setModal', '', { root: true })
         }
+        commit('setLoaderConnect', false)
       })
       try {
         adapter.connect()
       } catch (error) {
         console.log(error)
+        commit('setLoaderConnect', false)
       }
     }
   }

@@ -13,7 +13,6 @@ declare module 'vue/types/vue' {
   interface Vue {
     $web3: NuxtWeb3Instance,
     $accessor: typeof accessorType
-    $wallet: WalletAdapter | null
   }
 }
 
@@ -21,7 +20,7 @@ declare module 'vue/types/vue' {
 declare module 'vuex/types/index' {
   // eslint-disable-next-line
   interface Store<S> {
-    $web3: NuxtWeb3Instance
+    $web3: NuxtWeb3Instance,
     $accessor: typeof accessorType
   }
 }
