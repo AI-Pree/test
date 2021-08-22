@@ -8,7 +8,7 @@
         Safe pool
       </div>
       <div class="w-45 fsh-0">
-        <AmButton :height="false" color="mcolor-200" bColor="mcolor-100" opacityEffect full>
+        <AmButton :height="false" color="mcolor-200" bColor="mcolor-100" opacityEffect full @click="$emit('claimFunc')">
           claim
         </AmButton>
       </div>
@@ -40,7 +40,7 @@
     <div class="w-100 fd-r-S fd-c-XS ai-c pt-3">
       <div class="w-100 fd-r ai-c">
         <div class="w-a-S w-100-XS">
-          <AmButton :height="false" color="mcolor-200" bColor="mcolor-100" opacityEffect>
+          <AmButton :height="false" color="mcolor-200" bColor="mcolor-100" opacityEffect @click="$emit('claimFunc')">
             claim
           </AmButton>
         </div>

@@ -3,6 +3,10 @@ import { getAccessorType, mutationTree, actionTree, getterTree } from 'typed-vue
 
 // Import Modules
 import * as wallet from './wallet'
+import * as dashboard from './dashboard'
+import * as borrowing from './borrowing'
+import * as swap from './swap'
+import * as pool from './pool'
 
 // State
 export const state = () => ({
@@ -40,6 +44,10 @@ export const accessorType = getAccessorType({
   mutations,
   state,
   modules: {
-    wallet
+    wallet,
+    dashboard,
+    borrowing,
+    swap,
+    pool
   }
 })

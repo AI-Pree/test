@@ -36,9 +36,9 @@ export default {
     return {
       items: [
         {title: 'Dashboard', to: '/'},
-        {title: 'Participate', to: '/my'},
-        {title: 'Begginers Guide', to: ''},
-        {title: 'Documentation', to: ''},
+        {title: 'Participate', to: '/'},
+        {title: 'Begginers Guide', to: '/'},
+        {title: 'Documentation', to: '/documentation'},
         {title: 'Tokenomics', to: ''}
       ],
       languages: {

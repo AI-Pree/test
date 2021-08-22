@@ -11,7 +11,7 @@
           <span class="w-fix-15 h-fix-15 rad-50 p-a l-50 t-50 z-0 checked" :class="[modelData.colorRaisedChecked]" v-if="modelData.raised" />
           <span class="w-fix-15 h-fix-15 rad-50 p-a l-50 t-50 z-0 unchecked" :class="[modelData.colorRaisedUnchecked]" v-if="modelData.raised" />
         </div>
-        <div class="h-fix-14min pl-3 fs-5" v-if="modelData.title">
+        <div class="h-fix-14min pl-3 fs-5" v-if="modelData.title" :class="[`f-${modelData.colorTitle}`]">
           {{ modelData.title }}
         </div>
       </div>

@@ -1,8 +1,8 @@
 <template>
-  <div class="w-100 mcolor p-8 rad-fix-10">
-    <div class="w-100 fd-r ai-c" v-for="(item, i) in items">
-      <nuxt-link :to="item.to" class="fd-r ai-c hv ts-3" :class="{'mt-6': i > 0, 'mt-10': i === items.length - 1}">
-        <div class="w-fix-s-15 mr-2 fd-r ai-c">
+  <div class="w-100 mcolor p-8-M p-0-S p-0-XS rad-fix-10-M fd-r fw-w">
+    <div class="w-100-M w-20-S w-20-XS fd-r ai-c jc-l-M jc-c-S jc-c-XS" v-for="(item, i) in items">
+      <nuxt-link :to="item.to" class="w-a-M w-100-S w-100-XS fd-r-M fd-c-S fd-c-XS ai-c hv ts-3 mt-6-M mt-3-S mt-3-XS mb-0-M mb-3-S mb-3-XS">
+        <div class="w-fix-s-15 mr-2-M fd-r ai-c jc-l-M jc-c-S jc-c-XS">
           <HomeSvg class="w-fix-10" v-if="item.id === 1 && !getActive(item)" />
           <HomeActiveSvg class="w-fix-10" v-if="item.id === 1 && getActive(item)" />
           <WalletSvg class="w-fix-10" v-if="item.id === 2 && !getActive(item)" />
@@ -11,16 +11,20 @@
           <SwitchActiveSvg class="w-fix-10" v-if="item.id === 3 && getActive(item)" />
           <PieSvg class="w-fix-10" v-if="item.id === 4 && !getActive(item)" />
           <PieActiveSvg class="w-fix-10" v-if="item.id === 4 && getActive(item)" />
-          <CoinsSvg class="w-fix-10" v-if="item.id === 5 && !getActive(item)" />
-          <CoinsActiveSvg class="w-fix-10" v-if="item.id === 5 && getActive(item)" />
-          <DiggingSvg class="w-fix-10" v-if="item.id === 6 && !getActive(item)" />
-          <DiggingActiveSvg class="w-fix-10" v-if="item.id === 6 && getActive(item)" />
-          <ExitSvg class="w-fix-10" v-if="item.id === 7" />
+          <ExitSvg class="w-fix-10" v-if="item.id === 5" />
         </div>
-        <span class="fs-6 ts-3" :class="{'f-mcolor-300 fw-600': getActive(item), 'f-white-200 fw-400': !getActive(item)}">
+        <span class="fs-6-M fs-4-S fs-4-XS ts-3 pt-0-M pt-2-S pt-2-XS" :class="{'f-mcolor-300 fw-600': getActive(item), 'f-white-200 fw-400': !getActive(item)}">
           {{ item.name }}
         </span>
       </nuxt-link>
+    </div>
+    <div class="w-100-M w-20-S w-20-XS fd-r-M fd-c-S fd-c-XS ai-c hv ts-3 mt-10-M mt-3-S mt-3-XS" @click="$emit('logout')">
+      <div class="w-fix-s-15 mr-2-M fd-r ai-c jc-l-M jc-c-S jc-c-XS">
+        <ExitSvg class="w-fix-10" />
+      </div>
+      <span class="fs-6-M fs-4-S fs-4-XS ts-3 pt-0-M pt-2-S pt-2-XS f-white-200">
+        Log out
+      </span>
     </div>
   </div>
 </template>
@@ -67,10 +71,7 @@ export default {
         {id: 1, name: 'Dashboard', to: '/my', class: 'my'},
         {id: 2, name: 'Borrowing', to: '/my/borrowing', class: 'my-borrowing'},
         {id: 3, name: 'Swap', to: '/my/swap', class: 'my-swap'},
-        {id: 4, name: 'Pool/Safe pool', to: '/my/pool', class: 'my-pool'},
-        {id: 5, name: 'Stacking', to: '/my/stacking', class: 'my-stacking'},
-        {id: 6, name: 'Farming', to: '/my/farming', class: 'my-farming'},
-        {id: 7, name: 'Log out', to: '/logout'}
+        {id: 4, name: 'Pool/Safe pool', to: '/my/pool', class: 'my-pool'}
       ]
     }
   }

@@ -13,7 +13,7 @@
       $ 201,000
     </div>
     <div class="w-60">
-      <AmButton color="white-200" bColor="white-100" colorText="mcolor-100" opacityEffect full>
+      <AmButton color="white-200" bColor="white-100" colorText="mcolor-100" opacityEffect full @click="$emit('borrowFunc')">
         <span class="fw-800">Borrow</span>
       </AmButton>
     </div>

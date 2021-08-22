@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="w-100 pt-8 pb-6">
-      <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full>
+      <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full @click="$emit('depositFunc')">
         Deposit
       </AmButton>
     </div>

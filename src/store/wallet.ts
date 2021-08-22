@@ -3,10 +3,11 @@ import { getterTree, mutationTree, actionTree } from 'typed-vuex'
 
 // Import
 import { Wallets, WalletInfo } from '../utils/wallets'
+import { Account, Connection, PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY, Transaction, TransactionInstruction } from "@solana/web3.js";
 
 // State
 export const state = () => ({
-  publicKey: '',
+  publicKey: null,
   wallets: Wallets,
   errorConnect: false,
   loaderConnect: false
@@ -18,7 +19,7 @@ export const getters = getterTree(state, {})
 // Mutation
 export const mutations = mutationTree(state, {
 
-  setPublicKey (state, newValue: string | null) {
+  setPublicKey (state, newValue: string) {
     state.publicKey = newValue
   },
 
@@ -36,17 +37,21 @@ export const mutations = mutationTree(state, {
 export const actions = actionTree(
   { state, getters, mutations },
   {
+    // Connection
     async connectWallet ({ commit }, wallet: WalletInfo) {
       commit('setLoaderConnect', true)
       const adapter = await wallet.getAdapter({ providerUrl: wallet.url, endpoint: 'https://api.mainnet-beta.solana.com' })
-      if (!adapter) {
+      if (!adapter || !this.$web3) {
+        this.app.$accessor.setModal('connectError')
         return
       }
-      (this as any)._vm.$wallet = adapter
+      this.$wallet = adapter
       adapter.on('connect', () => {
         if (adapter.publicKey) {
           commit('setPublicKey', adapter.publicKey.toBase58())
-          commit('setModal', '', { root: true })
+          this.app.$accessor.setModal('')
+          const data = new Account()
+          console.log(data)
         }
         commit('setLoaderConnect', false)
       })
@@ -54,8 +59,18 @@ export const actions = actionTree(
         adapter.connect()
       } catch (error) {
         console.log(error)
+        commit('setErrorConnect', true)
         commit('setLoaderConnect', false)
       }
+    },
+    // Disconnection
+    logout ({ commit }) {
+      if (this.$wallet) {
+        this.$wallet.disconnect()
+        this.$wallet = null
+      }
+      commit('setPublicKey', '')
+      this.$router.push('/')
     }
   }
 )

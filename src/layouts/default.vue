@@ -16,6 +16,13 @@
           :error="errorConnect"
           :loader="loaderConnect" />
     </AmModal>
+    <AmModal
+      :show="modal === 'connectError'"
+      shadow="shadow-red-100"
+      max="w-fix-250-S w-90-XS"
+      @closed="setModalFunc">
+        <ConnectError />
+    </AmModal>
   </div>
 </template>
 
@@ -23,12 +30,14 @@
 import Menu from '@/components/Menu'
 import Footer from '@/components/Footer'
 import ConnectWallet from '@/components/modals/ConnectWallet'
+import ConnectError from '@/components/modals/ConnectError'
 
 export default {
   components: {
     Menu,
     Footer,
-    ConnectWallet
+    ConnectWallet,
+    ConnectError
   },
   computed: {
     modal () {

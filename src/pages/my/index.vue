@@ -2,10 +2,10 @@
   <div class="w-100">
     <div class="w-100 fd-r-L fd-c-S fd-c-XS ai-s">
       <div class="w-50-L w-100-S w-100-XS br-6 brs-s br-mcolor-300 shadow-purple-100 p-6-M p-4-S p-4-XS rad-fix-8 mr-2-L">
-        <Current />
+        <Current @claimFunc="claimFunc" />
       </div>
       <div class="w-50-L w-100-S w-100-XS gradient-500 p-6 rad-fix-8 ml-2-L ovh d-f-L d-n-S d-n-XS">
-        <Farming />
+        <Farming @borrowFunc="borrowFunc" />
         <img src="@/static/my-farming.png" class="h-100 p-a r-0 t-0" />
       </div>
     </div>
@@ -17,15 +17,15 @@
     </div>
     <div class="w-100 fd-r-L fd-c-S fd-c-XS ai-s">
       <div class="w-50-L w-100-S w-100-XS br-6 gradient-200 rad-fix-8 p-8-M p-4-S p-4-XS mr-8">
-        <Borrowing />
+        <Borrowing @borrowFunc="borrowFunc" @payFunc="payFunc" />
       </div>
       <div class="w-50-L w-100-S w-100-XS p-6-M p-3-S p-0-XS fsh-0 pt-0-L pt-10-S pt-10-XS">
-        <Pool />
+        <Pool @depositFunc="depositFunc" />
       </div>
     </div>
     <div class="w-100 fd-r-L fd-c-S fd-c-XS ai-s d-n-L pt-0-L pt-5-S pt-5-XS">
       <div class="w-50-L w-100-S w-100-XS gradient-500 p-6-M p-4-S p-4-XS rad-fix-8 ml-2-L ovh">
-        <Farming />
+        <Farming @borrowFunc="borrowFunc" />
         <img src="@/static/my-farming.png" class="h-100 p-a r-0 t-0" />
       </div>
     </div>
@@ -45,6 +45,20 @@ export default {
     Borrowing,
     Pool
   },
-  layout: 'my'
+  layout: 'my',
+  methods: {
+    depositFunc () {
+      this.$accessor.dashboard.deposit()
+    },
+    borrowFunc () {
+      this.$accessor.dashboard.borrow()
+    },
+    payFunc () {
+      this.$accessor.dashboard.pay()
+    },
+    claimFunc () {
+      this.$accessor.dashboard.claim()
+    }
+  }
 }
 </script>

@@ -7,14 +7,14 @@
         type="text"
         :value="getValue"
         :disabled="modelData.disabled"
-        class="w-100 h-fix-25 brs-s fs-5 pr-8 shadow-purple-100"
-        :class="[getInputClass, getFocusClass, {focus: focusValue}, modelData.colorBackground]"
+        class="w-100 h-fix-25 brs-s fs-5 pr-4"
+        :class="[getInputClass, getFocusClass, {focus: focusValue}, modelData.colorBackground, {'shadow-purple-100': shadow, 'px-4': padding}]"
         @focus="focusValue = true"
         @blur="focusValue = modelData.multiple || modelData.search ? true : false"
       />
       <div class="w-100 h-100 p-a l-0 fd-r ai-c amSelectboxLabel" :class="[getLabelPosition]" v-if="[2].indexOf(getActiveTheme) > -1 && modelData.label" v-html="modelData.label" />
       <span class="h-a p-a l-0 b-0 z-10 brs-s amSelectboxLine" :class="[lineBottomColor]" v-if="[1, 2].indexOf(getActiveTheme) > -1" />
-      <svg class="w-fix-s-10 h-fix-s-10 p-a r-0 b-fix-s-5" :class="{'r-fix-s-5': [0].indexOf(getActiveTheme) > -1}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="451.847px" height="451.847px" viewBox="0 0 451.847 451.847" style="enable-background:new 0 0 451.847 451.847;" xml:space="preserve">
+      <svg class="w-fix-s-10 h-fix-s-10 p-a r-0 b-fix-s-5" :class="{'r-fix-s-5': [0].indexOf(getActiveTheme) > -1 && padding}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="451.847px" height="451.847px" viewBox="0 0 451.847 451.847" style="enable-background:new 0 0 451.847 451.847;" xml:space="preserve">
         <path :class="getColorSvg" d="m368 154.667969h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/>
         <path :class="getColorSvg" d="m368 32h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/>
         <path :class="getColorSvg" d="m368 277.332031h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/>
@@ -58,10 +58,10 @@ export default {
     data: {type: Object, default: null},
     // Colors Props
     colorLabel: {type: String, default: 'gray-800'},
-    colorBackground: {type: String, default: 'white-200'},
-    colorDefault: {type: String, default: 'gray-400'},
+    colorBackground: {type: String, default: 'mcolor-200'},
+    colorDefault: {type: String, default: 'mcolor-100'},
     colorFocus: {type: String, default: 'green-500'},
-    colorTitle: {type: String, default: 'gray-A100'},
+    colorTitle: {type: String, default: 'white-200'},
     colorOptions: {type: String, default: 'white-200'},
     colorOptionsBorder: {type: String, default: 'gray-400'},
     colorOptionHover: {type: String, default: 'gray-300'},
@@ -71,6 +71,8 @@ export default {
     colorBar: {type: String, default: '#9E9E9E'},
     colorError: {type: String, default: 'red-600'},
     colorBottomText: {type: String, default: 'gray-800'},
+    shadow: {type: Boolean, default: true},
+    padding: {type: Boolean, default: true},
     theme: {type: String, default: 'default'},
     // All Props
     sizeBar: {type: String, default: '0.5rem'},
@@ -170,7 +172,7 @@ export default {
       return this.focusValue || this.modelValue !== null ? `fs-4 b-90 f-${this.modelData.colorFocus}` : 'fs-5 b-0'
     },
     getInputClass () {
-      return [1, 2].indexOf(this.getActiveTheme) > -1 ? `br-0 brb-6 br-${this.modelData.colorDefault}` : `rad-fix-2 px-4 br-6 br-${this.focusValue ? this.modelData.colorFocus : this.modelData.colorDefault}`
+      return [1, 2].indexOf(this.getActiveTheme) > -1 ? `br-0 brb-6 br-${this.modelData.colorDefault}` : `rad-fix-2 br-6 br-${this.focusValue ? this.modelData.colorFocus : this.modelData.colorDefault}`
     },
     getFocusClass () {
       return `f-${this.focusValue || this.modelValue !== null ? this.modelData.colorTitle : [2].indexOf(this.getActiveTheme) > -1 ? 'white-100' : this.modelData.colorTitle}`

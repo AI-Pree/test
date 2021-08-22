@@ -16,12 +16,12 @@
     </div>
     <div class="w-100 pb-6 fd-c-L fd-r-S fd-c-XS">
       <div class="w-100 mr-0-L mr-2-S mr-0-XS">
-        <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full>
+        <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full @click="$emit('borrowFunc')">
           Borrow
         </AmButton>
       </div>
       <div class="w-100 pt-4-L pt-0-S pt-4-XS ml-0-L ml-2-S ml-0-XS">
-        <AmButton color="mcolor-200" bColor="mcolor-100" opacityEffect full>
+        <AmButton color="mcolor-200" bColor="mcolor-100" opacityEffect full @click="$emit('payFunc')">
           pay debt
         </AmButton>
       </div>
