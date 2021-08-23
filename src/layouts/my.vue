@@ -46,6 +46,9 @@ export default {
     logout () {
       this.$accessor.wallet.logout()
     }
+  },
+  mounted () {
+    this.$accessor.wallet.getBalance()
   }
 }
 </script>

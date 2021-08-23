@@ -10,17 +10,16 @@ import {
   signTransaction
 } from '@solana/web3.js';
 import BN from "bn.js";
-import {TroveLayout, TROVE_ACCOUNT_DATA_LAYOUT, DEPOSIT_ACCOUNT_DATA_LAYOUT, DepositLayout} from './layout';
+import {TroveLayout, TROVE_ACCOUNT_DATA_LAYOUT, DEPOSIT_ACCOUNT_DATA_LAYOUT, DepositLayout, EscrowProgramIdString} from './layout';
 
 export const depositUtil = async (
     wallet: object,
-    escrowProgramIdString: string,
     tokenAmount: number,
     connection: object,
 ) => {
 
     const depositAccount = new Account();
-    const escrowProgramId = new PublicKey(escrowProgramIdString);
+    const escrowProgramId = new PublicKey(EscrowProgramIdString);
 
     const createDepositAccountIx = SystemProgram.createAccount({
         space: DEPOSIT_ACCOUNT_DATA_LAYOUT.span,
@@ -54,14 +53,11 @@ export const depositUtil = async (
     let signedTx = await wallet.signTransaction(tx);
     // to write without signer
     signedTx.partialSign(depositAccount)
-
     let txId = await connection.sendRawTransaction(signedTx.serialize());
-
     await connection.confirmTransaction(txId);
 
     // Info
     const encodedDepositAccount = (await connection.getAccountInfo(depositAccount.publicKey, 'singleGossip'))!.data;
-
     const decodedDepositState = DEPOSIT_ACCOUNT_DATA_LAYOUT.decode(encodedDepositAccount) as DepositLayout;
 
     return {

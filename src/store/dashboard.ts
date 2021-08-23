@@ -2,8 +2,7 @@
 import { getterTree, mutationTree, actionTree } from 'typed-vuex'
 
 // Import Utils
-import { depositUtil } from '@/utils/deposit'
-import { claimDepositReward } from '@/utils/claimDepositReward'
+import { claimDepositRewardUtil } from '@/utils/claimDepositReward'
 
 // State
 export const state = () => ({
@@ -26,11 +25,12 @@ export const actions = actionTree(
   {
     // Deposit
     async claim ({ commit, state }) {
-      if (state.depositId) {
-        const data = await claimDepositReward(this.$wallet, 'GgMKgNMEY8QTHFXC5xSkMAKaYQqkiZ3WqFbZaBPRFwrA', state.depositId, this.$web3)
-        data.then(result => {
-          console.log(result)
-        })
+      if (this.$accessor.pool.depositKey) {
+        const data = await claimDepositRewardUtil(this.$wallet, this.$accessor.pool.depositKey, this.$web3)
+        if (data) {
+          console.log(data, 'claimDeposit')
+          this.$accessor.wallet.getBalance()
+        }
       }
     },
   }

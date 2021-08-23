@@ -7,6 +7,8 @@ const publicKey = (property = "publicKey") => {
   return BufferLayout.blob(32, property);
 };
 
+export const EscrowProgramIdString = 'GgMKgNMEY8QTHFXC5xSkMAKaYQqkiZ3WqFbZaBPRFwrA'
+
 /**
  * Layout for a 64bit unsigned value
  */

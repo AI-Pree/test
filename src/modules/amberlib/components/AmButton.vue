@@ -1,5 +1,5 @@
 <template>
-  <div class="w-100-S w-100-XS d-ib tt-u rad-fix-2 shadow-purple-100 amButton br-4 brs-s" :class="[color, `f-${colorText}`, `br-${bColor}`, {'w-100-M': full, 'w-a-M': !full, opacity: opacityEffect, scale: scaleEffect}]">
+  <div class="w-100-S w-100-XS d-ib tt-u rad-fix-2 amButton br-4 brs-s" :class="[{'disabled': disabled, 'shadow-purple-100': !disabled}, color, `f-${colorText}`, `br-${bColor}`, {'w-100-M': full, 'w-a-M': !full, opacity: opacityEffect, scale: scaleEffect}]">
     <span class="w-100 h-100 p-a l-0 t-0 amButtonHover" :class="[colorHover, `f-${colorTextHover}`]" v-if="hover" />
     <nuxt-link :to="to" v-if="to" class="w-100-S w-100-XS d-f ai-c jc-c ta-c px-8 py-1 fs-5 fw-500 z-2" :class="{'h-fix-25min': height, 'w-100-M': full, 'w-a-M': !full}">
       <span v-if="label">
@@ -43,7 +43,8 @@ export default {
     opacityEffect: {type: Boolean, default: false},
     scaleEffect: {type: Boolean, default: false},
     height: {type: Boolean, default: true},
-    full: {type: Boolean, default: false}
+    full: {type: Boolean, default: false},
+    disabled: {type: Boolean, default: false}
   },
   computed: {
     getHover () {
@@ -61,6 +62,9 @@ export default {
   .amButtonHover {
     opacity: 0;
     transition: 0.3s;
+  }
+  &.disabled {
+    cursor: default;
   }
   &:hover{
     &.opacity {

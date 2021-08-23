@@ -8,7 +8,7 @@
         SOL
       </div>
       <div class="w-70 fs-7 f-mcolor-300 fw-500 ta-r-XS">
-        20.901345345
+        {{ getBalance > 0 ? (getBalance).toLocaleString() : 0 }}
       </div>
     </div>
     <div class="w-100 fd-r py-2">
@@ -16,7 +16,7 @@
         HGEN
       </div>
       <div class="w-70 fs-7 f-mcolor-300 fw-500 ta-r-XS">
-        13.010112342
+        {{ getBalanceHGEN.toLocaleString() }}
       </div>
     </div>
     <div class="w-100 fd-r py-2">
@@ -24,7 +24,7 @@
         GENS
       </div>
       <div class="w-70 fs-7 f-mcolor-300 fw-500 ta-r-XS">
-        400.01
+        {{ getBalanceGENS.toLocaleString() }}
       </div>
     </div>
     <div class="w-100 pt-8 fd-r jc-c">
@@ -34,3 +34,19 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    getBalance () {
+      return this.$accessor.wallet.balance || 0
+    },
+    getBalanceHGEN () {
+      return this.$accessor.wallet.balanceHGEN || 0
+    },
+    getBalanceGENS () {
+      return this.$accessor.wallet.balanceGENS || 0
+    }
+  },
+}
+</script>

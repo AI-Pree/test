@@ -8,7 +8,10 @@
         Safe pool
       </div>
       <div class="w-45 fsh-0">
-        <AmButton :height="false" color="mcolor-200" bColor="mcolor-100" opacityEffect full @click="claimFunc">
+        <AmButton :height="false" color="mcolor-200" bColor="mcolor-100" opacityEffect full @click="claimFunc" v-if="getDepositKey">
+          claim
+        </AmButton>
+        <AmButton :height="false" color="gray-900" bColor="gray-900" colorText="gray-500" disabled full v-if="!getDepositKey">
           claim
         </AmButton>
       </div>
@@ -40,7 +43,10 @@
     <div class="w-100 fd-r-S fd-c-XS ai-c pt-3">
       <div class="w-100 fd-r ai-c">
         <div class="w-a-S w-100-XS">
-          <AmButton :height="false" color="mcolor-200" bColor="mcolor-100" opacityEffect @click="claimFunc">
+          <AmButton :height="false" color="mcolor-200" bColor="mcolor-100" opacityEffect @click="claimFunc" v-if="getDepositKey">
+            claim
+          </AmButton>
+          <AmButton :height="false" color="gray-900" bColor="gray-900" colorText="gray-500" disabled full v-if="!getDepositKey">
             claim
           </AmButton>
         </div>

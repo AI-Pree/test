@@ -12,12 +12,11 @@ import {
 import BN from "bn.js";
 import {TroveLayout, TROVE_ACCOUNT_DATA_LAYOUT, DEPOSIT_ACCOUNT_DATA_LAYOUT, DepositLayout, EscrowProgramIdString} from './layout';
 
-const connection = new Connection("http://localhost:8899", 'singleGossip');
-
-export const claimDepositRewardUtil = async (
-    wallet: object,
+export const withdrawDepositUtil = async (
+    wallet: string,
     depositId: string,
-    connection: object
+    tokenAmount: number,
+    connection: object,
 ) => {
 
     const depositAccount = new PublicKey(depositId);
@@ -30,7 +29,8 @@ export const claimDepositRewardUtil = async (
             { pubkey: depositAccount, isSigner: false, isWritable: true },
         ],
         data: Buffer.from(
-            Uint8Array.of(8,
+            Uint8Array.of(7,
+            ...new BN(tokenAmount).toArray('le', 8),
         ))
     })
 
