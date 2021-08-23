@@ -293,3 +293,15 @@ html {
 .m-0-auto {
   margin: 0 auto;
 }
+.br-mcolor-400 {
+  border-color: #CF68FF;
+}
+
+.bin-icon {
+  width: 24px;
+  height: 24px;
+  background-color: #CF68FF;
+  -webkit-mask: url("../assets/svg/my/bin.svg") no-repeat center;
+  mask: url("../assets/svg/my/bin.svg") no-repeat center;
+  mask-size: contain;
+}
