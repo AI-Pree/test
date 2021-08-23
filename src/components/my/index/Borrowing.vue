@@ -15,13 +15,13 @@
       (<span class="f-mcolor-100 fw-800 pr-1">10.06%</span> Collateral)
     </div>
     <div class="w-100 pb-6 fd-c-L fd-r-S fd-c-XS">
-      <div class="w-100 mr-0-L mr-2-S mr-0-XS">
-        <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full @click="$emit('borrowFunc')">
+      <div class="w-100 mr-0-L mr-2-S mr-0-XS" v-if="!isBorrow">
+        <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full to="/my/borrowing">
           Borrow
         </AmButton>
       </div>
-      <div class="w-100 pt-4-L pt-0-S pt-4-XS ml-0-L ml-2-S ml-0-XS">
-        <AmButton color="mcolor-200" bColor="mcolor-100" opacityEffect full @click="$emit('payFunc')">
+      <div class="w-100 pt-4-L pt-0-S pt-4-XS ml-0-L ml-2-S ml-0-XS" v-if="isBorrow">
+        <AmButton color="mcolor-200" bColor="mcolor-100" opacityEffect full to="/my/borrowing">
           pay debt
         </AmButton>
       </div>
@@ -52,3 +52,13 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    isBorrow () {
+      return this.$accessor.dashboard.isBorrow
+    }
+  },
+}
+</script>

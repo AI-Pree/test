@@ -8,7 +8,7 @@
         Safe pool
       </div>
       <div class="w-45 fsh-0">
-        <AmButton :height="false" color="mcolor-200" bColor="mcolor-100" opacityEffect full @click="$emit('claimFunc')">
+        <AmButton :height="false" color="mcolor-200" bColor="mcolor-100" opacityEffect full @click="claimFunc">
           claim
         </AmButton>
       </div>
@@ -40,7 +40,7 @@
     <div class="w-100 fd-r-S fd-c-XS ai-c pt-3">
       <div class="w-100 fd-r ai-c">
         <div class="w-a-S w-100-XS">
-          <AmButton :height="false" color="mcolor-200" bColor="mcolor-100" opacityEffect @click="$emit('claimFunc')">
+          <AmButton :height="false" color="mcolor-200" bColor="mcolor-100" opacityEffect @click="claimFunc">
             claim
           </AmButton>
         </div>
@@ -51,3 +51,23 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    depositKey: {type: String, default: null}
+  },
+  computed: {
+    getDepositKey () {
+      return this.$accessor.pool.depositKey
+    }
+  },
+  methods: {
+    claimFunc () {
+      if (this.getDepositKey) {
+        this.$accessor.dashboard.claim()
+      }
+    }
+  }
+}
+</script>

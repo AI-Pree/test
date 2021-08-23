@@ -36,7 +36,6 @@ export default {
   },
   methods: {
     changeBorrow(borrow) {
-      console.log(borrow)
       this.isBorrow = borrow
     }
   },

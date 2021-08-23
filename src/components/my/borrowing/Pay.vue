@@ -3,14 +3,6 @@
     <div class="w-100 fs-9-M fs-9-S fs-7-XS fw-600 f-white-200 pb-4 ta-c-XS">
       Borrowing
     </div>
-    <div class="w-100 fs-6-M fs-6-S fs-5-XS f-gray-500 pb-6 ta-c-XS">
-      your current debt
-    </div>
-    <div class="w-100 fs-6-M fs-6-S fs-4-XS f-white-200 ta-c-XS">
-      <span class="fs-9-M fs-9-S fs-7-XS fw-800 f-mcolor-100">201.00</span>
-      <span class="fs-9-M fs-9-S fs-7-XS fw-600 px-1">GENS</span>
-      (<span class="f-mcolor-100 fw-800 pr-1">10.06%</span>Debt Ratio)
-    </div>
     <div class="w-100 pt-6 fd-r-S fd-c-XS">
       <div class="w-50-S w-100-XS mr-2-L mr-2-S mr-0-XS">
         <AmButton color="mcolor-200" bColor="mcolor-100" opacityEffect full @click="$emit('cancelFunc')">
@@ -28,9 +20,9 @@
         set amount you want to deposit
       </div>
       <div class="w-100 fd-r ai-c">
-        <div class="w-fix-s-10min fs-7 fw-600 f-mcolor-300 br-0 oul-n" contenteditable @input="press">234.00</div>
-        <span class="pl-1 fs-6 fw-600 f-white-200">SOL</span>
-        <span class="p-a r-0 fs-6 f-mcolor-100 td-u ts-3 hv d-n-XS">max</span>
+        <span class="w-15 fs-6 fw-600 f-white-200 fsh-0">SOL</span>
+        <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-7 fw-600 f-mcolor-300" placeholder="0.00" v-model="from" />
+        <span class="fs-6 f-mcolor-100 td-u ts-3 hv d-n-XS fsh-0">max</span>
       </div>
     </div>
     <div class="w-100 mb-4 mcolor-700 rad-fix-2 px-4 py-3">
@@ -38,13 +30,13 @@
         amount received
       </div>
       <div class="w-100 fd-r ai-c">
-        <div class="w-fix-s-10min fs-7 fw-600 f-mcolor-300 br-0 oul-n" contenteditable @input="press">234.00</div>
-        <span class="pl-1 fs-6 fw-600 f-white-200">GENS</span>
+        <span class="w-15 fs-6 fw-600 f-white-200 fsh-0">GENS</span>
+        <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-7 fw-600 f-mcolor-300" placeholder="0.00" v-model="to" />
       </div>
     </div>
     <div class="w-100 pb-6 fd-r-S fd-c-XS">
       <div class="w-50-S w-100-XS mr-2-L mr-2-S mr-0-XS">
-        <AmButton color="mcolor-200" bColor="mcolor-100" opacityEffect full @click="$emit('cancelFunc')">
+        <AmButton color="mcolor-200" bColor="mcolor-100" opacityEffect full @click="reset">
           reset
         </AmButton>
       </div>
@@ -59,12 +51,34 @@
 
 <script>
 export default {
-  methods: {
-    press (e) {
-      if (e.data) {
-        if (!e.data.match(/^\d+/) && e.data !== '.') e.target.innerHTML = e.target.innerHTML.replace(/[^+\d\.]/g, '')
-        if (e.data === '.' && e.target.innerHTML.split('.').length > 2) e.target.innerHTML = e.target.innerHTML.replace(/\.(?=[^\.]*$)/, '')
+  data () {
+    return {
+      from: null,
+      to: null
+    }
+  },
+  watch: {
+    from (val) {
+      if (val) {
+        this.from = val.replace(/[^+\d\.]/g, '')
+        if (this.from.split('.').length > 2) {
+          this.from = this.from.replace(/\.(?=[^\.]*$)/, '')
+        }
       }
+    },
+    to (val) {
+      if (val) {
+        this.to = val.replace(/[^+\d\.]/g, '')
+        if (this.to.split('.').length > 2) {
+          this.to = this.to.replace(/\.(?=[^\.]*$)/, '')
+        }
+      }
+    }
+  },
+  methods: {
+    reset () {
+      this.from = null
+      this.to = null
     }
   }
 }

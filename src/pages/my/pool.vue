@@ -3,7 +3,7 @@
     <Balance />
     <div class="w-100 fd-r fw-w pt-10">
       <div class="w-55-M w-100-S w-100-XS">
-        <Safe @cancelFunc="cancelFunc" @confirmFunc="confirmFunc" />
+        <Safe @confirmFunc="confirmFunc" />
       </div>
       <div class="w-45-M w-100-S w-100-XS pl-8-M pl-0-XS pt-4-M pt-8-S pt-8-XS">
         <Info />
@@ -30,11 +30,8 @@ export default {
     Info
   },
   methods: {
-    cancelFunc () {
-      this.$accessor.dashboard.cancel()
-    },
-    confirmFunc () {
-      this.$accessor.dashboard.confirm()
+    confirmFunc (value) {
+      this.$accessor.pool.confirm(value)
     }
   }
 }

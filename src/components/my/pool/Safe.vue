@@ -19,7 +19,7 @@
         set amount you want to deposit
       </div>
       <div class="w-100 fd-r ai-c">
-        <div class="w-fix-s-10min fs-7 fw-600 f-mcolor-300 br-0 oul-n" contenteditable @input="press">234.00</div>
+        <div class="w-fix-s-10min fs-7 fw-600 f-mcolor-300 br-0 oul-n d-i" style="white-space: nowrap;" contenteditable @input="press" id="fromValPool" @click="setFocus" @blur="blur">0.0</div>
         <span class="pl-1 fs-6 fw-600 f-white-200">GENS</span>
         <span class="p-a r-0 fs-6 f-mcolor-100 td-u ts-3 hv d-n-XS">max</span>
       </div>
@@ -29,18 +29,18 @@
         amount received
       </div>
       <div class="w-100 fd-r ai-c">
-        <div class="w-fix-s-10min fs-7 fw-600 f-mcolor-300 br-0 oul-n" contenteditable @input="press">234.00</div>
+        <div class="w-fix-s-10min fs-7 fw-600 f-mcolor-300 br-0 oul-n" contenteditable @input="press" id="toValPool" @click="setFocus" @blur="blur">0.0</div>
         <span class="pl-1 fs-6 fw-600 f-white-200">GENS</span>
       </div>
     </div>
     <div class="w-100 pb-6 fd-r-S fd-c-XS">
       <div class="w-50-S w-100-XS mr-2-L mr-2-S mr-0-XS">
-        <AmButton color="mcolor-200" bColor="mcolor-100" opacityEffect full @click="$emit('cancelFunc')">
-          cancel
+        <AmButton color="mcolor-200" bColor="mcolor-100" opacityEffect full @click="reset">
+          reset
         </AmButton>
       </div>
       <div class="w-50-S w-100-XS ml-2-L ml-2-S ml-0-XS mt-0-S mt-4-XS">
-        <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full @click="$emit('confirmFunc')">
+        <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full @click="$emit('confirmFunc', {from: getFrom, to: getTo})">
           confirm
         </AmButton>
       </div>
@@ -50,11 +50,33 @@
 
 <script>
 export default {
+  computed: {
+    getFrom () {
+      return document.getElementById('fromValPool').innerText
+    },
+    getTo () {
+      return document.getElementById('toValPool').innerText
+    }
+  },
   methods: {
     press (e) {
       if (e.data) {
         if (!e.data.match(/^\d+/) && e.data !== '.') e.target.innerHTML = e.target.innerHTML.replace(/[^+\d\.]/g, '')
         if (e.data === '.' && e.target.innerHTML.split('.').length > 2) e.target.innerHTML = e.target.innerHTML.replace(/\.(?=[^\.]*$)/, '')
+      }
+    },
+    reset () {
+      document.getElementById('fromValPool').innerText = '0.0'
+      document.getElementById('toValPool').innerText = '0.0'
+    },
+    setFocus (e) {
+      if (e.target.innerText === '0.0') {
+        e.target.innerText = ''
+      }
+    },
+    blur (e) {
+      if (e.target.innerText === '') {
+        e.target.innerText = '0.0'
       }
     }
   }

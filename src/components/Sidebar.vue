@@ -1,5 +1,5 @@
 <template>
-  <div class="w-100 mcolor p-8-M p-0-S p-0-XS rad-fix-10-M fd-r fw-w">
+  <div class="w-100 mcolor px-8-M px-0-S px-0-XS pb-8-M pb-0-S pb-0-XS rad-fix-10-M fd-r fw-w">
     <div class="w-100-M w-20-S w-20-XS fd-r ai-c jc-l-M jc-c-S jc-c-XS" v-for="(item, i) in items">
       <nuxt-link :to="item.to" class="w-a-M w-100-S w-100-XS fd-r-M fd-c-S fd-c-XS ai-c hv ts-3 mt-6-M mt-3-S mt-3-XS mb-0-M mb-3-S mb-3-XS">
         <div class="w-fix-s-15 mr-2-M fd-r ai-c jc-l-M jc-c-S jc-c-XS">
