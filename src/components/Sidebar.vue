@@ -1,6 +1,6 @@
 <template>
   <div class="w-100 mcolor px-8-M px-0-S px-0-XS pb-8-M pb-0-S pb-0-XS rad-fix-10-M fd-r fw-w">
-    <div class="w-100-M w-20-S w-20-XS fd-r ai-c jc-l-M jc-c-S jc-c-XS" v-for="(item, i) in items">
+    <div class="w-100-M w-20-S w-20-XS fd-r ai-c jc-l-M jc-c-S jc-c-XS" v-for="item in items" :key="item.class">
       <nuxt-link :to="item.to" class="w-a-M w-100-S w-100-XS fd-r-M fd-c-S fd-c-XS ai-c hv ts-3 mt-6-M mt-3-S mt-3-XS mb-0-M mb-3-S mb-3-XS">
         <div class="w-fix-s-15 mr-2-M fd-r ai-c jc-l-M jc-c-S jc-c-XS">
           <HomeSvg class="w-fix-10" v-if="item.id === 1 && !getActive(item)" />
@@ -11,7 +11,9 @@
           <SwitchActiveSvg class="w-fix-10" v-if="item.id === 3 && getActive(item)" />
           <PieSvg class="w-fix-10" v-if="item.id === 4 && !getActive(item)" />
           <PieActiveSvg class="w-fix-10" v-if="item.id === 4 && getActive(item)" />
-          <ExitSvg class="w-fix-10" v-if="item.id === 5" />
+          <CoinsSvg class="w-fix-10" v-if="item.id === 5 && !getActive(item)" />
+          <CoinsActiveSvg class="w-fix-10" v-if="item.id === 5 && getActive(item)" />
+          <ExitSvg class="w-fix-10" v-if="item.id === 6" />
         </div>
         <span class="fs-6-M fs-4-S fs-4-XS ts-3 pt-0-M pt-2-S pt-2-XS" :class="{'f-mcolor-300 fw-600': getActive(item), 'f-white-200 fw-400': !getActive(item)}">
           {{ item.name }}
@@ -71,7 +73,8 @@ export default {
         {id: 1, name: 'Dashboard', to: '/my', class: 'my'},
         {id: 2, name: 'Borrowing', to: '/my/borrowing', class: 'my-borrowing'},
         {id: 3, name: 'Swap', to: '/my/swap', class: 'my-swap'},
-        {id: 4, name: 'Pool/Safe pool', to: '/my/pool', class: 'my-pool'}
+        {id: 4, name: 'Pool/Safe pool', to: '/my/pool', class: 'my-pool'},
+        {id: 5, name: 'Risky trove', to: '/my/risky', class: 'my-ricky-trove'},
       ]
     }
   }
