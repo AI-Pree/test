@@ -69,7 +69,7 @@ export const actions = actionTree(
     // Claim
     async confirmBorrow ({ commit, dispatch }, value) {
       if (Number(value.from > 0) && Number(value.to > 0)) {
-        const data = await borrowUtil(this.$wallet, Number(value.to), Number(value.from), this.$web3)
+        const data = await borrowUtil(this.$wallet, Number(value.to), Number(value.from) * 1000000000, this.$web3)
         if (data && (data.troveAccountPubkey)) {
           commit('setTroveId', data.troveAccountPubkey || '')
           console.log(data, 'borrow')

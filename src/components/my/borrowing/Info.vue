@@ -17,7 +17,7 @@
       <div class="w-100 fd-r pt-4 fw-w">
         <div class="w-70-S w-100-XS">
           <div class="w-100 fs-12 f-mcolor-100 fw-700 ta-c-XS">
-            {{ getTroveAmount.toLocaleString() }}
+            {{ getTroveAmount ? getTroveAmount.toLocaleString() : 0 }}
           </div>
           <div class="w-100 fs-6 f-white-200 fw-600 pt-2 ta-c-XS">
             GENS
@@ -25,7 +25,7 @@
         </div>
         <div class="w-30-S w-100-XS">
           <div class="w-100 fs-8 f-green-600 fw-700 ta-c-XS">
-            {{ getDebt }} %
+            {{ getCollateral }} %
           </div>
           <div class="w-100 fs-5 f-white-200 fw-400 pt-2 ta-c-XS">
             Remaining<br/>Debit Ratio
@@ -82,6 +82,7 @@
 
 <script>
 import Hint from '@/components/Hint'
+import { getCollateral } from "@/utils/layout"
 
 export default {
   components: {
@@ -95,13 +96,21 @@ export default {
       return 5
     },
     getDebt () {
-      return this.$accessor.borrowing.debt || 0
+      if (!this.$accessor.borrowing.troveId) {
+        return this.$accessor.borrowing.debt || 0
+      } else {
+        return ((10 * 1) / (this.$accessor.borrowing.trove.borrowAmount - 200)) * 100
+      }
     },
     getIsBorrow () {
       return this.$accessor.borrowing.troveId
     },
     getTroveAmount () {
       return this.$accessor.borrowing.trove ? this.$accessor.borrowing.trove.borrowAmount : 0
+    },
+    getCollateral () {
+      return this.$accessor.borrowing.trove.borrowAmount ?
+        getCollateral(this.$accessor.borrowing.trove.borrowAmount.toString(), this.$accessor.borrowing.trove.lamports.toString()) : 0;
     }
   }
 }
