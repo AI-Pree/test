@@ -10,7 +10,13 @@ import * as pool from './pool'
 
 // State
 export const state = () => ({
-  modal: ''
+  modal: '',
+  totalDeposit: 0,
+  gasFee: 0,
+  governanceReward: 0,
+  solReward: 0,
+  tokenReward: 0,
+  troveTotal: 0
 })
 
 export type RootState = ReturnType<typeof state>
@@ -23,9 +29,23 @@ export const mutations = mutationTree(state, {
   setModal (state, newValue: string) {
     state.modal = newValue
   },
-
-  initialiseStore() {
-    console.log('initialised')
+  setTotalDeposit (state, newValue: number) {
+    state.totalDeposit = newValue
+  },
+  setGasFee (state, newValue: number) {
+    state.gasFee = newValue
+  },
+  setGovernanceReward (state, newValue: number) {
+    state.governanceReward = newValue
+  },
+  setSolReward (state, newValue: number) {
+    state.solReward = newValue
+  },
+  setTokenReward (state, newValue: number) {
+    state.tokenReward = newValue
+  },
+  setTroveTotal (state, newValue: number) {
+    state.troveTotal = newValue
   },
 })
 
@@ -33,7 +53,16 @@ export const mutations = mutationTree(state, {
 export const actions = actionTree(
   { state, getters, mutations },
   {
-
+    getInfo ({ commit }) {
+      this.$axios.get('info').then(({ data }) => {
+        commit('setTotalDeposit', data.depositTotal || 0)
+        commit('setGasFee', data.gasFee || 0)
+        commit('setGovernanceReward', data.governanceReward || 0)
+        commit('setSolReward', data.solReward || 0)
+        commit('setTokenReward', data.tokenReward || 0)
+        commit('setTroveTotal', data.troveTotal || 0)
+      })
+    }
   }
 )
 

@@ -63,6 +63,9 @@ export default {
     connectWalletFunc (value) {
       this.$accessor.wallet.connectWallet(value)
     }
+  },
+  mounted () {
+    this.$accessor.getInfo()
   }
 }
 </script>

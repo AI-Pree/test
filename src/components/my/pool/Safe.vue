@@ -17,6 +17,22 @@
       </div>
       <div class="w-100 my-4 mb-2 mcolor-700 rad-fix-2 px-4 py-3">
         <div class="w-100 fs-5 f-gray-600 pb-1">
+          set wallet token GENS
+        </div>
+        <div class="w-100 fd-r ai-c">
+          <input type="text" class="w-100 white-100 br-0 oul-n fs-7 fw-600 f-mcolor-300" placeholder="XXXXXXXXX..." v-model="gen" />
+        </div>
+      </div>
+      <div class="w-100 my-4 mb-2 mcolor-700 rad-fix-2 px-4 py-3">
+        <div class="w-100 fs-5 f-gray-600 pb-1">
+          set wallet token HGEN
+        </div>
+        <div class="w-100 fd-r ai-c">
+          <input type="text" class="w-100 white-100 br-0 oul-n fs-7 fw-600 f-mcolor-300" placeholder="XXXXXXXXX..." v-model="hgen" />
+        </div>
+      </div>
+      <div class="w-100 my-4 mb-2 mcolor-700 rad-fix-2 px-4 py-3">
+        <div class="w-100 fs-5 f-gray-600 pb-1">
           set amount you want to deposit
         </div>
         <div class="w-100 fd-r ai-c">
@@ -58,6 +74,8 @@ export default {
   },
   data () {
     return {
+      gen: '',
+      hgen: '',
       from: null
     }
   },
@@ -86,9 +104,9 @@ export default {
     },
     depositFunc () {
       if (this.getDepositKey) {
-        this.$accessor.pool.addDeposit(this.from)
+        this.$accessor.pool.addDeposit({from: this.from, gen: this.gen, hgen: this.hgen})
       } else {
-        this.$accessor.pool.newDeposit(this.from)
+        this.$accessor.pool.newDeposit({from: this.from, gen: this.gen, hgen: this.hgen})
       }
       this.from = null
     },
