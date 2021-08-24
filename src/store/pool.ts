@@ -6,12 +6,16 @@ import { getterTree, mutationTree, actionTree } from 'typed-vuex'
 // Import Utils
 import { depositUtil } from '@/utils/deposit'
 import { addDepositUtil } from '@/utils/addDeposit'
+import BN from "bn.js";
 
 // State
 export const state = () => ({
   depositKey: '',
   gen: '',
   hgen: '',
+  rewardCoinAmount: 0,
+  rewardHgenAmount: 0,
+  rewardGensAmount: 0,
   loading: false
 })
 
@@ -29,6 +33,15 @@ export const mutations = mutationTree(state, {
   setHGEN (state, newValue: string) {
     state.hgen = newValue
   },
+  setRewardCoinAmount (state, newValue: number) {
+    state.rewardCoinAmount = newValue
+  },
+  setRewardHgenAmount (state, newValue: number) {
+    state.rewardHgenAmount = newValue
+  },
+  setRewardGensAmount (state, newValue: number) {
+    state.rewardGensAmount = newValue
+  },
   setLoading (state, newValue: boolean) {
     state.loading = newValue
   },
@@ -39,9 +52,10 @@ export const actions = actionTree(
   { state, getters, mutations },
   {
     // Get Deposit
-    async getDeposit ({ commit }, value) {
+    async getDeposit ({ commit, dispatch }, value) {
       await this.$axios.get('deposit?user=' + this.$wallet.publicKey.toBase58()).then(async ({ data }) => {
         commit('setDepositKey', data.model || '')
+        dispatch('setDepositById', new PublicKey(data.model.deposit))
         // Info
         const encodedDepositAccount = (await this.$web3.getAccountInfo(new PublicKey(data.model.deposit), 'singleGossip'))!.data;
         const decodedDepositState = DEPOSIT_ACCOUNT_DATA_LAYOUT.decode(encodedDepositAccount) as DepositLayout;
@@ -51,6 +65,10 @@ export const actions = actionTree(
         if (decodedDepositState.governanceBank) {
           commit('setHGEN', new PublicKey(decodedDepositState.governanceBank).toBase58())
         }
+
+        commit('setRewardGensAmount', new BN(decodedDepositState.rewardTokenAmount, 10, 'le').toNumber());
+        commit('setRewardHgenAmount', new BN(decodedDepositState.rewardGovernanceTokenAmount, 10, 'le').toNumber());
+        commit('setRewardCoinAmount', new BN(decodedDepositState.rewardCoinAmount, 10, 'le').toNumber());
       })
     },
 
