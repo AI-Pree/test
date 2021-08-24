@@ -1,6 +1,6 @@
 <template>
   <div class="w-100 p-2-XS p-2-S">
-    <CommonTable :tableData="aTroveList" :tableOptions="tableOptions" @binAction="binAction($event)" class="mt-4" />
+    <CommonTable :tableData="tableData" :tableOptions="tableOptions" @binAction="binAction($event)" class="mt-4" />
     <AmButton color="mcolor-100" opacityEffect scaleEffect class="mt-4" @click="nextPage()">
       More
     </AmButton>
@@ -11,6 +11,7 @@
 import Balance from '@/components/my/pool/Balance.vue'
 import CommonTable from '@/components/common/table/CommonTable.vue'
 import { encodeUtil } from '@/utils/trove'
+import { getCollateral } from "@/utils/layout"
 import { PublicKey } from '@solana/web3.js';
 
 export default {
@@ -51,16 +52,22 @@ export default {
   },
   methods: {
     binAction(val) {
-      console.log(val)
+      console.log(val, 111)
     },
     setTroveList(newVal) {
       this.tableData = []
       newVal.forEach(async (element) => {
-        const trove = new PublicKey(element.user)
-        this.$web3.getAccountInfo(trove).then(data => {
-          encodeUtil(trove, data).then(res => {
-            console.log(res)
-          })
+        const trove = new PublicKey(element.trove)
+        const data = await this.$web3.getAccountInfo(trove);
+        const res = await encodeUtil(trove, data.data)
+        this.tableData.push({
+          date: '',
+          holder: res.owner.substr(0, 5) + '...' + res.owner.substr(-4),
+          coll: '',
+          debt: res.borrowAmount || '',
+          fee: res.depositorFee || '',
+          debtRatio: getCollateral(res.borrowAmount.toString(), res.lamports.toString()),
+          price: ''
         })
       })
 
