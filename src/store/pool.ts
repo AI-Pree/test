@@ -109,6 +109,24 @@ export const actions = actionTree(
             const data = await addDepositUtil(this.$wallet, state.depositKey.deposit, process.env.mint, Number(value.from), state.gen, state.hgen, this.$web3)
             console.log(data, 'addDeposit')
             this.$accessor.wallet.getBalance()
+
+            await this.$axios.get('deposit?user=' + this.$wallet.publicKey.toBase58()).then(async ({ data }) => {
+              commit('setDepositKey', data.model || '')
+              // Info
+              const encodedDepositAccount = (await this.$web3.getAccountInfo(new PublicKey(data.model.deposit), 'singleGossip'))!.data;
+              const decodedDepositState = DEPOSIT_ACCOUNT_DATA_LAYOUT.decode(encodedDepositAccount) as DepositLayout;
+              if (decodedDepositState.bank) {
+                commit('setGen', new PublicKey(decodedDepositState.bank).toBase58())
+              }
+              if (decodedDepositState.governanceBank) {
+                commit('setHGEN', new PublicKey(decodedDepositState.governanceBank).toBase58())
+              }
+
+              commit('setRewardGensAmount', new BN(decodedDepositState.rewardTokenAmount, 10, 'le').toNumber());
+              commit('setRewardHgenAmount', new BN(decodedDepositState.rewardGovernanceTokenAmount, 10, 'le').toNumber());
+              commit('setDepositAmount', new BN(decodedDepositState.tokenAmount, 10, 'le').toNumber());
+              commit('setRewardCoinAmount', new BN(decodedDepositState.rewardCoinAmount, 10, 'le').toNumber());
+            })
             commit('setLoading', false)
           } catch {
             commit('setLoading', false)
@@ -124,9 +142,27 @@ export const actions = actionTree(
           commit('setLoading', true)
           this.$axios.post('deposit/withdraw', {deposit: state.depositKey.deposit, amount: value}).then(({ data }) => {
             console.log(data, 'closeDeposit')
-          }).finally(() => {
+          }).finally(async () => {
             commit('setLoading', false)
             this.$accessor.wallet.getBalance()
+
+            await this.$axios.get('deposit?user=' + this.$wallet.publicKey.toBase58()).then(async ({ data }) => {
+              commit('setDepositKey', data.model || '')
+              // Info
+              const encodedDepositAccount = (await this.$web3.getAccountInfo(new PublicKey(data.model.deposit), 'singleGossip'))!.data;
+              const decodedDepositState = DEPOSIT_ACCOUNT_DATA_LAYOUT.decode(encodedDepositAccount) as DepositLayout;
+              if (decodedDepositState.bank) {
+                commit('setGen', new PublicKey(decodedDepositState.bank).toBase58())
+              }
+              if (decodedDepositState.governanceBank) {
+                commit('setHGEN', new PublicKey(decodedDepositState.governanceBank).toBase58())
+              }
+
+              commit('setRewardGensAmount', new BN(decodedDepositState.rewardTokenAmount, 10, 'le').toNumber());
+              commit('setRewardHgenAmount', new BN(decodedDepositState.rewardGovernanceTokenAmount, 10, 'le').toNumber());
+              commit('setDepositAmount', new BN(decodedDepositState.tokenAmount, 10, 'le').toNumber());
+              commit('setRewardCoinAmount', new BN(decodedDepositState.rewardCoinAmount, 10, 'le').toNumber());
+            })
           })
         }
       }
