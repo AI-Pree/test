@@ -4,14 +4,15 @@ import { getterTree, mutationTree, actionTree } from 'typed-vuex'
 // Import Utils
 import { borrowUtil } from '@/utils/borrow'
 import { closeBorrowUtil } from '@/utils/closeBorrow'
-import {TROVE_ACCOUNT_DATA_LAYOUT, TroveLayout} from "@/utils/layout";
+import {TROVE_ACCOUNT_DATA_LAYOUT, TroveLayout, getCollateral} from "@/utils/layout";
 import BN from "bn.js";
 import {PublicKey} from "@solana/web3.js";
 
 // State
 export const state = () => ({
   troveId: '',
-  trove: {}
+  trove: {},
+  debt: 0
 })
 
 // Getters
@@ -26,6 +27,10 @@ export const mutations = mutationTree(state, {
   setTrove (state, newValue: TroveLayout) {
     state.trove = newValue
     console.log({newValue})
+  },
+
+  setDebt (state, newValue: number) {
+    state.debt = newValue
   }
 })
 
@@ -64,7 +69,7 @@ export const actions = actionTree(
     // Claim
     async confirmBorrow ({ commit, dispatch }, value) {
       if (Number(value.from > 0) && Number(value.to > 0)) {
-        const data = await borrowUtil(this.$wallet, Number(value.to), Number(value.from) * 1000000000, this.$web3)
+        const data = await borrowUtil(this.$wallet, Number(value.to), Number(value.from), this.$web3)
         if (data && (data.troveAccountPubkey)) {
           commit('setTroveId', data.troveAccountPubkey || '')
           console.log(data, 'borrow')
@@ -95,5 +100,13 @@ export const actions = actionTree(
         }
       }
     },
+
+    getDebt ({ commit }, value) {
+      if (value && (value.from > 0 && value.to > 0)) {
+        commit('setDebt', getCollateral(String(value.from), String(value.to)))
+      } else {
+        commit('setDebt', 0)
+      }
+    }
   }
 )
