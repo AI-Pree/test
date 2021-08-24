@@ -56,10 +56,9 @@ export const actions = actionTree(
   { state, getters, mutations },
   {
     // Get Deposit
-    async getDeposit ({ commit, dispatch }, value) {
+    async getDeposit ({ commit }, value) {
       await this.$axios.get('deposit?user=' + this.$wallet.publicKey.toBase58()).then(async ({ data }) => {
         commit('setDepositKey', data.model || '')
-        dispatch('setDepositById', new PublicKey(data.model.deposit))
         // Info
         const encodedDepositAccount = (await this.$web3.getAccountInfo(new PublicKey(data.model.deposit), 'singleGossip'))!.data;
         const decodedDepositState = DEPOSIT_ACCOUNT_DATA_LAYOUT.decode(encodedDepositAccount) as DepositLayout;
