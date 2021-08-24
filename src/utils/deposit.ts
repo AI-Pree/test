@@ -1,24 +1,34 @@
-import { AccountLayout, Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
+import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import {
   Account,
-  Connection,
   PublicKey,
   SystemProgram,
+  Connection,
   SYSVAR_RENT_PUBKEY,
   Transaction,
   TransactionInstruction
 } from '@solana/web3.js';
 import BN from "bn.js";
 import {TroveLayout, TROVE_ACCOUNT_DATA_LAYOUT, DEPOSIT_ACCOUNT_DATA_LAYOUT, DepositLayout, EscrowProgramIdString} from './layout';
+import Wallet from "@project-serum/sol-wallet-adapter";
 
 export const depositUtil = async (
-    wallet: object,
+    wallet: Wallet,
+    // Адрес токена GENS
+    tokenMintAccountPubkey: string,
     tokenAmount: number,
-    connection: object,
+    // Адрес кошелька токена пользователя GENS
+    pdaToken: string,
+    // Адрес кошелька токена пользователя HGEN
+    governanceToken: string,
+    connection: Connection,
 ) => {
 
     const depositAccount = new Account();
     const escrowProgramId = new PublicKey(EscrowProgramIdString);
+    const tokenMintAcc = new PublicKey(tokenMintAccountPubkey);
+    const pdaTokenAcc = new PublicKey(pdaToken);
+    const governanceTokenAcc = new PublicKey(governanceToken);
 
     const createDepositAccountIx = SystemProgram.createAccount({
         space: DEPOSIT_ACCOUNT_DATA_LAYOUT.span,
@@ -34,6 +44,10 @@ export const depositUtil = async (
             { pubkey: wallet.publicKey, isSigner: true, isWritable: false },
             { pubkey: depositAccount.publicKey, isSigner: false, isWritable: true },
             { pubkey: SYSVAR_RENT_PUBKEY, isSigner: false, isWritable: false},
+            { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
+            { pubkey: pdaTokenAcc, isSigner: false, isWritable: true },
+            { pubkey: governanceTokenAcc, isSigner: false, isWritable: true },
+            { pubkey: tokenMintAcc, isSigner: false, isWritable: true },
         ],
         data: Buffer.from(
             Uint8Array.of(6,

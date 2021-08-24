@@ -26,11 +26,11 @@ export const actions = actionTree(
     // Deposit
     async claim ({ commit, state }) {
       if (this.$accessor.pool.depositKey) {
-        const data = await claimDepositRewardUtil(this.$wallet, this.$accessor.pool.depositKey, this.$web3)
-        if (data) {
-          console.log(data, 'claimDeposit')
+        //const data = await claimDepositRewardUtil(this.$wallet, this.$accessor.pool.depositKey, this.$web3)
+        //if (data) {
+          //console.log(data, 'claimDeposit')
           this.$accessor.wallet.getBalance()
-        }
+        //}
       }
     },
   }

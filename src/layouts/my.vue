@@ -48,6 +48,8 @@ export default {
     }
   },
   mounted () {
+    this.$accessor.pool.getDeposit()
+    this.$accessor.borrowing.getTrove()
     this.$accessor.wallet.getBalance()
   }
 }

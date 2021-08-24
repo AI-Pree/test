@@ -49,6 +49,16 @@ export default {
     '@nuxtjs/svg'
   ],
 
+  axios: {
+    baseUrl: process.env.baseUrl || 'https://liquity-back.ambersoft.llc/'
+  },
+
+  // ENV
+  env: {
+    baseUrl: process.env.BASE_URL || 'https://liquity-back.ambersoft.llc/',
+    mint: 'C6tfES3TrhTzQnRopAyqHAjx4ixShAzJ16QeffWvoXBk'
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   },

@@ -24,6 +24,12 @@ export const mutations = mutationTree(state, {
 export const actions = actionTree(
   { state, getters, mutations },
   {
+    // Get Deposit
+    async getTrove ({ commit }, value) {
+      await this.$axios.get('trove?user=' + this.$wallet.publicKey.toBase58()).then(({ data }) => {
+        commit('setTroveId', data.model || '')
+      })
+    },
     // Claim
     async confirmBorrow ({ commit }, value) {
       if (Number(value.from > 0) && Number(value.to > 0)) {
@@ -40,7 +46,7 @@ export const actions = actionTree(
     // Deposit
     async closeTrove ({ state, commit }) {
       if (state.troveId) {
-        const data = await closeBorrowUtil(this.$wallet, String(state.troveId), this.$web3)
+        const data = await closeBorrowUtil(this.$wallet, '12', String(state.troveId), '12', this.$web3)
         console.log(data, 'closeTrove')
         commit('setTroveId', '')
         this.$accessor.wallet.getBalance()
