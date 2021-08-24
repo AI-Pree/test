@@ -10,7 +10,7 @@
       your current debt
     </div>
     <div class="w-100 fs-6-M fs-6-S fs-4-XS f-white-200 pb-8">
-      <span class="fs-9-M fs-9-S fs-7-XS fw-800 f-mcolor-100">{{getDebt}}</span>
+      <span class="fs-9-M fs-9-S fs-7-XS fw-800 f-mcolor-100">{{getDebt.toLocaleString()}}</span>
       <span class="fs-9-M fs-9-S fs-7-XS fw-600 px-1">GENS</span>
       (<span class="f-mcolor-100 fw-800 pr-1">{{getCollateral}}%</span> Collateral)
     </div>
@@ -31,7 +31,7 @@
         Total Borrowing
       </div>
       <div class="w-45 fsh-0 fs-5 f-white-200 fw-600">
-        <span class="f-mcolor-100">{{ getTotalDebt }}</span> GENS
+        <span class="f-mcolor-100">{{ getTotalDebt.toLocaleString() }}</span> GENS
       </div>
     </div>
     <div class="w-100 fd-r ai-c py-2" v-if="false">

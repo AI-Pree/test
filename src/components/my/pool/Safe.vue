@@ -11,9 +11,9 @@
         your current pool share
       </div>
       <div class="w-100 fs-6-M fs-6-S fs-4-XS f-white-200 ta-c-XS" v-if="getDepositKey">
-        <span class="fs-9-M fs-9-S fs-7-XS fw-800 f-mcolor-100">6.40</span>
+        <span class="fs-9-M fs-9-S fs-7-XS fw-800 f-mcolor-100">{{getPercent.toLocaleString()}}</span>
         <span class="fs-9-M fs-9-S fs-7-XS fw-600 px-1">%</span>
-        (<span class="f-mcolor-100 fw-800 pr-1">201.00</span> GENS)
+        (<span class="f-mcolor-100 fw-800 pr-1">{{getDepositAmount.toLocaleString()}}</span> GENS)
       </div>
       <div class="w-100 my-4 mb-2 mcolor-700 rad-fix-2 px-4 py-3" v-if="!getDepositKey">
         <div class="w-100 fs-5 f-gray-600 pb-1">
@@ -85,6 +85,15 @@ export default {
     },
     getLoading () {
       return this.$accessor.pool.loading
+    },
+    getDepositAmount () {
+      return this.$accessor.pool.depositAmount
+    },
+    getPercent () {
+      return Number.parseInt((this.$accessor.pool.depositAmount / this.$accessor.totalDeposit || 0) * 100)
+    },
+    getDepositeTotal () {
+      return this.$accessor.totalDeposit || 0
     }
   },
   watch: {

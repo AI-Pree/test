@@ -75,5 +75,5 @@ export const TOKEN_GENS = new PublicKey('JCnyD2wyimf5P3MBVAxB5yCVhotmswDhvrwXdS9
 export const SYS_ACCOUNT = new PublicKey('H8zGtK1u7wtGmcYFLcrES4trMRAz8BR2WH83k3uYYiLo')
 
 export const getCollateral = (gens: string, lamports: string) => {
-  return new BN(lamports).mul(new BN("77")).div(new BN(gens))
+  return new BN(lamports).div(new BN("10000000")).mul(new BN("77")).div(new BN(gens))
 }
