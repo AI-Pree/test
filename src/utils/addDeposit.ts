@@ -1,4 +1,3 @@
-import { AccountLayout, Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import {
   Account,
   Connection,
@@ -6,14 +5,13 @@ import {
   SystemProgram,
   SYSVAR_RENT_PUBKEY,
   Transaction,
-  TransactionInstruction,
-  signTransaction
+  TransactionInstruction
 } from '@solana/web3.js';
 import BN from "bn.js";
 import {TroveLayout, TROVE_ACCOUNT_DATA_LAYOUT, DEPOSIT_ACCOUNT_DATA_LAYOUT, DepositLayout, EscrowProgramIdString} from './layout';
 
 export const addDepositUtil = async (
-    wallet: object,
+    wallet: PublicKey,
     depositId: string,
     tokenAmount: number,
     connection: object,
@@ -26,7 +24,7 @@ export const addDepositUtil = async (
     const createDepositAccountIx = SystemProgram.createAccount({
         space: DEPOSIT_ACCOUNT_DATA_LAYOUT.span,
         lamports: await connection.getMinimumBalanceForRentExemption(DEPOSIT_ACCOUNT_DATA_LAYOUT.span),
-        fromPubkey: wallet.publicKey,
+        fromPubkey: wallet.publicKey ?? PublicKey,
         newAccountPubkey: tempDepositAccount.publicKey,
         programId: escrowProgramId
     });
@@ -60,7 +58,7 @@ export const addDepositUtil = async (
     await connection.confirmTransaction(txId);
 
     // Info
-    const encodedDepositAccount = (await connection.getAccountInfo(depositAccount, 'singleGossip'))!.data;
+    const encodedDepositAccount = (Object<any>) => (await connection.getAccountInfo(depositAccount, 'singleGossip'))!.data;
     const decodedDepositState = DEPOSIT_ACCOUNT_DATA_LAYOUT.decode(encodedDepositAccount) as DepositLayout;
 
     return {

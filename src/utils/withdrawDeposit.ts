@@ -6,8 +6,7 @@ import {
   SystemProgram,
   SYSVAR_RENT_PUBKEY,
   Transaction,
-  TransactionInstruction,
-  signTransaction
+  TransactionInstruction
 } from '@solana/web3.js';
 import BN from "bn.js";
 import {TroveLayout, TROVE_ACCOUNT_DATA_LAYOUT, DEPOSIT_ACCOUNT_DATA_LAYOUT, DepositLayout, EscrowProgramIdString} from './layout';
@@ -47,8 +46,8 @@ export const withdrawDepositUtil = async (
     await connection.confirmTransaction(txId);
 
     // Info
-    const encodedDepositAccount = (await connection.getAccountInfo(depositAccount, 'singleGossip'))!.data;
-    const decodedDepositState = DEPOSIT_ACCOUNT_DATA_LAYOUT.decode(encodedDepositAccount) as DepositLayout;
+    const encodedDepositAccount = await connection.getAccountInfo(depositAccount, 'singleGossip'))!.data;
+    const decodedDepositState = DEPOSIT_ACCOUNT_DATA_LAYOUT.decode(encodedDepositAccount || '') as DepositLayout;
 
     return {
         depositAccountPubkey: depositAccount.toBase58(),
