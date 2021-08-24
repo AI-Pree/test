@@ -16,6 +16,7 @@ export const state = () => ({
   rewardCoinAmount: 0,
   rewardHgenAmount: 0,
   rewardGensAmount: 0,
+  depositAmount: 0,
   loading: false
 })
 
@@ -41,6 +42,9 @@ export const mutations = mutationTree(state, {
   },
   setRewardGensAmount (state, newValue: number) {
     state.rewardGensAmount = newValue
+  },
+  setDepositAmount (state, newValue: number) {
+    state.depositAmount = newValue
   },
   setLoading (state, newValue: boolean) {
     state.loading = newValue
@@ -68,6 +72,7 @@ export const actions = actionTree(
 
         commit('setRewardGensAmount', new BN(decodedDepositState.rewardTokenAmount, 10, 'le').toNumber());
         commit('setRewardHgenAmount', new BN(decodedDepositState.rewardGovernanceTokenAmount, 10, 'le').toNumber());
+        commit('setDepositAmount', new BN(decodedDepositState.tokenAmount, 10, 'le').toNumber());
         commit('setRewardCoinAmount', new BN(decodedDepositState.rewardCoinAmount, 10, 'le').toNumber());
       })
     },

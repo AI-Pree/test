@@ -12,9 +12,9 @@
           your current pool share
         </div>
         <div class="w-100 fs-5 f-white-200">
-          <span class="f-mcolor-100 fs-10 fw-900">6.40</span>
+          <span class="f-mcolor-100 fs-10 fw-900">{{getPercent}}</span>
           <span class="fs-10 fw-900 px-1">%</span>
-          (<span class="f-mcolor-100 fw-800 pr-1">201</span> GENS)
+          (<span class="f-mcolor-100 fw-800 pr-1">{{ getDepositAmount }}</span> GENS)
         </div>
       </div>
       <div class="w-30-S w-100-XS pt-4-XS">
@@ -47,6 +47,12 @@ export default {
   computed: {
     isBorrow () {
       return this.$accessor.dashboard.isBorrow
+    },
+    getDepositAmount () {
+      return this.$accessor.pool.depositAmount
+    },
+    getPercent () {
+      return Number.parseInt((this.$accessor.pool.depositAmount / this.$accessor.totalDeposit || 0) * 100)
     },
     getDepositeTotal () {
       return this.$accessor.totalDeposit || 0
