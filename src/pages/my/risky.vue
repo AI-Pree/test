@@ -1,5 +1,5 @@
 <template>
-  <div class="w-100">
+  <div class="w-100 p-2-XS p-2-S">
     <CommonTable :tableData="risky" :tableOptions="tableOptions" @binAction="binAction($event)" class="mt-4"/>
 
     <AmButton color="mcolor-100" opacityEffect scaleEffect class="mt-4">

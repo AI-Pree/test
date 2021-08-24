@@ -1,5 +1,5 @@
 <template>
-  <table class="w-100">
+  <table class="w-100 d-b-XS d-b-S ovh-x-a">
     <thead>
       <tr>
         <th v-for="(to, index) in tableOptions" :key="to.field" class="ta-c px-3 py-5" :class="{ 'brl-1 br-mcolor-400 brls-s': index !== 0 }">
