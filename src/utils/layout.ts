@@ -40,6 +40,13 @@ export const DEPOSIT_ACCOUNT_DATA_LAYOUT = BufferLayout.struct([
   publicKey("owner"),
 ]);
 
+export const OWNER_ACCOUNT_DATA_LAYOUT = BufferLayout.struct([
+  BufferLayout.u8("isInitialized"),
+  publicKey("bank"),
+  publicKey("governanceBank"),
+  publicKey("owner"),
+]);
+
 export interface TroveLayout {
   isInitialized: number,
   isLiquidated: number,
@@ -59,6 +66,7 @@ export interface DepositLayout {
   rewardGovernanceTokenAmount: Uint8Array,
   rewardCoinAmount: Uint8Array,
   bank: Uint8Array,
+  governanceBank: Uint8Array,
   owner: Uint8Array
 }
 

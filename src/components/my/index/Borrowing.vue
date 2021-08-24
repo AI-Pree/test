@@ -31,7 +31,7 @@
         Total Borrowing
       </div>
       <div class="w-45 fsh-0 fs-5 f-white-200 fw-600">
-        <span class="f-mcolor-100">20.901345</span> GENS
+        <span class="f-mcolor-100">{{ getTroveTotal.toLocaleString() }}</span> GENS
       </div>
     </div>
     <div class="w-100 fd-r ai-c py-2">
@@ -58,6 +58,9 @@ export default {
   computed: {
     isBorrow () {
       return this.$accessor.dashboard.isBorrow
+    },
+    getTroveTotal () {
+      return this.$accessor.troveTotal || 0
     }
   },
 }

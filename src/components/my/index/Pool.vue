@@ -36,8 +36,21 @@
         Total Deposited
       </div>
       <div class="w-45 fsh-0 fs-5 f-white-200 fw-600">
-        <span class="f-mcolor-100">5343423434.00</span> GENS
+        <span class="f-mcolor-100">{{ getDepositeTotal.toLocaleString() }}</span> GENS
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    isBorrow () {
+      return this.$accessor.dashboard.isBorrow
+    },
+    getDepositeTotal () {
+      return this.$accessor.totalDeposit || 0
+    }
+  },
+}
+</script>

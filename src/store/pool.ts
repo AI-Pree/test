@@ -1,4 +1,6 @@
 // Import Typed
+import { PublicKey } from '@solana/web3.js';
+import { DEPOSIT_ACCOUNT_DATA_LAYOUT, DepositLayout } from '@/utils/layout';
 import { getterTree, mutationTree, actionTree } from 'typed-vuex'
 
 // Import Utils
@@ -8,7 +10,8 @@ import { addDepositUtil } from '@/utils/addDeposit'
 // State
 export const state = () => ({
   depositKey: '',
-  depositData: null,
+  gen: '',
+  hgen: '',
   loading: false
 })
 
@@ -20,8 +23,11 @@ export const mutations = mutationTree(state, {
   setDepositKey (state, newValue: string) {
     state.depositKey = newValue
   },
-  setDepositData (state, newValue: object | null) {
-    state.depositData = newValue
+  setGen (state, newValue: string) {
+    state.gen = newValue
+  },
+  setHGEN (state, newValue: string) {
+    state.hgen = newValue
   },
   setLoading (state, newValue: boolean) {
     state.loading = newValue
@@ -34,8 +40,17 @@ export const actions = actionTree(
   {
     // Get Deposit
     async getDeposit ({ commit }, value) {
-      await this.$axios.get('deposit?user=' + this.$wallet.publicKey.toBase58()).then(({ data }) => {
+      await this.$axios.get('deposit?user=' + this.$wallet.publicKey.toBase58()).then(async ({ data }) => {
         commit('setDepositKey', data.model || '')
+        // Info
+        const encodedDepositAccount = (await this.$web3.getAccountInfo(new PublicKey(data.model.deposit), 'singleGossip'))!.data;
+        const decodedDepositState = DEPOSIT_ACCOUNT_DATA_LAYOUT.decode(encodedDepositAccount) as DepositLayout;
+        if (decodedDepositState.bank) {
+          commit('setGen', new PublicKey(decodedDepositState.bank).toBase58())
+        }
+        if (decodedDepositState.governanceBank) {
+          commit('setHGEN', new PublicKey(decodedDepositState.governanceBank).toBase58())
+        }
       })
     },
 
@@ -51,7 +66,7 @@ export const actions = actionTree(
               console.log(data, 'newDeposit')
               await this.$axios.post('deposit/upsert', {deposit: data.depositAccountPubkey}).then(({ res }) => {
                 console.log(res, 'newDeposit Backend')
-              }).finnaly(() => {
+              }).finally(() => {
                 commit('setLoading', false)
               })
               this.$accessor.wallet.getBalance()
@@ -65,11 +80,11 @@ export const actions = actionTree(
 
     // Add Deposit
     async addDeposit ({ state, commit }, value) {
-      if (value && (Number(value) > 0)) {
-        if (state.depositKey) {
+      if (value && (Number(value.from) > 0)) {
+        if (state.depositKey && state.gen && state.hgen) {
           commit('setLoading', true)
           try {
-            const data = await addDepositUtil(this.$wallet, state.depositKey, Number(value), this.$web3)
+            const data = await addDepositUtil(this.$wallet, state.depositKey.deposit, process.env.mint, Number(value.from), state.gen, state.hgen, this.$web3)
             console.log(data, 'addDeposit')
             this.$accessor.wallet.getBalance()
             commit('setLoading', false)
@@ -85,11 +100,9 @@ export const actions = actionTree(
       if (value && (Number(value) > 0)) {
         if (state.depositKey) {
           commit('setLoading', true)
-          this.$axios.post('depositwithdraw', {deposit: state.depositKey, amount: value}).then(({ data }) => {
+          this.$axios.post('deposit/withdraw', {deposit: state.depositKey.deposit, amount: value}).then(({ data }) => {
             console.log(data, 'closeDeposit')
-            commit('setDepositKey', '')
-            commit('setDepositData', null)
-          }).finnaly(() => {
+          }).finally(() => {
             commit('setLoading', false)
             this.$accessor.wallet.getBalance()
           })

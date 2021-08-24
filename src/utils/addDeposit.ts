@@ -20,13 +20,18 @@ export const addDepositUtil = async (
     tokenAmount: number,
     // Адрес кошелька токена пользователя GENS
     pdaToken: string,
+    // Адрес кошелька токена пользователя HGEN
+    governanceToken: string,
     connection: Connection,
 ) => {
+
+    console.log(wallet, depositId, tokenMintAccountPubkey, tokenAmount, pdaToken, connection)
 
     const depositAccount = new PublicKey(depositId);
     const escrowProgramId = new PublicKey(EscrowProgramIdString);
     const tokenMintAcc = new PublicKey(tokenMintAccountPubkey)
     const pdaTokenAcc = new PublicKey(pdaToken)
+    const governanceTokenAcc = new PublicKey(governanceToken);
 
     const depositIx = new TransactionInstruction({
         programId: escrowProgramId,
@@ -36,6 +41,7 @@ export const addDepositUtil = async (
             { pubkey: SYSVAR_RENT_PUBKEY, isSigner: false, isWritable: false},
             { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
             { pubkey: pdaTokenAcc, isSigner: false, isWritable: true },
+            { pubkey: governanceTokenAcc, isSigner: false, isWritable: true },
             { pubkey: tokenMintAcc, isSigner: false, isWritable: true },
         ],
         data: Buffer.from(
