@@ -1,14 +1,13 @@
 
-import { PublicKey, Connection } from '@solana/web3.js';
+import { PublicKey } from '@solana/web3.js';
 import BN from "bn.js";
 import {TroveLayout, TROVE_ACCOUNT_DATA_LAYOUT} from './layout';
 
 
 export const encodeUtil = async (
   trove,
-  connection: Connection,
+  encodedTroveState
 ) => {
-  const encodedTroveState = (await connection.getAccountInfo(new PublicKey(trove), 'singleGossip'))!.data;
   const decodedTroveState = TROVE_ACCOUNT_DATA_LAYOUT.decode(encodedTroveState) as TroveLayout;
 
   return {

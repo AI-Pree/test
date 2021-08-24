@@ -12,6 +12,7 @@
 import Balance from '@/components/my/pool/Balance.vue'
 import CommonTable from '@/components/common/table/CommonTable.vue'
 import { encodeUtil } from '@/utils/trove'
+import { PublicKey } from '@solana/web3.js';
 
 export default {
   layout: 'my',
@@ -56,14 +57,12 @@ export default {
     setTroveList(newVal) {
       this.tableData = []
       newVal.forEach(async (element) => {
-        encodeUtil(element.trove).then(data => {
-          console.log(data)
+        const trove = new PublicKey(element.user)
+        this.$web3.getAccountInfo(trove).then(data => {
+          encodeUtil(trove, data).then(res => {
+            console.log(res)
+          })
         })
-        // const temp = new PublicKey(element.user)
-        // this.$web3.getAccountInfo(temp).then(res => {
-          
-
-        // })
       })
 
     },
