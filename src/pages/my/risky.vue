@@ -10,8 +10,8 @@
 <script>
 import Balance from '@/components/my/pool/Balance.vue'
 import CommonTable from '@/components/common/table/CommonTable.vue'
+import { encodeUtil } from '@/utils/trove'
 import { PublicKey } from '@solana/web3.js';
-import { mapGetters } from 'vuex'
 
 export default {
   layout: 'my',
@@ -56,11 +56,14 @@ export default {
     setTroveList(newVal) {
       this.tableData = []
       newVal.forEach(async (element) => {
-        const temp = new PublicKey(element.user)
-        this.$web3.getAccountInfo(temp).then(res => {
-          console.log(res)
+        const trove = new PublicKey(element.user)
+        this.$web3.getAccountInfo(trove).then(data => {
+          encodeUtil(trove, data).then(res => {
+            console.log(res)
+          })
         })
       })
+
     },
     nextPage() {
       this.page++
