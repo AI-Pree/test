@@ -1,5 +1,6 @@
 import * as BufferLayout from "buffer-layout";
 import {PublicKey} from "@solana/web3.js";
+import BN from "bn.js"
 
 /**
  * Layout for a public key
@@ -64,3 +65,7 @@ export interface DepositLayout {
 
 export const TOKEN_GENS = new PublicKey('JCnyD2wyimf5P3MBVAxB5yCVhotmswDhvrwXdS9xNbAq')
 export const SYS_ACCOUNT = new PublicKey('H8zGtK1u7wtGmcYFLcrES4trMRAz8BR2WH83k3uYYiLo')
+
+export const getCollateral = (gens: string, lamports: string) => {
+  return new BN(lamports).mul(new BN("77")).div(new BN(gens))
+}

@@ -46,15 +46,5 @@ export const closeBorrowUtil = async (
     await connection.confirmTransaction(txId);
 
     // Info
-    const encodedTroveState = (await connection.getAccountInfo(troveAccount, 'singleGossip'))!.data;
-    const decodedTroveState = TROVE_ACCOUNT_DATA_LAYOUT.decode(encodedTroveState) as TroveLayout;
-
-    return {
-        troveAccountPubkey: troveAccount.toBase58(),
-        isInitialized: !!decodedTroveState.isInitialized,
-        isLiquidated: !!decodedTroveState.isLiquidated,
-        borrowAmount: new BN(decodedTroveState.borrowAmount, 10, 'le').toNumber(),
-        lamports: new BN(decodedTroveState.lamports, 10, 'le').toNumber(),
-        owner: new PublicKey(decodedTroveState.owner).toBase58(),
-    };
+    return (await connection.getAccountInfo(troveAccount, 'singleGossip'))
 }
