@@ -11,16 +11,17 @@ import {
 } from '@solana/web3.js';
 import BN from "bn.js";
 import {DEPOSIT_ACCOUNT_DATA_LAYOUT, DepositLayout, EscrowProgramIdString} from './layout';
+import Wallet from "@project-serum/sol-wallet-adapter";
 
 export const addDepositUtil = async (
-    wallet: object,
+    wallet: Wallet,
     depositId: string,
     // Адрес токена GENS
     tokenMintAccountPubkey: string,
     tokenAmount: number,
     // Адрес кошелька токена пользователя GENS
     pdaToken: string,
-    connection: object,
+    connection: Connection,
 ) => {
 
     const depositAccount = new PublicKey(depositId);

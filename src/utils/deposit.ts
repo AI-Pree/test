@@ -11,9 +11,10 @@ import {
 } from '@solana/web3.js';
 import BN from "bn.js";
 import {TroveLayout, TROVE_ACCOUNT_DATA_LAYOUT, DEPOSIT_ACCOUNT_DATA_LAYOUT, DepositLayout, EscrowProgramIdString} from './layout';
+import Wallet from "@project-serum/sol-wallet-adapter";
 
 export const depositUtil = async (
-    wallet: object,
+    wallet: Wallet,
     // Адрес токена GENS
     tokenMintAccountPubkey: string,
     tokenAmount: number,
@@ -21,7 +22,7 @@ export const depositUtil = async (
     pdaToken: string,
     // Адрес кошелька токена пользователя HGEN
     governanceToken: string,
-    connection: object,
+    connection: Connection,
 ) => {
 
     const depositAccount = new Account();

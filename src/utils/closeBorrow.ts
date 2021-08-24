@@ -2,15 +2,16 @@ import { AccountLayout, Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { Account, Connection, PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY, Transaction, TransactionInstruction } from "@solana/web3.js";
 import BN from "bn.js";
 import {TroveLayout, TROVE_ACCOUNT_DATA_LAYOUT, EscrowProgramIdString} from './layout';
+import Wallet from "@project-serum/sol-wallet-adapter";
 
 export const closeBorrowUtil = async (
-    wallet: string,
+    wallet: Wallet,
     // Адрес токена GENS
     tokenMintAccountPubkey: string,
     troveId: string,
     // Адрес кошелька токена пользователя GENS
     pdaToken: string,
-    connection: object
+    connection: Connection,
 ) => {
 
     const escrowProgramId = new PublicKey(EscrowProgramIdString);

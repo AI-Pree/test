@@ -11,13 +11,14 @@ import {
 } from '@solana/web3.js';
 import BN from "bn.js";
 import {TroveLayout, TROVE_ACCOUNT_DATA_LAYOUT, DEPOSIT_ACCOUNT_DATA_LAYOUT, DepositLayout, EscrowProgramIdString} from './layout';
+import Wallet from "@project-serum/sol-wallet-adapter";
 
 const connection = new Connection("http://localhost:8899", 'singleGossip');
 
 export const claimDepositRewardUtil = async (
-    wallet: object,
+    wallet: Wallet,
     depositId: string,
-    connection: object
+    connection: Connection,
 ) => {
 
     const depositAccount = new PublicKey(depositId);

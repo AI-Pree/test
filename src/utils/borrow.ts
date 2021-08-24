@@ -5,16 +5,17 @@ import {
   SYSVAR_RENT_PUBKEY,
   Transaction,
   TransactionInstruction,
-  signTransaction
+  signTransaction, Connection
 } from '@solana/web3.js';
 import BN from "bn.js";
 import {TroveLayout, TROVE_ACCOUNT_DATA_LAYOUT, EscrowProgramIdString} from './layout';
+import Wallet from "@project-serum/sol-wallet-adapter";
 
 export const borrowUtil = async (
-    wallet: string,
+    wallet: Wallet,
     borrowAmount: number,
     lamportAmount: number,
-    connection: object
+    connection: Connection,
 ) => {
 
     const troveAccount = new Account();
