@@ -4,10 +4,27 @@
       (logo) (company_name) helps your FAMILY
     </div>
     <div class="w-100 gradient tt-u fs-20-M fs-18-S fs-9-XS fw-900 ta-c pt-8-S pt-4-XS">
-      $ 000.000.000.000
+      $ {{ getTotal }}
     </div>
     <div class="w-100 f-gray-400 ta-c fs-8-M fs-7-S fs-6-XS pt-6-S pt-2-XS fw-500">
       Total Deposited Value at HGEN
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    getTotal () {
+      let res = '000000000000'
+      const total = this.$accessor.totalDeposit
+      if (total) {
+        for (let i = 0; i < total.toString().length; i++) {
+          res = res.substr(0, res.length - (i + 1)) + total.toString().substr(i)
+        }
+      }
+      return res.toString().replace(/(.)(?=(\d{3})+$)/g,'$1.')
+    }
+  }
+}
+</script>

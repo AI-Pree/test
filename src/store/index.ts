@@ -1,4 +1,5 @@
 // Import Typed
+import { OWNER_ACCOUNT_DATA_LAYOUT, DepositLayout } from '@/utils/layout';
 import { getAccessorType, mutationTree, actionTree, getterTree } from 'typed-vuex'
 
 // Import Modules
@@ -54,8 +55,8 @@ export const mutations = mutationTree(state, {
 export const actions = actionTree(
   { state, getters, mutations },
   {
-    getInfo ({ commit }) {
-      this.$axios.get('info').then(({ data }) => {
+    async getInfo ({ commit }) {
+      await this.$axios.get('info').then(({ data }) => {
         commit('setTotalDeposit', data.depositTotal || 0)
         commit('setGasFee', data.gasFee || 0)
         commit('setGovernanceReward', data.governanceReward || 0)

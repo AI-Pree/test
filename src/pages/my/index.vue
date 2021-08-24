@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="w-100 f-mcolor-300 fw-800 fs-18-M fs-12-S fs-10-XS ta-c pt-12 pb-2">
-      <span class="f-white-200 pr-3">$</span>000.000.000.000
+      <span class="f-white-200 pr-3">$</span>{{ getTotal.toLocaleString() }}
     </div>
     <div class="w-100 f-white-200 fw-400 fs-7-M fs-6-S fs-5-XS ta-c pb-12 pt-2">
       Total Deposited Value (Total Value Locked)
@@ -45,6 +45,11 @@ export default {
     Borrowing,
     Pool
   },
-  layout: 'my'
+  layout: 'my',
+  computed: {
+    getTotal () {
+      return this.$accessor.troveTotal || 0
+    }
+  }
 }
 </script>

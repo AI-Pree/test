@@ -10,9 +10,9 @@
       your current debt
     </div>
     <div class="w-100 fs-6-M fs-6-S fs-4-XS f-white-200 pb-8">
-      <span class="fs-9-M fs-9-S fs-7-XS fw-800 f-mcolor-100">201.00</span>
+      <span class="fs-9-M fs-9-S fs-7-XS fw-800 f-mcolor-100">{{getDebt.toLocaleString()}}</span>
       <span class="fs-9-M fs-9-S fs-7-XS fw-600 px-1">GENS</span>
-      (<span class="f-mcolor-100 fw-800 pr-1">10.06%</span> Collateral)
+      (<span class="f-mcolor-100 fw-800 pr-1">{{getCollateral}}%</span> Collateral)
     </div>
     <div class="w-100 pb-6 fd-c-L fd-r-S fd-c-XS">
       <div class="w-100 mr-0-L mr-2-S mr-0-XS" v-if="!isBorrow">
@@ -31,10 +31,10 @@
         Total Borrowing
       </div>
       <div class="w-45 fsh-0 fs-5 f-white-200 fw-600">
-        <span class="f-mcolor-100">20.901345</span> GENS
+        <span class="f-mcolor-100">{{ getTotalDebt.toLocaleString() }}</span> GENS
       </div>
     </div>
-    <div class="w-100 fd-r ai-c py-2">
+    <div class="w-100 fd-r ai-c py-2" v-if="false">
       <div class="w-100 fs-5 fw-400 f-white-200">
         Total Debt Ratio
       </div>
@@ -42,7 +42,7 @@
         <span class="f-mcolor-100">30.70</span> %
       </div>
     </div>
-    <div class="w-100 fd-r ai-c pt-2">
+    <div class="w-100 fd-r ai-c pt-2" v-if="false">
       <div class="w-100 fs-5 fw-400 f-white-200">
         Total Liquidation Mode
       </div>
@@ -54,10 +54,30 @@
 </template>
 
 <script>
+import { getCollateral } from "../../../utils/layout"
+
 export default {
   computed: {
     isBorrow () {
       return this.$accessor.dashboard.isBorrow
+    },
+    getDebt () {
+      console.log(this.$accessor.borrowing.trove)
+      return this.$accessor.borrowing.trove.borrowAmount || '0'
+    },
+    getBalanceHGEN () {
+      return this.$accessor.wallet.balanceHGEN || 0
+    },
+    getBalanceGENS () {
+      return this.$accessor.wallet.balanceGENS || 0
+    },
+
+    getTotalDebt() {
+      return this.$accessor.troveTotal;
+    },
+    getCollateral () {
+      return this.$accessor.borrowing.trove.borrowAmount ?
+        getCollateral(this.$accessor.borrowing.trove.borrowAmount.toString(), this.$accessor.borrowing.trove.lamports.toString()) : 0;
     }
   },
 }

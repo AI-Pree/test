@@ -21,6 +21,14 @@
         </AmButton>
       </div>
     </div>
+    <div class="w-100 mt-4 mb-2 mcolor-700 rad-fix-2 px-4 py-3">
+      <div class="w-100 fs-5 f-gray-600 pb-1">
+        set wallet gens
+      </div>
+      <div class="w-100 fd-r ai-c">
+        <input type="text" class="w-100 white-100 br-0 oul-n fs-7 fw-600 f-mcolor-300" placeholder="XXXXXXXXX..." v-model="mint" />
+      </div>
+    </div>
     <div class="w-100 mt-4 mb-2 mcolor-700 rad-fix-2 px-4 py-3" v-if="!getIsBorrow">
       <div class="w-100 fs-5 f-gray-600 pb-1">
         set amount you want to deposit
@@ -46,7 +54,7 @@
       </div>
       <div class="w-100 fd-r ai-c">
         <span class="w-15-S w-25-XS fs-6 fw-600 f-white-200 fsh-0">GENS</span>
-        <div type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-7 fw-600 f-mcolor-300">{{ borrow }}</div>
+        <div type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-7 fw-600 f-mcolor-300">{{ getBorrowAmount }}</div>
       </div>
     </div>
     <div class="w-100 pb-6 fd-r-S fd-c-XS" v-if="!getIsBorrow">
@@ -75,12 +83,16 @@ export default {
     return {
       from: null,
       to: null,
+      mint: '',
       borrow: 0
     }
   },
   computed: {
     getIsBorrow () {
       return this.$accessor.dashboard.isBorrow
+    },
+    getBorrowAmount () {
+      return this.$accessor.borrowing.trove.amountToClose || 0
     }
   },
   watch: {
@@ -104,12 +116,12 @@ export default {
       this.to = null
     },
     confirmFunc () {
-      this.$accessor.borrowing.confirmBorrow({from: this.from, to: this.to})
+      this.$accessor.borrowing.confirmBorrow({from: this.from, to: this.to, mint: this.mint})
       this.from = null
       this.to = null
     },
     closeTroveFunc () {
-      this.$accessor.borrowing.closeTrove()
+      this.$accessor.borrowing.closeTrove({mint: this.mint})
     }
   }
 }

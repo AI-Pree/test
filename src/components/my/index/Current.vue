@@ -21,7 +21,7 @@
         Liquidation Incentive
       </div>
       <div class="w-45-S w-100-XS fsh-0 f-white-200 fw-600 pt-2-XS">
-        <span class="f-mcolor-100 mr-1">20.901345</span> SOL
+        <span class="f-mcolor-100 mr-1">{{getCoin}}</span> SOL
       </div>
     </div>
     <div class="w-100 fd-r-S fd-c-XS py-2">
@@ -29,7 +29,7 @@
         Transaction Fee
       </div>
       <div class="w-45-S w-100-XS fsh-0 f-white-200 fw-600 pt-2-XS">
-        <span class="f-mcolor-100 mr-1">20.901345</span> SOL
+        <span class="f-mcolor-100 mr-1">{{getGens}}</span> GENS
       </div>
     </div>
     <div class="w-100 fd-r-S fd-c-XS ai-c py-2">
@@ -37,10 +37,10 @@
         Rewards
       </div>
       <div class="w-45-S w-100-XS fsh-0 f-white-200 fw-600 pt-2-XS">
-        <span class="f-mcolor-100 mr-1">20.901345343</span> HGEN
+        <span class="f-mcolor-100 mr-1">{{getHgen}}</span> HGEN
       </div>
     </div>
-    <div class="w-100 fd-r-S fd-c-XS ai-c pt-3">
+    <div class="w-100 fd-r-S fd-c-XS ai-c pt-3" v-if="false">
       <div class="w-100 fd-r ai-c">
         <div class="w-a-S w-100-XS">
           <AmButton :height="false" color="mcolor-200" bColor="mcolor-100" opacityEffect @click="claimFunc" v-if="getDepositKey">
@@ -59,14 +59,28 @@
 </template>
 
 <script>
+import { DEPOSIT_ACCOUNT_DATA_LAYOUT, DepositLayout } from "../../../utils/layout"
+import BN from "bn.js"
+import { PublicKey } from "@solana/web3.js"
+
 export default {
   props: {
-    depositKey: {type: String, default: null}
+    depositKey: {type: String, default: null},
+    deposit: {type: DEPOSIT_ACCOUNT_DATA_LAYOUT, default: {}}
   },
   computed: {
     getDepositKey () {
       return this.$accessor.pool.depositKey
-    }
+    },
+    getCoin () {
+      return this.$accessor.pool.rewardCoinAmount
+    },
+    getGens () {
+      return this.$accessor.pool.rewardGensAmount
+    },
+    getHgen () {
+      return this.$accessor.pool.rewardHgenAmount
+    },
   },
   methods: {
     claimFunc () {

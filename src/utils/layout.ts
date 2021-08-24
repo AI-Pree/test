@@ -1,5 +1,6 @@
 import * as BufferLayout from "buffer-layout";
 import {PublicKey} from "@solana/web3.js";
+import BN from "bn.js"
 
 /**
  * Layout for a public key
@@ -40,6 +41,13 @@ export const DEPOSIT_ACCOUNT_DATA_LAYOUT = BufferLayout.struct([
   publicKey("owner"),
 ]);
 
+export const OWNER_ACCOUNT_DATA_LAYOUT = BufferLayout.struct([
+  BufferLayout.u8("isInitialized"),
+  publicKey("bank"),
+  publicKey("governanceBank"),
+  publicKey("owner"),
+]);
+
 export interface TroveLayout {
   isInitialized: number,
   isLiquidated: number,
@@ -59,8 +67,13 @@ export interface DepositLayout {
   rewardGovernanceTokenAmount: Uint8Array,
   rewardCoinAmount: Uint8Array,
   bank: Uint8Array,
+  governanceBank: Uint8Array,
   owner: Uint8Array
 }
 
 export const TOKEN_GENS = new PublicKey('JCnyD2wyimf5P3MBVAxB5yCVhotmswDhvrwXdS9xNbAq')
 export const SYS_ACCOUNT = new PublicKey('H8zGtK1u7wtGmcYFLcrES4trMRAz8BR2WH83k3uYYiLo')
+
+export const getCollateral = (gens: string, lamports: string) => {
+  return new BN(lamports).div(new BN("10000000")).mul(new BN("77")).div(new BN(gens))
+}
