@@ -5,18 +5,27 @@ import {TroveLayout, TROVE_ACCOUNT_DATA_LAYOUT, EscrowProgramIdString} from './l
 
 export const closeBorrowUtil = async (
     wallet: string,
+    // Адрес токена GENS
+    tokenMintAccountPubkey: string,
     troveId: string,
+    // Адрес кошелька токена пользователя GENS
+    pdaToken: string,
     connection: object
 ) => {
 
     const escrowProgramId = new PublicKey(EscrowProgramIdString);
     const troveAccount = new PublicKey(troveId)
+    const tokenMintAcc = new PublicKey(tokenMintAccountPubkey)
+    const pdaTokenAcc = new PublicKey(pdaToken)
 
     const closeBorrowIx = new TransactionInstruction({
         programId: escrowProgramId,
         keys: [
             { pubkey: wallet.publicKey, isSigner: true, isWritable: false },
             { pubkey: troveAccount, isSigner: false, isWritable: true },
+            { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
+            { pubkey: pdaTokenAcc, isSigner: false, isWritable: true },
+            { pubkey: tokenMintAcc, isSigner: false, isWritable: true },
         ],
         data: Buffer.from(
             Uint8Array.of(1, // id of instruction
