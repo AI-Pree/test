@@ -4,24 +4,28 @@ import { getterTree, mutationTree, actionTree } from 'typed-vuex'
 
 // State
 export const state = () => ({
-  risky: [
-    { date: '2021-02-12 13:12', holder: '0x9fdf…cr34', coll: '212.34', debt: '2323.20', fee: '11.00', debtRatio: '48%', price: '23.20' },
-    { date: '2021-02-12 13:12', holder: '0x9fdf…cr34', coll: '212.34', debt: '2323.20', fee: '11.00', debtRatio: '48%', price: '23.20' },
-    { date: '2021-02-12 13:12', holder: '0x9fdf…cr34', coll: '212.34', debt: '2323.20', fee: '11.00', debtRatio: '48%', price: '23.20' }
-  ]
+  troveList: [],
 })
 
 // Getters
 export const getters = getterTree(state, {
-  getRisky(state) {
-    return state.risky
-  }
+  troveList: (state) => state.troveList,
 })
 
 // Mutation
-export const mutations = mutationTree(state, {})
+export const mutations = mutationTree(state, {
+  adjustTroveList(state, newValue = []) {
+    state.troveList = [ ...state.troveList, ...newValue ]
+  },
+})
 
 // Actions
 export const actions = actionTree(
-  { state, getters, mutations }, {}
+  { state, getters, mutations }, {
+    async getTroveListAction({ commit }, page) {
+      await this.$axios.get('trove/list?page=' + page).then(({ data }) => {
+        commit('adjustTroveList', data.entities || [])
+      })
+    },
+  }
 )

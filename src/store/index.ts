@@ -7,6 +7,7 @@ import * as dashboard from './dashboard'
 import * as borrowing from './borrowing'
 import * as swap from './swap'
 import * as pool from './pool'
+import * as risky from './risky'
 
 // State
 export const state = () => ({
@@ -77,6 +78,7 @@ export const accessorType = getAccessorType({
     dashboard,
     borrowing,
     swap,
-    pool
+    pool,
+    risky
   }
 })
