@@ -36,7 +36,7 @@ export default {
   },
   data() {
     return {
-      page: 1,
+      page: 0,
       tableOptions: [
         { title: 'Date', field: 'date' },
         { title: 'Holder', field: 'holder', type: 'link' },
