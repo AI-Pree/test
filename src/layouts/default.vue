@@ -58,7 +58,11 @@ export default {
   },
   methods: {
     setModalFunc (value) {
-      this.$accessor.setModal(value)
+      if (this.loaderConnect) {
+        this.$accessor.wallet.setLoaderConnect(false)
+      } else {
+        this.$accessor.setModal(value)
+      }
     },
     connectWalletFunc (value) {
       this.$accessor.wallet.connectWallet(value)

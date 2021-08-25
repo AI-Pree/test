@@ -19,9 +19,7 @@ export default {
       let res = '000000000000'
       const total = this.$accessor.totalDeposit
       if (total) {
-        for (let i = 0; i < total.toString().length; i++) {
-          res = res.substr(0, res.length - (i + 1)) + total.toString().substr(i)
-        }
+        res = res.substr(0, res.length - total.toString().length) + total
       }
       return res.toString().replace(/(.)(?=(\d{3})+$)/g,'$1.')
     }

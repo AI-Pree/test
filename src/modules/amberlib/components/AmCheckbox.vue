@@ -90,6 +90,10 @@ export default {
         this.$emit('set', val)
         this.$emit('setdata', this.modelData)
       }
+    },
+    model (val) {
+      this.modelData.value = val
+      this.modelValue = val
     }
   },
   mounted () {

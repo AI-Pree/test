@@ -3,7 +3,6 @@ import { getterTree, mutationTree, actionTree } from 'typed-vuex'
 
 // Import
 import { Wallets, WalletInfo } from '../utils/wallets'
-import { Account, Connection, PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY, Transaction, TransactionInstruction } from "@solana/web3.js";
 
 // State
 export const state = () => ({
@@ -65,8 +64,6 @@ export const actions = actionTree(
         if (adapter.publicKey) {
           commit('setPublicKey', adapter.publicKey.toBase58())
           this.app.$accessor.setModal('')
-          const data = new Account()
-          console.log(data)
         }
         commit('setLoaderConnect', false)
       })

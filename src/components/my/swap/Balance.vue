@@ -45,7 +45,7 @@ export default {
       return this.$accessor.wallet.balanceHGEN || 0
     },
     getBalanceGENS () {
-      return this.$accessor.wallet.balanceGENS || 0
+      return this.$accessor.borrowing.trove?.borrowAmount || 0
     }
   },
 }

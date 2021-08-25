@@ -12,7 +12,9 @@ import {PublicKey} from "@solana/web3.js";
 export const state = () => ({
   troveId: '',
   trove: {},
-  debt: 0
+  debt: 0,
+  loading: false,
+  loadingSub: false
 })
 
 // Getters
@@ -31,6 +33,14 @@ export const mutations = mutationTree(state, {
 
   setDebt (state, newValue: number) {
     state.debt = newValue
+  },
+
+  setLoading (state, newValue: boolean) {
+    state.loading = newValue
+  },
+
+  setLoadingSub (state, newValue: boolean) {
+    state.loadingSub = newValue
   }
 })
 
@@ -69,6 +79,7 @@ export const actions = actionTree(
     // Claim
     async confirmBorrow ({ commit, dispatch }, value) {
       if (Number(value.from > 0) && Number(value.to > 0)) {
+        commit('setLoading', true)
         const data = await borrowUtil(this.$wallet, Number(value.to), Number(value.from) * 1000000000, this.$web3)
         if (data && (data.troveAccountPubkey)) {
           commit('setTroveId', data.troveAccountPubkey || '')
@@ -80,6 +91,7 @@ export const actions = actionTree(
             console.log(res, 'newTrove Backend')
           })
         }
+        commit('setLoading', false)
         this.$accessor.dashboard.setBorrow(true)
       }
     },
@@ -87,6 +99,7 @@ export const actions = actionTree(
     // Deposit
     async closeTrove ({ state, commit }, value) {
       if (state.troveId) {
+        commit('setLoading', true)
         const data = await closeBorrowUtil(this.$wallet, process.env.mint, state.trove.troveAccountPubkey, value.mint, this.$web3)
         if(data === null) {
           console.log(data, 'closeTrove')
@@ -98,14 +111,28 @@ export const actions = actionTree(
           this.$accessor.wallet.getBalance()
           this.$accessor.dashboard.setBorrow(false)
         }
+        commit('setLoading', false)
       }
     },
 
+    // Get Debt Ratio
     getDebt ({ commit }, value) {
       if (value && (value.from > 0 && value.to > 0)) {
         commit('setDebt', getCollateral(String(value.from), String(value.to)))
       } else {
         commit('setDebt', 0)
+      }
+    },
+
+    // Send Email
+    async sendEmail ({ commit }, value) {
+      if (value) {
+        commit('setLoadingSub', true)
+        await this.$axios.post('/notification/subscribe', {email: value}).then(({ res }) => {
+          console.log(res, 'Subscribe')
+        }).finally(() => {
+          commit('setLoadingSub', false)
+        })
       }
     }
   }

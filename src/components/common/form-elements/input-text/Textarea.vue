@@ -6,6 +6,7 @@
     <div class="w-100 p-r textarea">
       <textarea
         :name="inputName"
+        v-model="model"
       ></textarea>
     </div>
   </div>
@@ -21,9 +22,18 @@ export default {
     label: { type: String, default: '' },
     placeholder: { type: String, default: '' }
   },
+  watch: {
+    value (val) {
+      this.model = val
+    },
+    model (val) {
+      this.$emit('update:value', val)
+    }
+  },
   data() {
     return {
-      inputName: ''
+      inputName: '',
+      model: null
     }
   },
   created() {

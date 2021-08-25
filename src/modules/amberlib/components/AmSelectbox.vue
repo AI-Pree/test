@@ -240,7 +240,15 @@ export default {
         this.$emit('set', val)
         this.$emit('setdata', this.modelData)
       }
-    }
+    },
+    data: {
+      deep: true,
+      handler (val) {
+        if (val) {
+          this.modelValue = val.value
+        }
+      }
+    },
   },
   mounted () {
     if (this.data) {

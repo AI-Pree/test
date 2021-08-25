@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="w-100 mt-2">
-      <AmButton color="mcolor-100" opacityEffect scaleEffect :full="true">
+      <AmButton color="mcolor-100" opacityEffect :full="true">
         Confirm
       </AmButton>
     </div>

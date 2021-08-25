@@ -7,9 +7,9 @@
       <span class="fw-500 fs-5 f-gray-600">{{ inputLabel }}</span>
       <input
         autocomplete="false"
-        :value="value"
         :name="inputName"
         :type="inputType"
+        v-model="model"
         :placeholder="placeholder"
         @input="$emit('input', $event.target.value)"
       >
@@ -29,9 +29,18 @@ export default {
     placeholder: { type: String, default: '' },
     inputLabel: { type: String, default: '' }
   },
+  watch: {
+    value (val) {
+      this.model = val
+    },
+    model (val) {
+      this.$emit('update:value', val)
+    }
+  },
   data() {
     return {
-      inputName: ''
+      inputName: '',
+      model: null
     }
   },
   created() {

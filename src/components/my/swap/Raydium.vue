@@ -8,9 +8,9 @@
         from
       </div>
       <div class="w-100 pb-3-S pb-0">
-        <div class="w-fix-s-10min fs-7 fw-600 f-mcolor-300 br-0 oul-n" contenteditable @input="press">234.00</div>
+        <input class="w-fix-s-10min fs-7 fw-600 f-mcolor-300 br-0 oul-n white-100" placeholder="0" v-model="from" maxlength="15" type="text" />
         <div class="p-a-S p-r-XS r-0 b-0 w-fix-35-S w-100-XS">
-          <AmSelectbox :data="currencyFrom" :update="false" :shadow="false" :padding="false" />
+          <AmSelectbox v-bind:data.sync="currencyFrom" :update="true" :shadow="false" :padding="false" />
         </div>
       </div>
     </div>
@@ -19,14 +19,19 @@
         to (estimate)
       </div>
       <div class="w-100 pb-3-S pb-0">
-        <div class="w-fix-s-10min fs-7 fw-600 f-mcolor-300 br-0 oul-n" contenteditable @input="press">234.00</div>
+        <div class="w-fix-s-10min fs-7 fw-600 br-0 oul-n" :class="{'f-mcolor-300': Number(to) > 0, 'f-gray-800': Number(to) === 0}">
+          {{ to }}
+        </div>
         <div class="p-a-S p-r-XS r-0 b-0 w-fix-35-S w-100-XS">
-          <AmSelectbox :data="currencyTo" :update="false" :shadow="false" :padding="false" />
+          <AmSelectbox v-bind:data.sync="currencyTo" :update="true" :shadow="false" :padding="false" />
         </div>
       </div>
     </div>
-    <div class="w-100 pt-2 pb-6 ta-c fs-6 fw-500 f-white-200">
-      1 RAY ≈ 0,099720900961941 SOL
+    <div class="w-100 pt-2 pb-6 ta-c fs-6 fw-500 f-white-200" v-if="currencyFrom.value === tokens[0].value">
+      1 RAY ≈ {{ convertRay }} SOL
+    </div>
+    <div class="w-100 pt-2 pb-6 ta-c fs-6 fw-500 f-white-200" v-if="currencyFrom.value === tokens[1].value">
+      1 SOL ≈ {{ convertSOL }} RAY
     </div>
     <div class="w-100 fd-r-S fd-c-XS py-2">
       <div class="w-100 fs-6 fw-400 f-white-200 fd-r ai-c jc-c-XS">
@@ -61,7 +66,7 @@
       </div>
     </div>
     <div class="w-100 pt-8 fd-r jc-c">
-      <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect @click="$emit('swapFunc')" :full="true">
+      <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect @click="confirm" :full="true">
         CREATE RAY aCCOUNT
       </AmButton>
     </div>
@@ -69,28 +74,34 @@
 </template>
 
 <script>
+const TOKENS = [
+  {label: 'RAY', value: '4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R'},
+  {label: 'SOL', value: 'So11111111111111111111111111111111111111112'}
+]
+const CONVERT_RAY = 0.10104800982233
+const CONVERT_SOL = 9.896285951185709
+
 export default {
   data () {
     return {
+      tokens: TOKENS,
+      convertRay: CONVERT_RAY,
+      convertSOL: CONVERT_SOL,
+      from: null,
       currencyFrom: {
         theme: 'default',
-        value: 1,
-        items: [
-          {label: 'RAY', value: 1},
-          {label: 'SOL', value: 2}
-        ],
+        value: TOKENS[0].value,
+        items: TOKENS,
         colorDefault: 'mcolor-700',
         colorFocus: 'mcolor-700',
         colorBackground: 'mcolor-700',
         colorTitle: 'white-200'
       },
+      to: 0,
       currencyTo: {
         theme: 'default',
-        value: 2,
-        items: [
-          {label: 'RAY', value: 1},
-          {label: 'SOL', value: 2}
-        ],
+        value: TOKENS[1].value,
+        items: TOKENS,
         colorDefault: 'mcolor-700',
         colorFocus: 'mcolor-700',
         colorBackground: 'mcolor-700',
@@ -98,11 +109,47 @@ export default {
       }
     }
   },
+  watch: {
+    currencyFrom: {
+      deep: true,
+      handler (val) {
+        if (val.value === this.currencyTo.value) {
+          this.currencyTo.value = val.items.filter(item => item.value !== val.value)[0].value
+        }
+        this.convert()
+      }
+    },
+    currencyTo: {
+      deep: true,
+      handler (val) {
+        if (val.value === this.currencyFrom.value) {
+          this.currencyFrom.value = val.items.filter(item => item.value !== val.value)[0].value
+        }
+        this.convert()
+      }
+    },
+    from (val) {
+      if (val) {
+        this.from = val.toString().replace(/[^+\d\.]/g, '')
+        if (this.from.split('.').length > 2) this.from = this.from.replace(/\.(?=[^\.]*$)/, '')
+        if (this.from.substr(0, 2) === '00') this.from = this.from.substr(1, this.from.length)
+        this.convert()
+      } else {
+        this.to = 0
+      }
+    }
+  },
   methods: {
-    press (e) {
-      if (e.data) {
-        if (!e.data.match(/^\d+/) && e.data !== '.') e.target.innerHTML = e.target.innerHTML.replace(/[^+\d\.]/g, '')
-        if (e.data === '.' && e.target.innerHTML.split('.').length > 2) e.target.innerHTML = e.target.innerHTML.replace(/\.(?=[^\.]*$)/, '')
+    convert () {
+      if (this.currencyFrom.value === this.tokens[0].value) {
+        this.to = CONVERT_RAY * Number(this.from)
+      } else {
+        this.to = CONVERT_SOL * Number(this.from)
+      }
+    },
+    confirm () {
+      if (Number(this.from) > 0) {
+        this.$accessor.swap.swap({from: this.from, mintFrom: this.currencyFrom.value, mintTo: this.currencyTo.value})
       }
     }
   }

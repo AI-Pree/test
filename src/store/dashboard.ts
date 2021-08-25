@@ -6,7 +6,8 @@ import { claimDepositRewardUtil } from '@/utils/claimDepositReward'
 
 // State
 export const state = () => ({
-  isBorrow: false
+  isBorrow: false,
+  loading: false
 })
 
 // Getters
@@ -16,6 +17,9 @@ export const getters = getterTree(state, {})
 export const mutations = mutationTree(state, {
   setBorrow (state, newValue: boolean) {
     state.isBorrow = newValue
+  },
+  setLoading (state, newValue: boolean) {
+    state.loading = newValue
   }
 })
 
@@ -26,11 +30,13 @@ export const actions = actionTree(
     // Deposit
     async claim ({ commit, state }) {
       if (this.$accessor.pool.depositKey) {
-        //const data = await claimDepositRewardUtil(this.$wallet, this.$accessor.pool.depositKey, this.$web3)
-        //if (data) {
-          //console.log(data, 'claimDeposit')
-          this.$accessor.wallet.getBalance()
-        //}
+        commit('setLoading', true)
+        await this.$axios.post('deposit/claim', {deposit: this.$accessor.pool.depositKey.deposit}).then(({ res }) => {
+          console.log(res, 'claimDeposit Backend')
+        }).finally(() => {
+          commit('setLoading', false)
+        })
+        this.$accessor.wallet.getBalance()
       }
     },
   }
