@@ -37,7 +37,7 @@ export default {
       items: [
         {title: 'Dashboard', to: '/'},
         {title: 'Participate', to: '/'},
-        {title: 'Begginers Guide', to: '/'},
+        {title: 'Begginers Guide', to: '/documentation'},
         {title: 'Documentation', to: '/documentation'},
         {title: 'Tokenomics', to: ''}
       ],

@@ -53,7 +53,6 @@ export const mutations = mutationTree(state, {
     state.troveTotal = newValue
   },
   setUsd (state, newValue: number) {
-    alert(newValue)
     state.usd = newValue
   },
 })
