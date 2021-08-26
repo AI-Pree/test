@@ -126,7 +126,7 @@ export const actions = actionTree(
     // Get Debt Ratio
     getDebt ({ commit }, value) {
       if (value && (value.from > 0 && value.to > 0)) {
-        commit('setDebt', getCollateral(value.to.toString(), (Number(value.from) * 1000000000).toString()))
+        commit('setDebt', getCollateral(value.to.toString(), (Number(value.from) * 1000000000).toString()).toNumber() * 100)
       } else {
         commit('setDebt', 0)
       }

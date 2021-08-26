@@ -13,12 +13,24 @@ export const swapUtil = async (
   connection: Connection,
 ) => {
 
-  let marketAddress = new PublicKey('4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R');
-  let programAdress = new PublicKey(EscrowProgramIdString);
+  let marketAddress = new PublicKey('SwaPpA9LAaLfeLi3a68M4DjnLqgtticKg6CnyNwgAC8');
+  let programAdress = new PublicKey('BPFLoaderUpgradeab1e11111111111111111111111');
   let market = await Market.load(connection, marketAddress, {}, programAdress);
+  // Fetching orderbooks
   let bids = await market.loadBids(connection);
+  let asks = await market.loadAsks(connection);
+  // L2 orderbook data
   for (let [price, size] of bids.getL2(20)) {
     console.log(price, size);
+  }
+  // Full orderbook data
+  for (let order of asks) {
+    console.log(
+      order.orderId,
+      order.price,
+      order.size,
+      order.side, // 'buy' or 'sell'
+    );
   }
 
   return {

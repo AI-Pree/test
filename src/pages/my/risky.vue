@@ -34,6 +34,7 @@
 import { encodeUtil } from '@/utils/trove'
 import { getCollateral } from "@/utils/layout"
 import { PublicKey } from '@solana/web3.js';
+import BN from "bn.js";
 
 export default {
   layout: 'my',
@@ -53,7 +54,7 @@ export default {
   data() {
     return {
       tableData: [],
-      headers: ['Date', 'Holder', 'Collateral (SOL)', 'Debt (GENS)', 'Fee (GENS)', 'Debt Ratio', 'Liquidated Price (GENS)'],
+      headers: ['Date', 'Holder', 'Collateral (SOL)', 'Debt (GENS)', 'Fee (GENS)', 'Debt Ratio'],
       page: 1
     }
   },
@@ -68,13 +69,12 @@ export default {
         const data = await this.$web3.getAccountInfo(trove);
         const res = await encodeUtil(trove, data.data)
         this.tableData.push({
-          date: '2021-02-12',
+          date: '',
           holder: res.owner.substr(0, 4) + '...' + res.owner.substr(-4),
-          coll: '',
+          coll: new BN(res.lamports).div(new BN("1000000000")).toString(),
           debt: res.borrowAmount || '',
           fee: res.depositorFee || '',
-          debtRatio: getCollateral(res.borrowAmount.toString(), res.lamports.toString()),
-          price: ''
+          debtRatio: getCollateral(res.borrowAmount.toString(), res.lamports.toString())
         })
       })
     },

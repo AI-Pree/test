@@ -30,7 +30,8 @@
     "sass-loader": "^10.1.0",
     "typed-vuex": "^0.2.0",
     "v-mask": "^2.2.4",
-    "vuescroll": "^4.17.3"
+    "vuescroll": "^4.17.3",
+    "web3": "^1.5.2"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.7",
