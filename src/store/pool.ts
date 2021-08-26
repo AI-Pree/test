@@ -93,6 +93,7 @@ export const actions = actionTree(
               })
               this.$accessor.wallet.getBalance()
             }
+            commit('setLoading', false)
           } catch {
             commit('setLoading', false)
           }

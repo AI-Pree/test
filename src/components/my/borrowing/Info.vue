@@ -34,12 +34,12 @@
       </div>
       <AmDivider class="mt-5 mb-2" />
     </div>
-    <div class="w-100 mcolor-800 p-4 mt-4 rad-fix-4 fs-5 f-mcolor-500">
-      <div class="w-100 pb-2">
+    <div class="w-100 mcolor-800 p-4 mt-4 rad-fix-4 fs-5 f-mcolor-500" v-if="(Number(getDebt) < 110 || Number(to) < 1600) && (from && to)">
+      <div class="w-100 pb-2" v-if="Number(to) < 1600">
         The minimum borrowing amount is <span class="fw-600">1,600 GENS</span>
       </div>
-      <div class="w-100">
-        The debt limit is <span class="fw-600">90%</span>
+      <div class="w-100" v-if="Number(getDebt) < 110">
+        The debt limit is <span class="fw-600">110%</span>
       </div>
     </div>
     <div class="w-100 fd-r pt-4">
@@ -88,6 +88,10 @@ export default {
   components: {
     Hint
   },
+  props: {
+    to: {type: Number, default: null},
+    from: {type: Number, default: null}
+  },
   computed: {
     getTotalBorrow () {
       return this.$accessor.troveTotal || 0
@@ -96,11 +100,7 @@ export default {
       return 5
     },
     getDebt () {
-      if (!this.$accessor.borrowing.troveId) {
-        return this.$accessor.borrowing.debt || 0
-      } else {
-        return ((10 * 1) / (this.$accessor.borrowing.trove.borrowAmount - 200)) * 100
-      }
+      return this.$accessor.borrowing.debt || 0
     },
     getIsBorrow () {
       return this.$accessor.borrowing.troveId

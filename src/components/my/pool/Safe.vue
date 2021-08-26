@@ -38,7 +38,7 @@
         <div class="w-100 fd-r ai-c">
           <span class="w-15-S w-25-XS fs-6 fw-600 f-white-200 fsh-0">GENS</span>
           <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-7 fw-600 f-mcolor-300" placeholder="0" v-model="from" />
-          <span class="fs-6 f-mcolor-100 td-u ts-3 hv d-n-XS fsh-0">max</span>
+          <span class="fs-6 f-mcolor-100 td-u ts-3 hv d-n-XS fsh-0" v-if="false">max</span>
         </div>
       </div>
       <div class="w-100 pb-6 fd-r-S fd-c-XS">

@@ -51,7 +51,11 @@ export default {
       let res = '000000000000'
       const total = Number(this.$accessor.troveTotal)
       if (total) {
-        res = res.substr(0, res.length - total.toString().length) + total
+        if (total > 999999999999) {
+          res = 999999999999
+        } else {
+          res = res.substr(0, res.length - total.toString().length) + total
+        }
       }
       return res.toString().replace(/(.)(?=(\d{3})+$)/g,'$1.')
     }

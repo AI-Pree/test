@@ -78,20 +78,24 @@ export const actions = actionTree(
     },
     // Claim
     async confirmBorrow ({ commit, dispatch }, value) {
-      if (Number(value.from > 0) && Number(value.to > 0)) {
+      if (Number(value.from > 0) && Number(value.to) > 1599) {
         commit('setLoading', true)
-        const data = await borrowUtil(this.$wallet, Number(value.to), Number(value.from) * 1000000000, this.$web3)
-        if (data && (data.troveAccountPubkey)) {
-          commit('setTroveId', data.troveAccountPubkey || '')
-          console.log(data, 'borrow')
-          this.$accessor.wallet.getBalance()
-          dispatch('setTroveById', new PublicKey(data.troveAccountPubkey))
-          this.$accessor.dashboard.setBorrow(true)
-          await this.$axios.post('trove/upsert', {trove: data.troveAccountPubkey, user: value.mint}).then(({ res }) => {
-            console.log(res, 'newTrove Backend')
-          })
+        try {
+          const data = await borrowUtil(this.$wallet, Number(value.to), Number(value.from) * 1000000000, this.$web3)
+          if (data && (data.troveAccountPubkey)) {
+            commit('setTroveId', data.troveAccountPubkey || '')
+            console.log(data, 'borrow')
+            this.$accessor.wallet.getBalance()
+            dispatch('setTroveById', new PublicKey(data.troveAccountPubkey))
+            this.$accessor.dashboard.setBorrow(true)
+            await this.$axios.post('trove/upsert', {trove: data.troveAccountPubkey, user: value.mint}).then(({ res }) => {
+              console.log(res, 'newTrove Backend')
+            })
+          }
+          commit('setLoading', false)
+        } catch {
+          commit('setLoading', false)
         }
-        commit('setLoading', false)
         this.$accessor.dashboard.setBorrow(true)
       }
     },
@@ -100,25 +104,29 @@ export const actions = actionTree(
     async closeTrove ({ state, commit }, value) {
       if (state.troveId) {
         commit('setLoading', true)
-        const data = await closeBorrowUtil(this.$wallet, process.env.mint, state.trove.troveAccountPubkey, value.mint, this.$web3)
-        if(data === null) {
-          console.log(data, 'closeTrove')
-          commit('setTroveId', '')
-          await this.$axios.post('trove/liquidate', {trove: state.trove.troveAccountPubkey}).then(({ res }) => {
-            console.log(res, 'newTrove Backend')
-          })
-          commit('setTrove', {})
-          this.$accessor.wallet.getBalance()
-          this.$accessor.dashboard.setBorrow(false)
+        try {
+          const data = await closeBorrowUtil(this.$wallet, process.env.mint, state.trove.troveAccountPubkey, value.mint, this.$web3)
+          if(data === null) {
+            console.log(data, 'closeTrove')
+            commit('setTroveId', '')
+            await this.$axios.post('trove/liquidate', {trove: state.trove.troveAccountPubkey}).then(({ res }) => {
+              console.log(res, 'newTrove Backend')
+            })
+            commit('setTrove', {})
+            this.$accessor.wallet.getBalance()
+            this.$accessor.dashboard.setBorrow(false)
+          }
+          commit('setLoading', false)
+        } catch {
+          commit('setLoading', false)
         }
-        commit('setLoading', false)
       }
     },
 
     // Get Debt Ratio
     getDebt ({ commit }, value) {
       if (value && (value.from > 0 && value.to > 0)) {
-        commit('setDebt', getCollateral(String(value.from), String(value.to)))
+        commit('setDebt', getCollateral(value.to.toString(), (Number(value.from) * 1000000000).toString()))
       } else {
         commit('setDebt', 0)
       }

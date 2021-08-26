@@ -37,7 +37,7 @@
         <div class="w-100 fd-r ai-c">
           <span class="w-15-S w-25-XS fs-6 fw-600 f-white-200 fsh-0">SOL</span>
           <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-7 fw-600 f-mcolor-300" placeholder="0" v-model="from" />
-          <span class="fs-6 f-mcolor-100 td-u ts-3 hv d-n-XS fsh-0">max</span>
+          <span class="fs-6 f-mcolor-100 td-u ts-3 hv d-n-XS fsh-0" @click="setMax">max</span>
         </div>
       </div>
       <div class="w-100 mb-4 mcolor-700 rad-fix-2 px-4 py-3" v-if="!getIsBorrow">
@@ -104,6 +104,9 @@ export default {
     getIsBorrow () {
       return this.$accessor.borrowing.troveId
     },
+    getDebt () {
+      return this.$accessor.borrowing.debt || 0
+    },
     getBorrowAmount () {
       return this.$accessor.borrowing.trove.amountToClose || 0
     }
@@ -111,35 +114,47 @@ export default {
   watch: {
     from (val) {
       if (val) {
-        this.from = val.replace(/[^+\d]/g, '')
+        this.from = val.toString().replace(/[^+\d]/g, '')
         if (this.from.length > 1 && this.from.substr(0, 1) === '0') {
           this.from = 1
         }
       }
+      this.$emit('sol', this.from)
       this.$accessor.borrowing.getDebt({from: this.from, to: this.to})
     },
     to (val) {
       if (val) {
-        this.to = val.replace(/[^+\d]/g, '')
+        this.to = val.toString().replace(/[^+\d]/g, '')
         if (this.to.length > 1 && this.to.substr(0, 1) === '0') {
           this.to = 1
         }
       }
+      this.$emit('gens', this.to)
       this.$accessor.borrowing.getDebt({from: this.from, to: this.to})
     }
   },
   methods: {
+    setMax () {
+      this.from = this.$accessor.wallet.balance ? Math.floor(this.$accessor.wallet.balance) : 0
+    },
     reset () {
       this.from = null
       this.to = null
+      this.mint = null
     },
     confirmFunc () {
-      this.$accessor.borrowing.confirmBorrow({from: this.from, to: this.to, mint: this.mint})
-      this.from = null
-      this.to = null
+      if (Number(this.from) > 0 && Number(this.to) > 1599 && this.mint && Number(this.getDebt) > 109) {
+        this.$accessor.borrowing.confirmBorrow({from: this.from, to: this.to, mint: this.mint})
+        this.from = null
+        this.to = null
+        this.mint = null
+      }
     },
     closeTroveFunc () {
-      this.$accessor.borrowing.closeTrove({mint: this.mint})
+      if (this.mint) {
+        this.$accessor.borrowing.closeTrove({mint: this.mint})
+        this.mint = null
+      }
     }
   }
 }

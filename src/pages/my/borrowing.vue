@@ -3,10 +3,10 @@
     <Balance />
     <div class="w-100 fd-r fw-w pt-10">
       <div class="w-55-M w-100-S w-100-XS">
-        <Pay />
+        <Pay @gens="to = $event" @sol="from = $event"/>
       </div>
       <div class="w-45-M w-100-S w-100-XS pl-8-M pl-0-XS pt-4-M pt-8-S pt-8-XS">
-        <Info />
+        <Info :to="Number(to)" :from="Number(from)" />
       </div>
     </div>
     <div class="w-100 fd-r-M fd-c-S fd-c-XS pt-10 ai-s">
@@ -35,6 +35,12 @@ export default {
     Notification,
     UseFull
   },
-  layout: 'my'
+  layout: 'my',
+  data () {
+    return {
+      to: null,
+      from: null
+    }
+  }
 }
 </script>
