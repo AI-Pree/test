@@ -6,7 +6,7 @@
     <div class="w-100 fd-r fw-w">
       <div class="w-35-S w-100-XS">
         <div class="w-100 fs-6 fw-500 f-gray-600 pb-3 ta-c-XS">
-          $ {{ getBalance > 0 ? (getBalance / 71.77).toLocaleString() : 0 }}
+          $ {{ getBalance > 0 ? (Number(getBalance) * getUsd).toLocaleString() : 0 }}
         </div>
         <div class="w-100 fs-10-M fs-7-S fs-10-XS fw-600 f-white-200 pb-3 ta-c-XS">
           {{ getBalance > 0 ? (getBalance).toLocaleString() : 0 }}
@@ -17,7 +17,7 @@
       </div>
       <div class="w-40-S w-100-XS">
         <div class="w-100 fs-6 fw-500 f-gray-600 pb-3 ta-c-XS">
-          $ {{ getBalanceHGEN > 0 ? (getBalanceHGEN / 71.77).toLocaleString() : 0 }}
+          $ {{ getBalanceHGEN > 0 ? (Number(getBalanceHGEN) * getUsd).toLocaleString() : 0 }}
         </div>
         <div class="w-100 fs-10-M fs-7-S fs-10-XS fw-600 f-white-200 pb-3 ta-c-XS">
           {{ getBalanceHGEN > 0 ? (getBalanceHGEN).toLocaleString() : 0 }}
@@ -42,6 +42,9 @@
 <script>
 export default {
   computed: {
+    getUsd () {
+      return this.$accessor.usd || 0
+    },
     getBalance () {
       return this.$accessor.wallet.balance || 0
     },
