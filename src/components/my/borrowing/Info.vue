@@ -25,7 +25,7 @@
         </div>
         <div class="w-30-S w-100-XS">
           <div class="w-100 fs-8 f-green-600 fw-700 ta-c-XS">
-            {{ getCollateral }} %
+            {{ getRatio }} %
           </div>
           <div class="w-100 fs-5 f-white-200 fw-400 pt-2 ta-c-XS">
             Remaining<br/>Debit Ratio
@@ -108,9 +108,9 @@ export default {
     getTroveAmount () {
       return this.$accessor.borrowing.trove ? this.$accessor.borrowing.trove.borrowAmount : 0
     },
-    getCollateral () {
+    getRatio () {
       return this.$accessor.borrowing.trove.borrowAmount ?
-        getCollateral(this.$accessor.borrowing.trove.borrowAmount.toString(), this.$accessor.borrowing.trove.lamports.toString(), this.$accessor.usd.toString()) : 0;
+        getCollateral(this.$accessor.borrowing.trove.borrowAmount.toString(), this.$accessor.borrowing.trove.lamports.toString(), parseInt(this.$accessor.usd).toString()) : 0;
     }
   }
 }

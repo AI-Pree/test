@@ -77,7 +77,7 @@ export default {
     },
     getCollateral () {
       return this.$accessor.borrowing.trove.borrowAmount ?
-        getCollateral(this.$accessor.borrowing.trove.borrowAmount.toString(), this.$accessor.borrowing.trove.lamports.toString(), this.$accessor.usd.toString()) : 0;
+        getCollateral(this.$accessor.borrowing.trove.borrowAmount.toString(), this.$accessor.borrowing.trove.lamports.toString(), parseInt(this.$accessor.usd.toString())) : 0;
     }
   },
 }
