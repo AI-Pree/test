@@ -50,14 +50,14 @@ export default {
   ],
 
   axios: {
-    baseUrl: process.env.baseUrl || 'http://34.64.168.231:1335/'
-    //baseUrl: process.env.baseUrl || 'https://liquity-back.ambersoft.llc/'
+    // baseUrl: process.env.baseUrl || 'http://34.64.168.231:1335/'
+    baseUrl: process.env.baseUrl || 'https://liquity-back.ambersoft.llc/'
   },
 
   // ENV
   env: {
-    baseUrl: process.env.BASE_URL || 'http://34.64.168.231:1335/',
-    //baseUrl: process.env.BASE_URL || 'https://liquity-back.ambersoft.llc/',
+    // baseUrl: process.env.BASE_URL || 'http://34.64.168.231:1335/',
+    baseUrl: process.env.BASE_URL || 'https://liquity-back.ambersoft.llc/',
     mint: 'C6tfES3TrhTzQnRopAyqHAjx4ixShAzJ16QeffWvoXBk'
   },
 
