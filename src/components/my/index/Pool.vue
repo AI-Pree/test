@@ -35,8 +35,8 @@
       <div class="w-100 fs-5 fw-400 f-white-200">
         Total Deposited
       </div>
-      <div class="w-45 fsh-0 fs-5 f-white-200 fw-600">
-        <span class="f-mcolor-100">{{ getDepositeTotal.toLocaleString() }}</span> GENS
+      <div class="w-45 fsh-0 fs-5 f-white-200 fw-600 ta-r">
+        <span class="f-mcolor-100 pr-1">{{ getDepositeTotal.toLocaleString() }}</span> GENS
       </div>
     </div>
   </div>

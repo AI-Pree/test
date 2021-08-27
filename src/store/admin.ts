@@ -20,14 +20,14 @@ export const actions = actionTree(
   {
     // Send Warning Message
     async sendWarning ({}, value) {
-      await this.$axios.post('/notification/subscribe', {type: '1', text: value.text, ratio: value.ratio}).then(({ res }) => {
+      await this.$axios.post('/notification/send', {subject: 'Warning Message', body: value.text, debitRatio: value.ratio}).then(({ res }) => {
         console.log(res, 'Subscribe Warning')
       })
     },
 
     // Send Liquidation Message
     async sendLiquidation ({}, value) {
-      await this.$axios.post('/notification/send', {type: '2', text: value.text, ratio: value.ratio}).then(({ res }) => {
+      await this.$axios.post('/notification/send', {subject: 'Liquidation Message', body: value.text, debitRatio: value.ratio}).then(({ res }) => {
         console.log(res, 'Subscribe Liquidation')
       })
     }

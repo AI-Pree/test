@@ -5,7 +5,8 @@
         {{ getDebt }} %
       </div>
       <div class="w-100 fs-7-M fw-600 f-white-200 pb-2 fd-r ai-c pt-4 jc-c-XS">
-        Debt Ratio <Hint>
+        Debt Ratio
+        <Hint>
           It is recommended to keep your debt ratio <span class="f-mcolor-300">below 50%</span>
         </Hint>
       </div>

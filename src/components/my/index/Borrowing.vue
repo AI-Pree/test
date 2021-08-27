@@ -30,8 +30,8 @@
       <div class="w-100 fs-5 fw-400 f-white-200">
         Total Borrowing
       </div>
-      <div class="w-45 fsh-0 fs-5 f-white-200 fw-600">
-        <span class="f-mcolor-100">{{ getTotalDebt.toLocaleString() }}</span> GENS
+      <div class="w-45 fsh-0 fs-5 f-white-200 fw-600 ta-r" :title="getTotalDebt.toLocaleString()">
+        <span class="f-mcolor-100 pr-1">{{ getTotalDebt.toLocaleString().toString().slice(0, 10) }}{{ getTotalDebt.toString().length > 10 ? '... ' : ' '}}</span> GENS
       </div>
     </div>
     <div class="w-100 fd-r ai-c py-2" v-if="false">

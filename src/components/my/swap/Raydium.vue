@@ -35,7 +35,10 @@
     </div>
     <div class="w-100 fd-r-S fd-c-XS py-2">
       <div class="w-100 fs-6 fw-400 f-white-200 fd-r ai-c jc-c-XS">
-        Slippage Tolerance <span class="w-fix-s-12 h-fix-s-12 fd-r jc-c ai-c mcolor-100 rad-fix-2 fs-4 fw-400 ml-2">?</span>
+        Slippage Tolerance
+        <Hint>
+          Difference on price of 2 different coins you are using in transaction during time it takes to complete transaction.
+        </Hint>
       </div>
       <div class="w-a fs-6 fsh-0 fw-400 f-mcolor-100 fd-r ai-c pt-2-XS jc-c-XS">
         1 <span class="f-white-200 pl-1">%</span>
@@ -51,7 +54,10 @@
     </div>
     <div class="w-100 fd-r-S fd-c-XS py-2">
       <div class="w-100 fs-6 fw-400 f-white-200 fd-r ai-c jc-c-XS">
-        Minimum Received <span class="w-fix-s-12 h-fix-s-12 fd-r jc-c ai-c mcolor-100 rad-fix-2 fs-4 fw-400 ml-2">?</span>
+        Minimum Received
+        <Hint>
+          Your transaction will revert if there is a large, unfavourable price movement before it is confirmed.
+        </Hint>
       </div>
       <div class="w-a fs-6 fsh-0 fw-400 f-mcolor-100 fd-r ai-c pt-2-XS jc-c-XS">
         0.0983070000 <span class="f-white-200 pl-1">SOL</span>
@@ -59,7 +65,10 @@
     </div>
     <div class="w-100 fd-r-S fd-c-XS py-2">
       <div class="w-100 fs-6 fw-400 f-white-200 fd-r ai-c jc-c-XS">
-        Price Impact <span class="w-fix-s-12 h-fix-s-12 fd-r jc-c ai-c mcolor-100 rad-fix-2 fs-4 fw-400 ml-2">?</span>
+        Price Impact
+        <Hint>
+          If the pool is $1,000 and you sell $1 worth, thay will "impact" the pool 0.1%.
+        </Hint>
       </div>
       <div class="w-a fs-6 fsh-0 fw-400 f-mcolor-100 fd-r ai-c pt-2-XS jc-c-XS">
         0.00 <span class="f-white-200 pl-1">%</span>
@@ -74,6 +83,7 @@
 </template>
 
 <script>
+import Hint from '@/components/Hint'
 const TOKENS = [
   {label: 'RAY', value: '4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R'},
   {label: 'SOL', value: 'So11111111111111111111111111111111111111112'}
@@ -82,6 +92,9 @@ const CONVERT_RAY = 0.10104800982233
 const CONVERT_SOL = 9.896285951185709
 
 export default {
+  components: {
+    Hint
+  },
   data () {
     return {
       tokens: TOKENS,
