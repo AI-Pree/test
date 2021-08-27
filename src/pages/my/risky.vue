@@ -74,7 +74,7 @@ export default {
           coll: new BN(res.lamports).div(new BN("1000000000")).toString(),
           debt: res.borrowAmount || '',
           fee: res.depositorFee || '',
-          debtRatio: getCollateral(res.borrowAmount.toString(), res.lamports.toString())
+          debtRatio: `${getCollateral(res.borrowAmount.toString(), res.lamports.toString(), parseInt(this.$accessor.usd).toString())}%`
         })
       })
     },
