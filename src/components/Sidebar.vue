@@ -71,8 +71,8 @@ export default {
     return {
       items: [
         {id: 1, name: 'Dashboard', to: '/my', class: 'my'},
-        {id: 2, name: 'Borrowing', to: '/my/borrowing', class: 'my-borrowing'},
         {id: 3, name: 'Swap', to: '/my/swap', class: 'my-swap'},
+        {id: 2, name: 'Borrowing', to: '/my/borrowing', class: 'my-borrowing'},
         {id: 4, name: 'Pool/Safe pool', to: '/my/pool', class: 'my-pool'},
         {id: 5, name: 'Risky trove', to: '/my/risky', class: 'my-ricky-trove'},
       ]

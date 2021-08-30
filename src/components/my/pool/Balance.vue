@@ -6,7 +6,7 @@
     <div class="w-100 fd-r fw-w">
       <div class="w-35-S w-100-XS">
         <div class="w-100 fs-6 fw-500 f-gray-600 pb-3 ta-c-XS">
-          $ {{ getBalance > 0 ? (Number(getBalance) * getUsd).toLocaleString() : 0 }}
+          $ {{ getBalance > 0 ? getUsdBalance : 0 }}
         </div>
         <div class="w-100 fs-10-M fs-7-S fs-10-XS fw-600 f-white-200 pb-3 ta-c-XS">
           {{ getBalance > 0 ? (getBalance).toLocaleString() : 0 }}
@@ -17,7 +17,7 @@
       </div>
       <div class="w-40-S w-100-XS">
         <div class="w-100 fs-6 fw-500 f-gray-600 pb-3 ta-c-XS">
-          $ {{ getBalanceHGEN > 0 ? (Number(getBalanceHGEN) * getUsd).toLocaleString() : 0 }}
+          $ {{ getBalanceHGEN > 0 ? getHGENBalance : 0 }}
         </div>
         <div class="w-100 fs-10-M fs-7-S fs-10-XS fw-600 f-white-200 pb-3 ta-c-XS">
           {{ getBalanceHGEN > 0 ? (getBalanceHGEN).toLocaleString() : 0 }}
@@ -53,7 +53,23 @@ export default {
     },
     getBalanceGENS () {
       return this.$accessor.borrowing.trove?.borrowAmount || 0
-    }
+    },
+    getUsdBalance () {
+      let result = 0
+      if (this.getBalance) {
+        result = (Number(this.getBalance) * this.getUsd).toString().split('.')
+        result = Number(result[0]).toLocaleString() + ',' + result[1].substr(0, 2)
+      }
+      return result.toString()
+    },
+    getHGENBalance () {
+      let result = 0
+      if (this.getBalanceHGEN) {
+        result = (Number(this.getBalanceHGEN) * this.getUsd).toString().split('.')
+        result = Number(result[0]).toLocaleString() + ',' + result[1].substr(0, 2)
+      }
+      return result.toString()
+    },
   },
 }
 </script>

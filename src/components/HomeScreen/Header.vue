@@ -21,7 +21,7 @@ export default {
       if (total) {
         res = res.substr(0, res.length - total.toString().length) + total
       }
-      return res.toString().replace(/(.)(?=(\d{3})+$)/g,'$1.')
+      return res.toString().replace(/(.)(?=(\d{3})+$)/g,'$1,')
     }
   }
 }

@@ -36,7 +36,7 @@
         </div>
         <div class="w-100 fd-r ai-c">
           <span class="w-15-S w-25-XS fs-6 fw-600 f-white-200 fsh-0">SOL</span>
-          <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-7 fw-600 f-mcolor-300" placeholder="0" v-model="from" />
+          <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-7 fw-600 f-mcolor-300" placeholder="0" v-model="from" maxlength="12" />
           <span class="fs-6 f-mcolor-100 td-u ts-3 hv d-n-XS fsh-0" @click="setMax">max</span>
         </div>
       </div>
@@ -46,7 +46,7 @@
         </div>
         <div class="w-100 fd-r ai-c">
           <span class="w-15-S w-25-XS fs-6 fw-600 f-white-200 fsh-0">GENS</span>
-          <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-7 fw-600 f-mcolor-300" placeholder="0" v-model="to" />
+          <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-7 fw-600 f-mcolor-300" placeholder="0" v-model="to" maxlength="20" />
         </div>
       </div>
       <div class="w-100 my-4 mcolor-700 rad-fix-2 px-4 py-3" v-if="getIsBorrow">
@@ -98,6 +98,9 @@ export default {
     }
   },
   computed: {
+    getUsd () {
+      return this.$accessor.usd || 0
+    },
     getLoading () {
       return this.$accessor.borrowing.loading
     },
@@ -114,11 +117,10 @@ export default {
   watch: {
     from (val) {
       if (val) {
-        this.from = val.toString().replace(/[^+\d]/g, '')
-        if (this.from.length > 1 && this.from.substr(0, 1) === '0') {
-          this.from = 1
-        }
+        this.from = val.toString().replace(/[^+\d\.]/g, '')
+        if (this.from.split('.').length > 2) this.from = this.from.replace(/\.(?=[^\.]*$)/, '')
       }
+      this.to = Math.round(Number(this.from) * this.getUsd).toString()
       this.$emit('sol', this.from)
       this.$accessor.borrowing.getDebt({from: this.from, to: this.to})
     },
@@ -135,7 +137,7 @@ export default {
   },
   methods: {
     setMax () {
-      this.from = this.$accessor.wallet.balance ? Math.floor(this.$accessor.wallet.balance) : 0
+      this.from = this.$accessor.wallet.balance ? this.$accessor.wallet.balance : 0
     },
     reset () {
       this.from = null
