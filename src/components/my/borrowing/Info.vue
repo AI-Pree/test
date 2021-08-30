@@ -10,6 +10,10 @@
           It is recommended to keep your debt ratio <span class="f-mcolor-300">below 50%</span>
         </Hint>
       </div>
+      <div class="w-100 fs-6-M fw-400 f-white-200 pb-2 fd-r ai-c pt-4 jc-c-XS">
+        Liquidation Price
+        <span class="px-1 f-mcolor-100 fw-500">{{ Number(Number(from) * getUsd).toLocaleString() }}</span> GENS
+      </div>
     </div>
     <div class="w-100" v-if="getIsBorrow">
       <div class="w-100 f-white-200 fs-10 fw-600 ta-c-XS">
@@ -94,6 +98,9 @@ export default {
     from: {type: Number, default: null}
   },
   computed: {
+    getUsd () {
+      return this.$accessor.usd || 0
+    },
     getTotalBorrow () {
       return this.$accessor.troveTotal || 0
     },

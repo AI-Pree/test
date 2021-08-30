@@ -120,7 +120,7 @@ export default {
         this.from = val.toString().replace(/[^+\d\.]/g, '')
         if (this.from.split('.').length > 2) this.from = this.from.replace(/\.(?=[^\.]*$)/, '')
       }
-      this.to = Math.round(Number(this.from) * this.getUsd).toString()
+      this.to = (Math.round(Math.round(Number(this.from) * this.getUsd) / 2.5)).toString()
       this.$emit('sol', this.from)
       this.$accessor.borrowing.getDebt({from: this.from, to: this.to})
     },

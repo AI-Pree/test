@@ -12,7 +12,7 @@
             <span class="w-fix-15 h-fix-15 rad-50 p-a l-50 t-50 z-0 checked" :class="[modelData.colorRaisedChecked]" v-if="modelData.raised" />
             <span class="w-fix-15 h-fix-15 rad-50 p-a l-50 t-50 z-0 unchecked" :class="[modelData.colorRaisedUnchecked]" v-if="modelData.raised" />
           </div>
-          <div class="h-fix-14min pl-3 fs-5" v-if="item.label">
+          <div class="h-fix-14min pl-3 fs-5" v-if="item.label" :class="[`f-${modelData.colorLabel}`]">
             {{ item.label }}
           </div>
         </div>
@@ -41,6 +41,7 @@ export default {
     colorRaisedUnchecked: {type: String, default: 'gray-500'},
     colorError: {type: String, default: 'red-600'},
     colorBottomText: {type: String, default: 'gray-800'},
+    colorLabel: {type: String, default: 'gray-800'},
     // All
     label: {type: String, default: null},
     items: {type: Array, default: null},
@@ -65,6 +66,7 @@ export default {
         colorBottomText: this.colorBottomText,
         colorRaisedChecked: this.colorRaisedChecked,
         colorRaisedUnchecked: this.colorRaisedUnchecked,
+        colorLabel: this.colorLabel,
         label: this.label,
         items: this.items,
         error: this.error,
