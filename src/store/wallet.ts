@@ -65,6 +65,7 @@ export const actions = actionTree(
         if (adapter.publicKey) {
           commit('setPublicKey', adapter.publicKey.toBase58())
           this.app.$accessor.setModal('')
+          this.$router.push('/my')
         }
         commit('setLoaderConnect', false)
       })
