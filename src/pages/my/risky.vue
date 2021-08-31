@@ -66,8 +66,13 @@
           {{ getCollateralFunc(data.borrowAmount.toString(), data.lamports.toString()) }}%
         </div>
       </div>
+      <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 fd-r ai-c jc-c w-100 f-gray-400">
+        <div class="w-100 h-100 fd-r ai-c jc-c ta-c fw-400">
+          {{ Number(getLamports(data.lamports) * getUsd).toLocaleString() }}
+        </div>
+      </div>
       <div class="w-5 fsh-0 fd-r ai-c jc-c">
-        <img src="@/assets/svg/my/bin.svg" class="w-fix-s-10 hv ts-3" @click="binAction(data.holder)" />
+        <img src="@/assets/svg/my/bin.svg" class="w-fix-s-10 hv ts-3" @click="binAction({trove: data, index: d})" />
       </div>
     </div>
     <div class="w-100 fd-r jc-c pt-10" v-if="aTroveList.length >= (page * 10) && aTroveList.length > 0">
@@ -90,7 +95,10 @@ export default {
     },
     troveTotal() {
       return this.$accessor.risky.troveTotal
-    }
+    },
+    getUsd () {
+      return this.$accessor.usd || 0
+    },
   },
   data() {
     return {
@@ -109,7 +117,7 @@ export default {
         colorFocus: 'white-100',
         colorTitle: 'mcolor-300',
       },
-      headers: ['Date', 'Holder', 'Collateral (SOL)', 'Debt (GENS)', 'Fee (GENS)', 'Debt Ratio'],
+      headers: ['Date', 'Holder', 'Collateral (SOL)', 'Debt (GENS)', 'Fee (GENS)', 'Debt Ratio', 'Liquidation Price (GENS)'],
       page: 1
     }
   },
@@ -133,7 +141,7 @@ export default {
       return new BN(lamports).div(new BN("1000000000")).toString()
     },
     binAction (val) {
-      console.log(val)
+      this.$accessor.risky.closeTroveUser(val)
     },
     find () {
       this.page = 1
