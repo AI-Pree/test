@@ -117,7 +117,7 @@ export const actions = actionTree(
             this.$accessor.dashboard.setBorrow(false)
           } else {
             dispatch('setTroveById', new PublicKey(data.troveAccountPubkey))
-            await this.$axios.post('trove/upsert', {trove: data.troveAccountPubkey}).then(({ res }) => {
+            await this.$axios.post('trove/upsert', {trove: data.troveAccountPubkey, user: value.mint}).then(({ res }) => {
               console.log(res, 'updateTrove Backend')
             })
           }
