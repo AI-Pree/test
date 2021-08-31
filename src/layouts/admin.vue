@@ -7,5 +7,8 @@
 
 <script>
 export default {
+  mounted () {
+    this.$accessor.getInfo()
+  }
 }
 </script>

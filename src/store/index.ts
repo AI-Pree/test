@@ -16,6 +16,7 @@ import * as admin from './admin'
 export const state = () => ({
   modal: '',
   totalDeposit: 0,
+  debtRatio: 0,
   gasFee: 0,
   governanceReward: 0,
   solReward: 0,
@@ -58,6 +59,9 @@ export const mutations = mutationTree(state, {
   },
   setLightMode (state, newValue: boolean) {
     state.lightMode = newValue
+  },
+  setDebtRatio (state, newValue: boolean) {
+    state.debtRatio = newValue
   }
 })
 
@@ -74,6 +78,7 @@ export const actions = actionTree(
         commit('setTokenReward', data.tokenReward || 0)
         commit('setTroveTotal', data.troveTotal || 0)
         commit('setLightMode', data.totalLiquidationMode || false)
+        commit('setDebtRatio', data.debtRatio || 0)
       })
       await this.$axios.get('https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd').then(({ data }) => {
         if (data.solana) {
