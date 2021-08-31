@@ -9,7 +9,7 @@
       </div>
       <div class="w-a-L w-50-M w-100-S w-100-XS fsh-0 mt-0-L mt-4-S mt-4-XS px-0-M px-4-S px-4-XS">
         <AmButton color="mcolor-100" opacityEffect scaleEffect :full="mobile" @click="$emit('connect', 'connect')" v-if="!publicKey">
-          Connect Wallet
+          <span class="fw-800 pr-1 f-mcolor-300">SOL</span> Connect Wallet
         </AmButton>
         <AmButton color="mcolor-100" opacityEffect scaleEffect :full="mobile" to="/my" v-if="publicKey" :title="publicKey">
           SOL {{ publicKey.substr(0, 6) }} ...... {{ publicKey.substr(-4) }}

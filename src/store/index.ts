@@ -21,7 +21,8 @@ export const state = () => ({
   solReward: 0,
   tokenReward: 0,
   troveTotal: 0,
-  usd: 0
+  usd: 0,
+  lightMode: false
 })
 
 export type RootState = ReturnType<typeof state>
@@ -55,6 +56,9 @@ export const mutations = mutationTree(state, {
   setUsd (state, newValue: number) {
     state.usd = newValue
   },
+  setLightMode (state, newValue: boolean) {
+    state.lightMode = newValue
+  }
 })
 
 // Actions
@@ -69,6 +73,7 @@ export const actions = actionTree(
         commit('setSolReward', data.solReward || 0)
         commit('setTokenReward', data.tokenReward || 0)
         commit('setTroveTotal', data.troveTotal || 0)
+        commit('setLightMode', data.totalLiquidationMode || false)
       })
       await this.$axios.get('https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd').then(({ data }) => {
         if (data.solana) {

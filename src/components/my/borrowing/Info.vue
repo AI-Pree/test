@@ -39,12 +39,12 @@
       </div>
       <AmDivider class="mt-5 mb-2" />
     </div>
-    <div class="w-100 mcolor-800 p-4 mt-4 rad-fix-4 fs-5 f-mcolor-500" v-if="(Number(getDebt) < 110 || Number(to) < 1600) && (from && to)">
+    <div class="w-100 mcolor-800 p-4 mt-4 rad-fix-4 fs-5 f-mcolor-500" v-if="(Number(getDebt) < getMaxRatio || Number(to) < 1600) && (from && to)">
       <div class="w-100 pb-2" v-if="Number(to) < 1600">
         The minimum borrowing amount is <span class="fw-600">1,600 GENS</span>
       </div>
-      <div class="w-100" v-if="Number(getDebt) < 110">
-        The debt limit is <span class="fw-600">110%</span>
+      <div class="w-100" v-if="Number(getDebt) < getMaxRatio">
+        The debt limit is <span class="fw-600">{{ getMaxRatio }} %</span>
       </div>
     </div>
     <div class="w-100 fd-r pt-4">
@@ -98,6 +98,13 @@ export default {
     from: {type: Number, default: null}
   },
   computed: {
+    getMaxRatio () {
+      if (this.$accessor.lightMode) {
+        return 150
+      } else {
+        return 110
+      }
+    },
     getUsd () {
       return this.$accessor.usd || 0
     },

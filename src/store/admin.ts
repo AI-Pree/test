@@ -3,6 +3,8 @@ import { getAccessorType, mutationTree, actionTree, getterTree } from 'typed-vue
 
 // State
 export const state = () => ({
+  depositList: [],
+  depositTotal: 0
 })
 
 export type RootState = ReturnType<typeof state>
@@ -12,6 +14,15 @@ export const getters = getterTree(state, {})
 
 // Mutation
 export const mutations = mutationTree(state, {
+  addDepositList(state, newValue = []) {
+    state.depositList = [ ...state.depositList, ...newValue ]
+  },
+  setDepositList(state, newValue = []) {
+    state.depositList = newValue
+  },
+  setDepositTotal(state, newValue: number) {
+    state.depositTotal = newValue
+  }
 })
 
 // Actions
@@ -30,6 +41,25 @@ export const actions = actionTree(
       await this.$axios.post('/notification/send', {subject: 'Liquidation Message', body: value.text, debitRatio: value.ratio}).then(({ res }) => {
         console.log(res, 'Subscribe Liquidation')
       })
-    }
+    },
+
+    // Get Deposit List
+    async getDepositList({ commit }, value) {
+      if (value.clear) {
+        commit('setDepositList', [])
+      }
+      let params = '?page=' + value.page
+      if (value.search) {
+        params += '&query=' + value.search
+      }
+      await this.$axios.get('deposit/list' + params).then(({ data }) => {
+        commit('setDepositTotal', data.total_count || 0)
+        if (value.clear) {
+          commit('setDepositList', data.entities || [])
+        } else {
+          commit('addDepositList', data.entities || [])
+        }
+      })
+    },
   }
 )

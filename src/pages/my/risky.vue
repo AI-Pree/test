@@ -1,12 +1,24 @@
 <template>
-  <div class="w-100 p-2-XS p-2-S">
+  <div class="w-100">
+    <div class="w-100 fs-10 fw-600 f-white-200 pb-10 ta-c-XS">
+      Risky trove
+    </div>
+    <div class="w-100 fd-r pb-6">
+      <div class="fs-6 fw-500 f-white-200 pr-10">
+        Total
+      </div>
+      <div class="fs-6 f-white-200">
+        <span class="f-mcolor-300 fw-600 pr-1">{{ troveTotal }}</span>
+        MEMBERS
+      </div>
+    </div>
     <div class="w-100 pb-8 fd-r-S fd-c-XS">
       <div class="w-65-S w-100-XS pr-6-S pr-0-XS fd-r ai-c">
         <input type="text" class="w-100 mcolor-700 br-0 pl-3 pr-10 py-3 rad-fix-3 oul-n f-mcolor-300 fs-6" placeholder="Search..." maxlength="60" v-model="search" />
-        <img src="@/assets/svg/search.svg" class="w-fix-15 p-a r-10" />
+        <img src="@/assets/svg/search.svg" class="w-fix-15 p-a r-fix-s-15" />
       </div>
       <div class="w-a-S w-100-XS fsh-0 pt-6-XS">
-        <AmButton :height="false" color="mcolor-100" bColor="mcolor-100" opacityEffect class="py-2">
+        <AmButton :height="false" color="mcolor-100" bColor="mcolor-100" opacityEffect class="py-2" @click="find">
           FIND
         </AmButton>
       </div>
@@ -23,18 +35,42 @@
       </div>
       <div class="w-5 fsh-0" />
     </div>
-    <div class="w-100 fd-r ai-s br-t-4 brts-d br-mcolor-400" v-for="(data, d) in tableData" :key="d">
-      <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 fd-r ai-c jc-c w-100"
-        v-for="(key, i) in Object.keys(data)" :key="i" :class="{'f-mcolor-100': [1].indexOf(i) > -1, 'f-gray-400': [1].indexOf(i) === -1}">
-          <div class="w-100 h-100 fd-r ai-c jc-c ta-c fw-400">
-            {{ data[key] }}
-          </div>
+    <div class="w-100 fd-r ai-s br-t-4 brts-d br-mcolor-400" v-for="(data, d) in aTroveList" :key="d">
+      <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 fd-r ai-c jc-c w-100 f-gray-400">
+        <div class="w-100 h-100 fd-r ai-c jc-c ta-c fw-400">
+          {{ data.createdAt ? getDate(data.createdAt) : '' }}
+        </div>
+      </div>
+      <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 fd-r ai-c jc-c w-100 f-mcolor-300" :title="data.owner">
+        <div class="w-100 h-100 fd-r ai-c jc-c ta-c fw-400">
+          {{ data.owner.substr(0, 4) + '...' + data.owner.substr(-4) }}
+        </div>
+      </div>
+      <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 fd-r ai-c jc-c w-100 f-gray-400">
+        <div class="w-100 h-100 fd-r ai-c jc-c ta-c fw-400">
+          {{ getLamports(data.lamports) }}
+        </div>
+      </div>
+      <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 fd-r ai-c jc-c w-100 f-gray-400">
+        <div class="w-100 h-100 fd-r ai-c jc-c ta-c fw-400">
+          {{ data.borrowAmount }}
+        </div>
+      </div>
+      <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 fd-r ai-c jc-c w-100 f-gray-400">
+        <div class="w-100 h-100 fd-r ai-c jc-c ta-c fw-400">
+          {{ data.depositorFee }}
+        </div>
+      </div>
+      <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 fd-r ai-c jc-c w-100 f-gray-400">
+        <div class="w-100 h-100 fd-r ai-c jc-c ta-c fw-400">
+          {{ getCollateralFunc(data.borrowAmount.toString(), data.lamports.toString()) }}%
+        </div>
       </div>
       <div class="w-5 fsh-0 fd-r ai-c jc-c">
         <img src="@/assets/svg/my/bin.svg" class="w-fix-s-10 hv ts-3" @click="binAction(data.holder)" />
       </div>
     </div>
-    <div class="w-100 fd-r jc-c pt-10" v-if="tableData.length > 0">
+    <div class="w-100 fd-r jc-c pt-10" v-if="aTroveList.length >= (page * 10) && aTroveList.length > 0">
       <AmButton :height="false" color="mcolor-100" bColor="mcolor-100" opacityEffect @click="nextPage" class="py-2">
         More
       </AmButton>
@@ -43,11 +79,7 @@
 </template>
 
 <script>
-//import Balance from '@/components/my/pool/Balance.vue'
-//import CommonTable from '@/components/common/table/CommonTable.vue'
-import { encodeUtil } from '@/utils/trove'
 import { getCollateral } from "@/utils/layout"
-import { PublicKey } from '@solana/web3.js';
 import BN from "bn.js";
 
 export default {
@@ -55,20 +87,14 @@ export default {
   computed: {
     aTroveList() {
       return this.$accessor.risky.troveList
-    }
-  },
-  watch: {
-    aTroveList: {
-      deep: false,
-      handler(newValue) {
-        this.setTroveList(newValue)
-      }
     },
+    troveTotal() {
+      return this.$accessor.risky.troveTotal
+    }
   },
   data() {
     return {
       search: null,
-      tableData: [],
       sort: {
         theme: 'default',
         value: 1,
@@ -86,27 +112,25 @@ export default {
     }
   },
   methods: {
+    getDate (date) {
+      const newDate = new Date(date)
+      return `${newDate.getFullYear()}/${(newDate.getMonth() + 1).toString().padStart(2, '0')}/${newDate.getDate().toString().padStart(2, '0')}`
+    },
+    getCollateralFunc (borrow, lamports) {
+      return getCollateral(borrow, lamports, parseInt(this.$accessor.usd).toString())
+    },
+    getLamports (lamports) {
+      return new BN(lamports).div(new BN("1000000000")).toString()
+    },
     binAction (val) {
       console.log(val)
     },
-    setTroveList (newValue) {
-      this.tableData = []
-      newValue.forEach(async (element) => {
-        const trove = new PublicKey(element.trove)
-        const data = await this.$web3.getAccountInfo(trove);
-        const res = await encodeUtil(trove, data.data)
-        this.tableData.push({
-          date: '',
-          holder: res.owner.substr(0, 4) + '...' + res.owner.substr(-4),
-          coll: new BN(res.lamports).div(new BN("1000000000")).toString(),
-          debt: res.borrowAmount || '',
-          fee: res.depositorFee || '',
-          debtRatio: `${getCollateral(res.borrowAmount.toString(), res.lamports.toString(), parseInt(this.$accessor.usd).toString())}%`
-        })
-      })
+    find () {
+      this.page = 1
+      this.$accessor.risky.getTroveListAction({page: this.page, clear: true, search: this.search})
     },
     nextPage() {
-      this.page++
+      this.page += 1
       this.$accessor.risky.getTroveListAction({page: this.page, clear: false})
     }
   },
