@@ -55,7 +55,7 @@
       </div>
       <div class="w-100 mr-2-L mr-2-S mr-0-XS" v-if="getDepositKey">
         <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full @click="closeDepositFunc">
-          close deposit
+          withdraw deposit
         </AmButton>
       </div>
     </div>

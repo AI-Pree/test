@@ -1,7 +1,7 @@
 import { AccountLayout, Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { Account, Connection, PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY, Transaction, TransactionInstruction } from "@solana/web3.js";
 import BN from "bn.js";
-import {TroveLayout, TROVE_ACCOUNT_DATA_LAYOUT, EscrowProgramIdString} from './layout';
+import {TroveLayout, TROVE_ACCOUNT_DATA_LAYOUT, EscrowProgramIdString, CHAINLINK_SOL_USD_PUBKEY} from './layout';
 import Wallet from "@project-serum/sol-wallet-adapter";
 
 export const closeBorrowUtil = async (
@@ -11,6 +11,7 @@ export const closeBorrowUtil = async (
     troveId: string,
     // Адрес кошелька токена пользователя GENS
     pdaToken: string,
+    amount: number,
     connection: Connection,
 ) => {
 
@@ -27,9 +28,11 @@ export const closeBorrowUtil = async (
             { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
             { pubkey: pdaTokenAcc, isSigner: false, isWritable: true },
             { pubkey: tokenMintAcc, isSigner: false, isWritable: true },
+            { pubkey: CHAINLINK_SOL_USD_PUBKEY, isSigner: false, isWritable: true },
         ],
         data: Buffer.from(
             Uint8Array.of(1, // id of instruction
+              ...new BN(amount*100).toArray('le', 8),
             ))
     })
 
@@ -45,6 +48,22 @@ export const closeBorrowUtil = async (
     let txId = await connection.sendRawTransaction(signedTx.serialize());
     await connection.confirmTransaction(txId);
 
-    // Info
-    return (await connection.getAccountInfo(troveAccount, 'singleGossip'))
+  const encodedTroveState = (await connection.getAccountInfo(troveAccount, 'singleGossip'))!.data;
+  if(encodedTroveState === null) {
+    return null
+  }
+  const decodedTroveState = TROVE_ACCOUNT_DATA_LAYOUT.decode(encodedTroveState) as TroveLayout;
+
+  return {
+    troveAccountPubkey: troveAccount.toBase58(),
+    isInitialized: !!decodedTroveState.isInitialized,
+    isLiquidated: !!decodedTroveState.isLiquidated,
+    isReceived: !!decodedTroveState.isReceived,
+    borrowAmount: new BN(decodedTroveState.borrowAmount, 10, 'le').toNumber(),
+    lamports: new BN(decodedTroveState.lamports, 10, 'le').toString(),
+    teamFee: new BN(decodedTroveState.teamFee, 10, 'le').toString(),
+    depositorFee: new BN(decodedTroveState.depositorFee, 10, 'le').toString(),
+    amountToClose: new BN(decodedTroveState.amountToClose, 10, 'le').toString(),
+    owner: new PublicKey(decodedTroveState.owner).toBase58(),
+  }
 }

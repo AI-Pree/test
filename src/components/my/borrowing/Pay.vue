@@ -55,7 +55,7 @@
         </div>
         <div class="w-100 fd-r ai-c">
           <span class="w-15-S w-25-XS fs-6 fw-600 f-white-200 fsh-0">GENS</span>
-          <div type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-7 fw-600 f-mcolor-300">{{ getBorrowAmount }}</div>
+          <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-7 fw-600 f-mcolor-300" v-model="to" />
         </div>
       </div>
       <div class="w-100 pb-6 fd-r-S fd-c-XS" v-if="!getIsBorrow">
@@ -71,8 +71,13 @@
         </div>
       </div>
       <div class="w-100 mt-4" v-if="getIsBorrow">
+        <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full @click="updateTroveFunc">
+          update trove
+        </AmButton>
+      </div>
+      <div class="w-100 mt-4" v-if="getIsBorrow">
         <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full @click="closeTroveFunc">
-          close trove
+          Close trove
         </AmButton>
       </div>
     </div>
@@ -148,15 +153,27 @@ export default {
       if (Number(this.from) > 0 && Number(this.to) > 1599 && this.mint && Number(this.getDebt) > 109) {
         this.$accessor.borrowing.confirmBorrow({from: this.from, to: this.to, mint: this.mint})
         this.from = null
-        this.to = null
+        this.to = this.getBorrowAmount
         this.mint = null
       }
     },
     closeTroveFunc () {
       if (this.mint) {
-        this.$accessor.borrowing.closeTrove({mint: this.mint})
+        this.to = 0;
+        this.$accessor.borrowing.closeTrove({mint: this.mint, amount: this.to})
         this.mint = null
       }
+    },
+    updateTroveFunc () {
+      if (this.mint) {
+        this.$accessor.borrowing.closeTrove({mint: this.mint, amount: this.to})
+        this.mint = null
+      }
+    }
+  },
+  mounted() {
+    if(this.getIsBorrow) {
+      this.to = this.$accessor.borrowing.trove.amountToClose
     }
   }
 }
