@@ -52,6 +52,9 @@ export const actions = actionTree(
       if (value.search) {
         params += '&query=' + value.search
       }
+      if (value.sort) {
+        params += '&sort_field=' + value.sort + '&sort_direction=asc'
+      }
       await this.$axios.get('deposit/list' + params).then(({ data }) => {
         commit('setDepositTotal', data.total_count || 0)
         if (value.clear) {

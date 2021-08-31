@@ -26,7 +26,7 @@
             </AmButton>
           </div>
           <div class="w-25-M w-100-XS pl-6-M pl-0-XS pt-6-XS">
-            <AmSelectbox :data="sort" :update="false" :shadow="false" />
+            <AmSelectbox :data="sort" :update="false" :shadow="false" @set="sortValue = $event" />
           </div>
         </div>
         <div class="w-100 fd-r ai-s">
@@ -114,6 +114,7 @@ export default {
   data() {
     return {
       search: null,
+      sortValue: null,
       mode: {
         theme: 'default',
         label: '',
@@ -129,10 +130,10 @@ export default {
       },
       sort: {
         theme: 'default',
-        value: 1,
+        value: 'createdAt',
         items: [
-          {label: 'Sort By Date', value: 1},
-          {label: 'Sort By Price', value: 2}
+          {label: 'Sort By Date', value: 'createdAt'},
+          {label: 'Sort By Price', value: 'tokenAmount'}
         ],
         colorDefault: 'white-100',
         colorBackground: 'white-100',
@@ -141,6 +142,14 @@ export default {
       },
       headers: ['Date', 'Holder', 'Deposit (GENS)', 'Claimed', 'Remained'],
       page: 1
+    }
+  },
+  watch: {
+    sortValue (val) {
+      if (val) {
+        this.page = 1
+        this.$accessor.admin.getDepositList({page: this.page, clear: true, search: this.search, sort: val})
+      }
     }
   },
   methods: {

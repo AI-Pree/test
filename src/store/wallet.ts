@@ -2,6 +2,7 @@
 import { getterTree, mutationTree, actionTree } from 'typed-vuex'
 
 // Import
+import { PublicKey } from '@solana/web3.js';
 import { Wallets, WalletInfo } from '../utils/wallets'
 
 // State

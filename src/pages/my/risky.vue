@@ -23,7 +23,7 @@
         </AmButton>
       </div>
       <div class="w-35-M w-100-XS pl-6-M pl-0-XS pt-6-XS">
-        <AmSelectbox :data="sort" :update="false" :shadow="false" />
+        <AmSelectbox :data="sort" :update="false" :shadow="false" @set="sortValue = $event" />
       </div>
     </div>
     <div class="w-100 fd-r ai-s">
@@ -95,12 +95,14 @@ export default {
   data() {
     return {
       search: null,
+      sortValue: null,
       sort: {
         theme: 'default',
-        value: 1,
+        value: 'createdAt',
         items: [
-          {label: 'Sort By Date', value: 1},
-          {label: 'Sort By Price', value: 2}
+          {label: 'Sort By Date', value: 'createdAt'},
+          {label: 'Sort By Price', value: 'lamports'},
+          {label: 'Sort By Debt', value: 'borrowAmount'}
         ],
         colorDefault: 'white-100',
         colorBackground: 'white-100',
@@ -109,6 +111,14 @@ export default {
       },
       headers: ['Date', 'Holder', 'Collateral (SOL)', 'Debt (GENS)', 'Fee (GENS)', 'Debt Ratio'],
       page: 1
+    }
+  },
+  watch: {
+    sortValue (val) {
+      if (val) {
+        this.page = 1
+        this.$accessor.risky.getTroveListAction({page: this.page, clear: true, search: this.search, sort: val})
+      }
     }
   },
   methods: {
