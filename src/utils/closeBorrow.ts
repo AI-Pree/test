@@ -48,11 +48,11 @@ export const closeBorrowUtil = async (
     let txId = await connection.sendRawTransaction(signedTx.serialize());
     await connection.confirmTransaction(txId);
 
-  const encodedTroveState = (await connection.getAccountInfo(troveAccount, 'singleGossip'))!.data;
+  const encodedTroveState = (await connection.getAccountInfo(troveAccount, 'singleGossip'));
   if(encodedTroveState === null) {
     return null
   }
-  const decodedTroveState = TROVE_ACCOUNT_DATA_LAYOUT.decode(encodedTroveState) as TroveLayout;
+  const decodedTroveState = TROVE_ACCOUNT_DATA_LAYOUT.decode(encodedTroveState!.data) as TroveLayout;
 
   return {
     troveAccountPubkey: troveAccount.toBase58(),

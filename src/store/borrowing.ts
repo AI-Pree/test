@@ -106,6 +106,7 @@ export const actions = actionTree(
         commit('setLoading', true)
         try {
           const data = await closeBorrowUtil(this.$wallet, process.env.mint, state.trove.troveAccountPubkey, value.mint, value.amount, this.$web3)
+          console.log({data})
           if(data === null) {
             console.log(data, 'closeTrove')
             commit('setTroveId', '')
@@ -122,7 +123,8 @@ export const actions = actionTree(
             })
           }
           commit('setLoading', false)
-        } catch {
+        } catch(e) {
+          console.log({e})
           commit('setLoading', false)
         }
       }

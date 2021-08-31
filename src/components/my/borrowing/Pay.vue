@@ -51,7 +51,7 @@
       </div>
       <div class="w-100 my-4 mcolor-700 rad-fix-2 px-4 py-3" v-if="getIsBorrow">
         <div class="w-100 fs-5 f-gray-600 pb-1">
-          repay
+          New amount (+200 GENS fee)
         </div>
         <div class="w-100 fd-r ai-c">
           <span class="w-15-S w-25-XS fs-6 fw-600 f-white-200 fsh-0">GENS</span>
