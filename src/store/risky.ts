@@ -52,9 +52,7 @@ export const actions = actionTree(
     // Deposit
     async closeTroveUser ({ state, commit, dispatch }, value) {
       if (value) {
-        await this.$axios.post('trove/liquidate', {trove: value.trove.troveAccountPubkey}).then(({ res }) => {
-          console.log(res, 'newTrove Backend')
-        }).then(() => {
+        await this.$axios.post('trove/liquidate', {trove: value.trove.troveAccountPubkey}).then(() => {
           this.$accessor.wallet.getBalance()
           const newArr = state.troveList.filter(item => item)
           newArr.splice(value.index, 1)
