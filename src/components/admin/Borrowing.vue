@@ -19,7 +19,7 @@
             <span class="f-white-200">GENS</span>
           </div>
           <div class="fw-600 fs-6 sub-mt-1">
-            <span class="f-mcolor-500">9.003</span>
+            <span class="f-mcolor-500">{{ debtRatio }}</span>
             <span class="f-white-200">%</span>
           </div>
           <div class="fw-600 fs-6 sub-mt-1">
@@ -102,6 +102,9 @@ export default {
     },
     totalTroveList () {
       return this.$accessor.risky.troveTotal
+    },
+    debtRatio () {
+      return this.$accessor.debtRatio
     }
   },
   mounted () {
