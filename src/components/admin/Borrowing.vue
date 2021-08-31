@@ -11,19 +11,20 @@
         </div>
         <div>
           <div class="fw-600 fs-6 sub-mt-1">
-            <span class="f-mcolor-500">9.003</span>
+            <span class="f-mcolor-500">{{ totalTroveList }}</span>
             <span class="f-white-200">MEMBERS</span>
           </div>
           <div class="fw-600 fs-6 sub-mt-1">
-            <span class="f-mcolor-500">45645645</span>
+            <span class="f-mcolor-500">{{ troveTotal }}</span>
             <span class="f-white-200">GENS</span>
           </div>
           <div class="fw-600 fs-6 sub-mt-1">
             <span class="f-mcolor-500">9.003</span>
             <span class="f-white-200">%</span>
           </div>
-          <div class="fw-600 fs-6 f-red-600 sub-mt-1">
-            <span>OFF</span>
+          <div class="fw-600 fs-6 sub-mt-1">
+            <span v-if="!getLightMode" class="f-red-600">OFF</span>
+            <span v-if="getLightMode" class="f-green-600">ON</span>
           </div>
         </div>
       </div>
@@ -92,5 +93,19 @@
 
 <script>
 export default {
+  computed: {
+    getLightMode () {
+      return this.$accessor.lightMode
+    },
+    troveTotal () {
+      return this.$accessor.troveTotal
+    },
+    totalTroveList () {
+      return this.$accessor.risky.troveTotal
+    }
+  },
+  mounted () {
+    this.$accessor.risky.getTroveListAction({page: 1, clear: true})
+  }
 }
 </script>

@@ -36,7 +36,6 @@
               {{ header }}
             </div>
           </div>
-          <div class="w-5 fsh-0" />
         </div>
         <div class="w-100 fd-r ai-s br-t-4 brts-d br-mcolor-400" v-for="(data, d) in depositList" :key="d">
           <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 fd-r ai-c jc-c w-100 f-gray-400">
@@ -54,30 +53,16 @@
               {{ data.tokenAmount }}
             </div>
           </div>
-          <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 w-100 f-gray-300">
-            <div class="w-100 fw-400 f-mcolor-300 fd-r jc-r pr-2">
-              0 <span class="f-white-200 pl-1">SOL</span>
-            </div>
-            <div class="w-100 fw-400 f-mcolor-300 fd-r jc-r pr-2">
-              0 <span class="f-white-200 pl-1">GENS</span>
-            </div>
-            <div class="w-100 fw-400 f-mcolor-300 fd-r jc-r pr-2">
-              0 <span class="f-white-200 pl-1">HGEN</span>
-            </div>
-          </div>
           <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 fd-r ai-c jc-c w-100 f-gray-300">
             <div class="w-100 fw-400 f-mcolor-300 fd-r jc-r pr-2">
-              0 <span class="f-white-200 pl-1">SOL</span>
+              {{ data.rewardCoinAmount }} <span class="f-white-200 pl-1">SOL</span>
             </div>
             <div class="w-100 fw-400 f-mcolor-300 fd-r jc-r pr-2">
-              0 <span class="f-white-200 pl-1">GENS</span>
+              {{ data.rewardTokenAmount }} <span class="f-white-200 pl-1">GENS</span>
             </div>
             <div class="w-100 fw-400 f-mcolor-300 fd-r jc-r pr-2">
-              0 <span class="f-white-200 pl-1">HGEN</span>
+              {{ data.rewardGovernanceTokenAmount }} <span class="f-white-200 pl-1">HGEN</span>
             </div>
-          </div>
-          <div class="w-5 fsh-0 fd-r ai-c jc-c">
-            <img src="@/assets/svg/my/bin.svg" class="w-fix-s-10 hv ts-3" @click="binAction(data.holder)" />
           </div>
         </div>
         <div class="w-100 fd-r jc-c pt-10" v-if="depositList.length >= (page * 10) && depositList.length > 0">
@@ -133,14 +118,17 @@ export default {
         value: 'createdAt',
         items: [
           {label: 'Sort By Date', value: 'createdAt'},
-          {label: 'Sort By Price', value: 'tokenAmount'}
+          {label: 'Sort By Price', value: 'tokenAmount'},
+          {label: 'Sort By Sol', value: 'rewardCoinAmount'},
+          {label: 'Sort By GENS', value: 'rewardTokenAmount'},
+          {label: 'Sort By HGEN', value: 'rewardGovernanceTokenAmount'}
         ],
         colorDefault: 'white-100',
         colorBackground: 'white-100',
         colorFocus: 'white-100',
         colorTitle: 'mcolor-300',
       },
-      headers: ['Date', 'Holder', 'Deposit (GENS)', 'Claimed', 'Remained'],
+      headers: ['Date', 'Holder', 'Deposit (GENS)', 'Remained'],
       page: 1
     }
   },

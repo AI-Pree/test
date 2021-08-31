@@ -4,12 +4,10 @@
       <div class="w-100 f-white-200 tt-u fs-19-M fs-15-S fs-8-XS fw-600 ta-c">
         TOTAL DEPOSITED VALUE AY HGEN
       </div>
-      <div class="w-100 gradient tt-u fs-19-M fs-18-S fs-9-XS fw-800 ta-c pt-8-S pt-4-XS">
-        <span class="white-on-gradient">$</span>
-        000.000.000.000
-        <span class="white-on-gradient">(</span>
-        343.00
-        <span class="white-on-gradient">SOL)</span>
+      <div class="w-100 f-white-200 tt-u fs-19-M fs-18-S fs-9-XS fw-800 ta-c pt-8-S pt-4-XS">
+        $
+        <span class="gradient">{{ getTotal }}</span>
+        (<span class="gradient">{{ getTotalAll / getUsd }}</span> SOL)
       </div>
     </div>
     <div class="container w-100 my-10-L my-10-M my-10-S my-10-XS px-3-S px-3-XS">
@@ -50,7 +48,25 @@ export default {
     Borrowing
   },
   computed: {
-    ...mapGetters({ marketPrice: 'admin/getMarketPrice' })
+    ...mapGetters({ marketPrice: 'admin/getMarketPrice' }),
+    getUsd () {
+      return this.$accessor.usd || 0
+    },
+    getTotalAll () {
+      return Number(this.$accessor.totalDeposit)
+    },
+    getTotal () {
+      let res = '000000000000'
+      const total = Number(this.$accessor.totalDeposit)
+      if (total) {
+        if (total > 999999999999) {
+          res = 999999999999
+        } else {
+          res = res.substr(0, res.length - total.toString().length) + total
+        }
+      }
+      return res.toString().replace(/(.)(?=(\d{3})+$)/g,'$1,')
+    }
   },
 }
 </script>
