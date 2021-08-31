@@ -8,7 +8,7 @@
         SOL
       </div>
       <div class="w-70 fs-7 f-mcolor-300 fw-500 ta-r-XS">
-        {{ getBalance > 0 ? (getBalance).toLocaleString() : 0 }}
+        {{ getBalance > 0 ? getBalance : 0 }}
       </div>
     </div>
     <div class="w-100 fd-r py-2">

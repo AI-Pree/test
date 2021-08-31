@@ -9,7 +9,7 @@
           $ {{ getBalance > 0 ? getUsdBalance : 0 }}
         </div>
         <div class="w-100 fs-10-M fs-7-S fs-10-XS fw-600 f-white-200 pb-3 ta-c-XS">
-          {{ getBalance > 0 ? (getBalance).toLocaleString() : 0 }}
+          {{ getBalance > 0 ? getBalance : 0 }}
         </div>
         <div class="w-100 fs-6 fw-500 f-mcolor-100 ta-c-XS">
           SOL
