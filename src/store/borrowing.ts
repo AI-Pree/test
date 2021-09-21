@@ -58,11 +58,11 @@ export const actions = actionTree(
         isInitialized: !!decodedTroveState.isInitialized,
         isLiquidated: !!decodedTroveState.isLiquidated,
         isReceived: !!decodedTroveState.isReceived,
-        borrowAmount: new BN(decodedTroveState.borrowAmount, 10, 'le').toNumber(),
+        borrowAmount: new BN(decodedTroveState.borrowAmount, 10, 'le').div(new BN(100)).toNumber(),
         lamports: new BN(decodedTroveState.lamports, 10, 'le').toString(),
-        teamFee: new BN(decodedTroveState.teamFee, 10, 'le').toString(),
-        depositorFee: new BN(decodedTroveState.depositorFee, 10, 'le').toString(),
-        amountToClose: new BN(decodedTroveState.amountToClose, 10, 'le').toString(),
+        teamFee: new BN(decodedTroveState.teamFee, 10, 'le').div(new BN(100)).toString(),
+        depositorFee: new BN(decodedTroveState.depositorFee, 10, 'le').div(new BN(100)).toString(),
+        amountToClose: new BN(decodedTroveState.amountToClose, 10, 'le').div(new BN(100)).toString(),
         owner: new PublicKey(decodedTroveState.owner).toBase58(),
       })
     },
@@ -101,11 +101,12 @@ export const actions = actionTree(
     },
 
     // Deposit
-    async closeTrove ({ state, commit }, value) {
+    async closeTrove ({ state, commit, dispatch }, value) {
       if (state.troveId) {
         commit('setLoading', true)
         try {
-          const data = await closeBorrowUtil(this.$wallet, process.env.mint, state.trove.troveAccountPubkey, value.mint, this.$web3)
+          const data = await closeBorrowUtil(this.$wallet, process.env.mint, state.trove.troveAccountPubkey, value.mint, value.amount, this.$web3)
+          console.log({data})
           if(data === null) {
             console.log(data, 'closeTrove')
             commit('setTroveId', '')
@@ -115,9 +116,15 @@ export const actions = actionTree(
             commit('setTrove', {})
             this.$accessor.wallet.getBalance()
             this.$accessor.dashboard.setBorrow(false)
+          } else {
+            dispatch('setTroveById', new PublicKey(data.troveAccountPubkey))
+            await this.$axios.post('trove/upsert', {trove: data.troveAccountPubkey, user: value.mint}).then(({ res }) => {
+              console.log(res, 'updateTrove Backend')
+            })
           }
           commit('setLoading', false)
-        } catch {
+        } catch(e) {
+          console.log({e})
           commit('setLoading', false)
         }
       }

@@ -8,7 +8,7 @@ import {
   TransactionInstruction
 } from '@solana/web3.js';
 import BN from "bn.js";
-import {TroveLayout, TROVE_ACCOUNT_DATA_LAYOUT, EscrowProgramIdString} from './layout';
+import {TroveLayout, TROVE_ACCOUNT_DATA_LAYOUT, EscrowProgramIdString, CHAINLINK_SOL_USD_PUBKEY} from './layout';
 import Wallet from "@project-serum/sol-wallet-adapter";
 
 export const borrowUtil = async (
@@ -35,11 +35,12 @@ export const borrowUtil = async (
             {pubkey: wallet.publicKey, isSigner: true, isWritable: false},
             {pubkey: troveAccount.publicKey, isSigner: false, isWritable: true},
             {pubkey: SYSVAR_RENT_PUBKEY, isSigner: false, isWritable: false},
+            {pubkey: CHAINLINK_SOL_USD_PUBKEY, isSigner: false, isWritable: false},
         ],
         data: Buffer.from(
             Uint8Array.of(
                 0,
-                ...new BN(borrowAmount).toArray("le", 8),
+                ...new BN(borrowAmount*100).toArray("le", 8),
                 ...new BN(lamportAmount).toArray('le', 8),
             )
         )
