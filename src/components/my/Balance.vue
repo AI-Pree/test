@@ -1,38 +1,34 @@
 <template>
-  <div class="w-100">
-    <div class="w-100 fs-8-S fs-40-XS fw-600 f-white-200 pb-10-S pb-30-XS ta-c-XS">
-      Your Balance
-    </div>
-    <div class="w-100 fd-r fw-w">
-      <div class="w-35-S w-100-XS fd-r ai-c">
-        <div class="w-100 fs-6-S fs-20-XS fw-500 f-gray-600 pb-3 ta-c-XS">
+  <div class="w-100 pt-4-S pt-0-XS">
+    <div class="w-100 fd-c fw-w">
+      <div class="w-35-S w-100-XS">
+        <div class="w-100 fs-5-S fs-20-XS fw-500 f-gray-600 pb-2-S">
           $ {{ getBalance > 0 ? getUsdBalance : 0 }}
         </div>
-        <div class="w-100 fs-8-S fs-25-XS fs-10-XS fw-600 f-white-200 pb-3 ta-c-XS">
-          {{ getBalance > 0 ? getBalance.toString().replace('.', ',') : 0 }}
-        </div>
-        <div class="w-100 fs-6-S fs-20-XS fw-500 f-mcolor-100 ta-c-XS">
-          SOL
+        <div class="w-100 fs-6-S fs-20-XS fw-600 f-white-200 pb-2-S fd-r ai-c">
+          {{ getBalance > 0 ? getBalance : 0 }}
+          <div class="w-a fw-500 f-mcolor-100 pl-2-S pl-10-XS">
+            SOL
+          </div>
         </div>
       </div>
-      <div class="w-40-S w-100-XS py-0-S py-10-XS fd-r ai-c">
-        <div class="w-100 fs-6-S fs-20-XS fw-500 f-gray-600 pb-3 ta-c-XS">
+      <div class="w-40-S w-100-XS my-2">
+        <div class="w-100 fs-5-S fs-20-XS fw-500 f-gray-600 pb-2-S">
           $ {{ getBalanceHGEN > 0 ? getHGENBalance : 0 }}
         </div>
-        <div class="w-100 fs-8-S fs-25-XS fw-600 f-white-200 pb-3 ta-c-XS">
+        <div class="w-100 fs-6-S fs-20-XS fw-600 f-white-200 pb-2-S fd-r ai-c">
           {{ getBalanceHGEN > 0 ? (getBalanceHGEN).toLocaleString() : 0 }}
-        </div>
-        <div class="w-100 fs-6-S fs-20-XS fw-500 f-mcolor-100 ta-c-XS">
-          HGEN
+          <div class="w-100 fw-500 f-mcolor-100 pl-2-S pl-10-XS">
+            HGEN
+          </div>
         </div>
       </div>
-      <div class="w-25-S w-100-XS fd-r ai-c">
-        <div class="w-100 fs-6-S fs-20-XS fw-500 f-gray-600 pb-3">&nbsp;</div>
-        <div class="w-100 fs-8-S fs-25-XS fw-600 f-white-200 pb-3 ta-c-XS">
-          {{ getBalanceGENS.toLocaleString() }}
-        </div>
-        <div class="w-100 fs-6-S fs-20-XS fw-500 f-mcolor-100 ta-c-XS">
-          GENS
+      <div class="w-25-S w-100-XS">
+        <div class="w-100 fs-6-S fs-20-XS fw-600 f-white-200 pb-3 fd-r">
+          {{ getBalanceGENS > 0 ? (getBalanceGENS).toLocaleString() : 0 }}
+          <div class="w-100 fw-500 f-mcolor-100 ta-c-XS pl-2-S pl-10-XS">
+            GENS
+          </div>
         </div>
       </div>
     </div>

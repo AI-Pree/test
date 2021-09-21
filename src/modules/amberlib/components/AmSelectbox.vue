@@ -1,20 +1,20 @@
 <template>
   <div class="w-100 amSelectbox" :class="{'pt-8': [2].indexOf(getActiveTheme) > -1, disabled: modelData.disabled}" ref="amSelectbox">
-    <div class="w-100 fs-5 h-fix-25 fd-r ai-c pt-1 amSelectboxLabelTop" :class="[`f-${modelData.colorLabel}`]" v-if="[0, 1].indexOf(getActiveTheme) > -1 && modelData.label" v-html="modelData.label" />
+    <div class="w-100 fs-5-S fs-20-XS h-fix-s-28min-S h-fix-s-100min-XS fd-r ai-c pt-1-S mt-10-XS amSelectboxLabelTop" :class="[`f-${modelData.colorLabel}`]" v-if="[0, 1].indexOf(getActiveTheme) > -1 && modelData.label" v-html="modelData.label" />
     <div class="w-100 d-b amSelectboxBlock">
       <input
         readonly
         type="text"
         :value="getValue"
         :disabled="modelData.disabled"
-        class="w-100 h-fix-25 brs-s fs-5 pr-4"
-        :class="[getInputClass, getFocusClass, {focus: focusValue}, modelData.colorBackground, {'shadow-purple-100': shadow, 'px-4': padding}]"
+        class="w-100 h-fix-s-28min-S h-fix-s-100min-XS brs-s fs-5-S fs-20-XS pr-4"
+        :class="[getInputClass, getFocusClass, {focus: focusValue}, modelData.colorBackground, {'shadow-purple-100': shadow, 'px-4-S px-15-XS': padding}]"
         @focus="focusValue = true"
         @blur="focusValue = modelData.multiple || modelData.search ? true : false"
       />
       <div class="w-100 h-100 p-a l-0 fd-r ai-c amSelectboxLabel" :class="[getLabelPosition]" v-if="[2].indexOf(getActiveTheme) > -1 && modelData.label" v-html="modelData.label" />
       <span class="h-a p-a l-0 b-0 z-10 brs-s amSelectboxLine" :class="[lineBottomColor]" v-if="[1, 2].indexOf(getActiveTheme) > -1" />
-      <svg class="w-fix-s-10 h-fix-s-10 p-a r-0 b-fix-s-5" :class="{'r-fix-s-5': [0].indexOf(getActiveTheme) > -1 && padding}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="451.847px" height="451.847px" viewBox="0 0 451.847 451.847" style="enable-background:new 0 0 451.847 451.847;" xml:space="preserve">
+      <svg class="w-fix-s-10-S h-fix-s-10-S w-fix-s-50-XS h-fix-s-50-XS p-a r-0 b-fix-s-5-XL b-fix-s-5-S b-fix-s-10-XS" :class="{'r-fix-s-5-S r-fix-s-15-XS': [0].indexOf(getActiveTheme) > -1 && padding}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="451.847px" height="451.847px" viewBox="0 0 451.847 451.847" style="enable-background:new 0 0 451.847 451.847;" xml:space="preserve">
         <path :class="getColorSvg" d="m368 154.667969h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/>
         <path :class="getColorSvg" d="m368 32h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/>
         <path :class="getColorSvg" d="m368 277.332031h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/>
@@ -22,15 +22,15 @@
       <transition name="slide-fade">
         <div class="w-100 p-a br-6 brs-s z-15 rad-fix-2 amSelectboxOptions" v-if="focusValue && modelData.items" :class="[getOptionsClass, modelData.colorOptions, `br-${modelData.colorOptionsBorder}`]">
           <input
-            class="w-100 h-fix-25 br-0 brb-4 brb-s br-gray-400 px-2 fs-5"
+            class="w-100 h-fix-s-28min-S h-fix-s-100min-XS h-fix-25min-XS br-0 brb-4 brb-s br-gray-400 px-2 fs-5-S fs-20-XS"
             :placeholder="modelData.searchText"
             v-model="searchModel"
             v-if="modelData.search"
           />
-          <div class="w-100 h-fix-25 fd-r ai-c jc-c" v-if="modelData.search && (getItems.length === 0)" v-html="modelData.searchNotFound" />
+          <div class="w-100 h-fix-s-28min-S h-fix-s-100min-XS fd-r ai-c jc-c" v-if="modelData.search && (getItems.length === 0)" v-html="modelData.searchNotFound" />
           <div class="w-100" :class="{'h-a': getItems.length < 6, 'h-fix-100': getItems.length > 5}">
             <AmScroll :ops="ops">
-              <div class="w-100 h-fix-25min py-2 fd-r ai-c px-4 amSelectboxOption fs-5" :title="item.label" :class="[getOptionLine, {active: getActiveMultiple(item.value)}]" v-for="(item, i) in getItems" :key="i" @click="setModelValue(item.value)">
+              <div class="w-100 h-fix-s-28min-S h-fix-s-100min-XS py-2 fd-r ai-c px-4-S px-15-XS amSelectboxOption fs-5-S fs-20-XS" :title="item.label" :class="[getOptionLine, {active: getActiveMultiple(item.value)}]" v-for="(item, i) in getItems" :key="i" @click="setModelValue(item.value)">
                 <div class="w-fix-s-10 h-fix-s-10 br-6 brs-s br-gray-500 mr-2 rad-3 fd-r ai-c jc-c fsh-0" v-if="modelData.multiple">
                   <svg class="w-60 h-60" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="78.369px" height="78.369px" viewBox="0 0 78.369 78.369" style="enable-background:new 0 0 78.369 78.369;" xml:space="preserve">
                     <path  d="M78.049,19.015L29.458,67.606c-0.428,0.428-1.121,0.428-1.548,0L0.32,40.015c-0.427-0.426-0.427-1.119,0-1.547l6.704-6.704   c0.428-0.427,1.121-0.427,1.548,0l20.113,20.112l41.113-41.113c0.429-0.427,1.12-0.427,1.548,0l6.703,6.704   C78.477,17.894,78.477,18.586,78.049,19.015z"/>

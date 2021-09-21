@@ -1,32 +1,24 @@
 <template>
-  <div class="w-100 mcolor px-8-M px-0-S px-0-XS pb-8-M pb-0-S pb-0-XS rad-fix-10-M fd-r fw-w">
-    <div class="w-100-M w-20-S w-20-XS fd-r ai-c jc-l-M jc-c-S jc-c-XS" v-for="item in items" :key="item.class">
-      <nuxt-link :to="item.to" class="w-a-M w-100-S w-100-XS fd-r-M fd-c-S fd-c-XS ai-c hv ts-3 mt-6-M mt-3-S mt-3-XS mb-0-M mb-3-S mb-3-XS">
-        <div class="w-fix-s-15 mr-2-M fd-r ai-c jc-l-M jc-c-S jc-c-XS">
-          <HomeSvg class="w-fix-10" v-if="item.id === 1 && !getActive(item)" />
-          <HomeActiveSvg class="w-fix-10" v-if="item.id === 1 && getActive(item)" />
-          <WalletSvg class="w-fix-10" v-if="item.id === 2 && !getActive(item)" />
-          <WalletActiveSvg class="w-fix-10" v-if="item.id === 2 && getActive(item)" />
-          <SwitchSvg class="w-fix-10" v-if="item.id === 3 && !getActive(item)" />
-          <SwitchActiveSvg class="w-fix-10" v-if="item.id === 3 && getActive(item)" />
-          <PieSvg class="w-fix-10" v-if="item.id === 4 && !getActive(item)" />
-          <PieActiveSvg class="w-fix-10" v-if="item.id === 4 && getActive(item)" />
-          <CoinsSvg class="w-fix-10" v-if="item.id === 5 && !getActive(item)" />
-          <CoinsActiveSvg class="w-fix-10" v-if="item.id === 5 && getActive(item)" />
-          <ExitSvg class="w-fix-10" v-if="item.id === 6" />
+  <div class="w-100 gradient-200 p-r-S p-f-XS l-0 t-0-S t-a-XS b-a-S b-0-XS pl-10-S pl-0-XS fd-c-S fd-r-XS my-2 py-2-S">
+    <span class="w-100 h-100 bg-r p-a l-0 t-0 d-n-S d-f-XS" />
+    <div class="w-100" v-for="item in items" :key="item.class">
+      <nuxt-link :to="item.to" class="w-a-M w-100-S w-100-XS fd-r-S fd-c-XS ai-c hv ts-3 my-2-S my-10-XS">
+        <div class="w-fix-s-15-S w-100-XS mr-2-S fd-r ai-c jc-l-S jc-c-XS">
+          <HomeSvg class="w-fix-10-S w-40-XS" v-if="item.id === 1 && !getActive(item)" />
+          <HomeActiveSvg class="w-fix-10-S w-40-XS" v-if="item.id === 1 && getActive(item)" />
+          <WalletSvg class="w-fix-10-S w-40-XS" v-if="item.id === 2 && !getActive(item)" />
+          <WalletActiveSvg class="w-fix-10-S w-40-XS" v-if="item.id === 2 && getActive(item)" />
+          <SwitchSvg class="w-fix-10-S w-40-XS" v-if="item.id === 3 && !getActive(item)" />
+          <SwitchActiveSvg class="w-fix-10-S w-40-XS" v-if="item.id === 3 && getActive(item)" />
+          <PieSvg class="w-fix-10-S w-80-XS" v-if="item.id === 4 && !getActive(item)" />
+          <PieActiveSvg class="w-fix-10-S w-80-XS" v-if="item.id === 4 && getActive(item)" />
+          <CoinsSvg class="w-fix-10-S w-80-XS" v-if="item.id === 5 && !getActive(item)" />
+          <CoinsActiveSvg class="w-fix-10-S w-80-XS" v-if="item.id === 5 && getActive(item)" />
         </div>
-        <span class="fs-6-M fs-4-S fs-4-XS ts-3 pt-0-M pt-2-S pt-2-XS" :class="{'f-mcolor-300 fw-600': getActive(item), 'f-white-200 fw-400': !getActive(item)}">
+        <span class="fs-5-S fs-4-XS ts-3 pt-0-M pt-0-S pt-2-XS d-f-S d-n-XS" :class="{'f-mcolor-300 fw-600': getActive(item), 'f-white-200 fw-400': !getActive(item)}">
           {{ item.name }}
         </span>
       </nuxt-link>
-    </div>
-    <div class="w-100-M w-20-S w-20-XS fd-r-M fd-c-S fd-c-XS ai-c hv ts-3 mt-10-M mt-3-S mt-3-XS" @click="$emit('logout')">
-      <div class="w-fix-s-15 mr-2-M fd-r ai-c jc-l-M jc-c-S jc-c-XS">
-        <ExitSvg class="w-fix-10" />
-      </div>
-      <span class="fs-6-M fs-4-S fs-4-XS ts-3 pt-0-M pt-2-S pt-2-XS f-white-200">
-        Log out
-      </span>
     </div>
   </div>
 </template>

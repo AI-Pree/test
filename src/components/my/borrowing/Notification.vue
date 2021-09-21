@@ -1,21 +1,21 @@
 <template>
-  <div class="w-100 br-6 brs-s br-mcolor-100 p-6 rad-fix-8">
+  <div class="w-100 br-6 brs-s br-mcolor-100 p-6-S p-20-XS rad-fix-8">
     <div class="w-100" :class="{'op-0': getLoading}">
-      <div class="w-100 fs-9-M fs-9-S fs-7-XS fw-600 f-white-200 pb-4 ta-c-XS">
+      <div class="w-100 fs-8-S fs-25-XS fw-600 f-white-200 pb-4-S pb-15-XS ta-c-XS">
         Notification
       </div>
-      <div class="w-100 mt-4 mb-2 mcolor-700 rad-fix-2 px-4 py-3">
-        <div class="w-100 fs-5 f-gray-600 pb-1">
+      <div class="w-100 mt-4 mb-2 mcolor-700 rad-fix-2 px-4-S px-10-XS py-3-S py-10-XS">
+        <div class="w-100 fs-5-S fs-20-XS f-gray-600 pb-1-S pb-5-XS">
           email
         </div>
         <div class="w-100 fd-r ai-c">
-          <input class="w-100 fs-7 fw-600 f-mcolor-300 br-0 oul-n white-100" v-model="email" placeholder="sa******@gmail.com" />
+          <input class="w-100 fs-6-S fs-20-XS fw-600 f-mcolor-300 br-0 oul-n white-100" v-model="email" placeholder="sa******@gmail.com" />
         </div>
       </div>
-      <div class="w-100">
+      <div class="w-100 mt-0-S mt-10-XS">
         <AmCheckbox :update="false" :model="agree" :data="check" @set="agree = $event" />
       </div>
-      <div class="w-100 pt-8 fd-r jc-c">
+      <div class="w-100 pt-8-S pt-20-XS fd-r jc-c">
         <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect @click="sendEmail" :full="true">
           confirm
         </AmButton>

@@ -1,12 +1,12 @@
 <template>
-  <div class="container pt-10 px-0-L px-4-M px-3-S px-3-XS">
-    <div class="w-100 f-white-200 tt-u fs-19-M fs-15-S fs-8-XS fw-600 ta-c">
+  <div class="container pt-10-S pt-40-XS">
+    <div class="w-100 f-white-200 tt-u fs-14-S fs-25-XS fw-600 ta-c px-10-XS">
       (logo) (company_name) helps your FAMILY
     </div>
-    <div class="w-100 gradient tt-u fs-20-M fs-18-S fs-9-XS fw-900 ta-c pt-8-S pt-4-XS">
+    <div class="w-100 gradient tt-u fs-13-S fs-30-XS fw-900 ta-c pt-4-S pt-15-XS">
       $ {{ getTotal }}
     </div>
-    <div class="w-100 f-gray-400 ta-c fs-8-M fs-7-S fs-6-XS pt-6-S pt-2-XS fw-500">
+    <div class="w-100 f-gray-400 ta-c fs-6-S fs-15-XS fw-500 pt-2-S pt-10-XS">
       Total Deposited Value at HGEN
     </div>
   </div>

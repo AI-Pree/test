@@ -1,17 +1,17 @@
 <template>
   <div class="d-ib amCheckbox" :class="{disabled: modelData.disabled}">
-    <div class="w-100 fs-5 h-fix-20 fd-r ai-c pt-1" :class="[`f-${modelData.colorTitle}`]" v-if="modelData.label" v-html="modelData.label" />
+    <div class="w-100 fs-5-S fs-20-XS h-fix-20 fd-r ai-c pt-1" :class="[`f-${modelData.colorTitle}`]" v-if="modelData.label" v-html="modelData.label" />
     <div class="d-ib pt-3" :class="{'pt-3': modelData.label}">
       <div class="fd-r ai-c amCheckboxContainer">
         <input type="checkbox" class="w-100 h-100 p-a l-0 t-0 z-10" v-model="modelValue" :disabled="modelData.disabled" />
-        <div class="w-fix-s-14 h-fix-s-14 br-6 brs-s fd-r ai-c jc-c amCheckboxBlock rad-fix-2" :class="[getClassActive, getCheckedColor]">
+        <div class="w-fix-s-14-S h-fix-s-14-S w-fix-s-34-XS h-fix-s-34-XS br-6 brs-s fd-r ai-c jc-c amCheckboxBlock rad-fix-2" :class="[getClassActive, getCheckedColor]">
           <svg class="w-60 h-60" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="78.369px" height="78.369px" viewBox="0 0 78.369 78.369" style="enable-background:new 0 0 78.369 78.369;" xml:space="preserve">
             <path :class="[`svg-f-${modelData.colorSvgActive}`]" d="M78.049,19.015L29.458,67.606c-0.428,0.428-1.121,0.428-1.548,0L0.32,40.015c-0.427-0.426-0.427-1.119,0-1.547l6.704-6.704   c0.428-0.427,1.121-0.427,1.548,0l20.113,20.112l41.113-41.113c0.429-0.427,1.12-0.427,1.548,0l6.703,6.704   C78.477,17.894,78.477,18.586,78.049,19.015z"/>
           </svg>
           <span class="w-fix-15 h-fix-15 rad-50 p-a l-50 t-50 z-0 checked" :class="[modelData.colorRaisedChecked]" v-if="modelData.raised" />
           <span class="w-fix-15 h-fix-15 rad-50 p-a l-50 t-50 z-0 unchecked" :class="[modelData.colorRaisedUnchecked]" v-if="modelData.raised" />
         </div>
-        <div class="h-fix-14min pl-3 fs-5" v-if="modelData.title" :class="[`f-${modelData.colorTitle}`]">
+        <div class="h-fix-14min pl-3-S pl-5-XS fs-5-s fs-15-XS" v-if="modelData.title" :class="[`f-${modelData.colorTitle}`]">
           {{ modelData.title }}
         </div>
       </div>

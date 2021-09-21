@@ -1,84 +1,73 @@
 <template>
   <div class="w-100">
     <div class="w-100" v-if="!getIsBorrow">
-      <div class="w-100 f-mcolor-500 fs-12 fw-600 ta-c-XS">
+      <div class="w-100 f-mcolor-500 fs-12-S fs-30-XS fw-600 ta-l-S ta-c-XS">
         {{ getDebt }} %
       </div>
-      <div class="w-100 fs-7-M fw-600 f-white-200 pb-2 fd-r ai-c pt-4 jc-c-XS">
+      <div class="w-100 fs-8-S fs-24-XS fw-600 f-white-200 pb-2-S pb-10-XS fd-r ai-c pt-4-S pt-10-XS jc-l-S jc-c-XS">
         Debt Ratio
         <Hint>
           It is recommended to keep your debt ratio <span class="f-mcolor-300">below 50%</span>
         </Hint>
       </div>
-      <div class="w-100 fs-6-M fw-400 f-white-200 pb-2 fd-r ai-c pt-4 jc-c-XS">
+      <div class="w-100 fs-6-S fs-20-XS fw-400 f-white-200 pb-4-S pb-10-XS fd-r ai-c pt-4-s pt-10-XS jc-l-S jc-c-XS">
         Liquidation Price
-        <span class="px-1 f-mcolor-100 fw-500">{{ Number(Number(from) * getUsd).toLocaleString() }}</span> GENS
+        <span class="px-1-S px-6-XS f-mcolor-100 fw-500">{{ Number(Number(from) * getUsd).toLocaleString() }}</span> GENS
       </div>
     </div>
     <div class="w-100" v-if="getIsBorrow">
-      <div class="w-100 f-white-200 fs-10 fw-600 ta-c-XS">
+      <div class="w-100 f-white-200 fs-8-S fs-25-XS fw-600 ta-l-S ta-c-XS">
         Amount Remained
       </div>
-      <div class="w-100 fd-r pt-4 fw-w">
+      <div class="w-100 fd-r pt-4-S pt-10-XS fw-w">
         <div class="w-70-S w-100-XS">
-          <div class="w-100 fs-12 f-mcolor-100 fw-700 ta-c-XS">
+          <div class="w-100 fs-12-S fs-25-XS f-mcolor-100 fw-700 ta-l-S ta-c-XS">
             {{ getTroveAmount ? getTroveAmount.toLocaleString() : 0 }}
           </div>
-          <div class="w-100 fs-6 f-white-200 fw-600 pt-2 ta-c-XS">
+          <div class="w-100 fs-6-S fs-20-XS f-white-200 fw-600 pt-2-S pt-10-XS ta-l-S ta-c-XS">
             GENS
           </div>
         </div>
         <div class="w-30-S w-100-XS">
-          <div class="w-100 fs-8 f-green-600 fw-700 ta-c-XS">
+          <div class="w-100 fs-8-S fs-25-XS f-green-600 fw-700 ta-l-S ta-c-XS pt-0-S pt-10-XS">
             {{ getRatio }} %
           </div>
-          <div class="w-100 fs-5 f-white-200 fw-400 pt-2 ta-c-XS">
+          <div class="w-100 fs-5-S fs-20-XS f-white-200 fw-400 pt-2-S pt-10-XS ta-l-S ta-c-XS">
             Remaining<br/>Debit Ratio
           </div>
         </div>
       </div>
-      <AmDivider class="mt-5 mb-2" />
+      <AmDivider class="mt-5-S mt-10-XS mb-2-S mb-10-XS" />
     </div>
-    <div class="w-100 mcolor-800 p-4 mt-4 rad-fix-4 fs-5 f-mcolor-500" v-if="(Number(getDebt) < getMaxRatio || Number(to) < 1600) && (from && to)">
-      <div class="w-100 pb-2" v-if="Number(to) < 1600">
+    <div class="w-100 mcolor-800 p-4-S p-15-XS mt-4-S mt-10-XS rad-fix-4 fs-5-S fs-20-XS f-mcolor-500" v-if="(Number(getDebt) < getMaxRatio || Number(to) < 1600) && (from && to)">
+      <div class="w-100 pb-2-S pb-10-XS" v-if="Number(to) < 1600">
         The minimum borrowing amount is <span class="fw-600">1,600 GENS</span>
       </div>
       <div class="w-100" v-if="Number(getDebt) < getMaxRatio">
         The debt limit is <span class="fw-600">{{ getMaxRatio }} %</span>
       </div>
     </div>
-    <div class="w-100 fd-r pt-4">
-      <div :class="{'w-50-S w-100-XS': getIsBorrow, 'w-50': !getIsBorrow}">
-        <div class="w-100 fs-6 f-gray-600 pb-2 ta-c-XS">
+    <div class="w-100 fd-r pt-4-S pt-10-XS">
+      <div :class="{'w-100-S w-100-XS': getIsBorrow, 'w-100': !getIsBorrow}">
+        <div class="w-100 fs-6-S fs-20-XS f-gray-600 pb-2-S pb-10-XS ta-l-S ta-c-XS">
           fee
         </div>
-        <div class="w-100 fs-6-M fs-6-S fs-4-XS f-white-200 ta-c-XS">
-          <span class="fs-9-M fs-9-S fs-7-XS fw-800 f-mcolor-100">{{ getFee }}</span>
-          <span class="fs-9-M fs-9-S fs-7-XS fw-600 px-1">%</span>
-        </div>
-      </div>
-      <div class="w-50" v-if="false">
-        <div class="w-100 fs-6 f-gray-600 pb-2 ta-c-XS fd-r ai-c">
-          overall debt <Hint>
-            Overall Debt = Amount Received + Fee
-          </Hint>
-        </div>
-        <div class="w-100 fs-6-M fs-6-S fs-4-XS f-white-200 ta-c-XS">
-          <span class="fs-9-M fs-9-S fs-7-XS fw-800 f-mcolor-100">6.40</span>
-          <span class="fs-9-M fs-9-S fs-7-XS fw-600 px-1">%</span>
+        <div class="w-100 fs-6-S fs-20-XS f-white-200 ta-l-S ta-c-XS">
+          <span class="fs-8-S fs-25-XS fw-800 f-mcolor-100">{{ getFee }}</span>
+          <span class="fs-8-S fs-25-XS fw-600 px-1">%</span>
         </div>
       </div>
     </div>
     <div class="w-100" v-if="!getIsBorrow">
-      <div class="w-100 f-white-200 fs-6 fw-600 pt-4 pb-4 ta-c-XS">
+      <div class="w-100 f-white-200 fs-6-S fs-20-XS fw-600 pt-4-S pt-12-XS pb-4-S pb-12-XS ta-l-S ta-c-XS">
         You will receive GENS stable coin.
       </div>
-      <div class="w-100 fd-r-S fd-c-XS py-2">
-        <div class="w-100 fs-6 fw-400 f-gray-500 fd-r ai-c jc-c-XS">
+      <div class="w-100 fd-r py-2-S py-10-XS">
+        <div class="w-100 fs-6-S fs-20-XS fw-400 f-gray-500 fd-r ai-c">
           Total Borrowing
         </div>
-        <div class="w-a fs-5-M fs-8-S fs-8-XS fsh-0 fw-600 f-mcolor-100 fd-r ai-c pt-2-XS jc-c-XS">
-          {{ Number(getTotalBorrow).toLocaleString().slice(0, 16) }} <span class="f-white-200 pl-1">GENS</span>
+        <div class="w-a fs-5-M fs-8-S fs-25-XS fsh-0 fw-600 f-mcolor-100 fd-r ai-c">
+          {{ Number(getTotalBorrow).toLocaleString().slice(0, 16) }} <span class="f-white-200 pl-1-S pl-5-XS">GENS</span>
         </div>
       </div>
     </div>

@@ -1,28 +1,37 @@
 <template>
-  <div class="w-100 h-a-L h-100-S h-100-XS fd-r jc-c py-10-L py-0-S py-0-XS px-0-L px-4-M z-10">
-    <span class="w-100 h-100 p-f t-0 gradient-400 d-n-L ts-3" :class="{'l-100': !open, 'l-0': open}" />
-    <div class="container h-a-L h-100-S h-100-XS fd-r-L fd-c-S fd-c-XS ai-c p-r-L p-f-S p-f-XS l-0 t-0 ts-3 ovh-y-v-L ovh-y-a-L ovh-y-a-S ovh-y-a-XS" :class="{'l-100': !open, 'l-0': open}">
-      <div class="w-100 fd-r-L fd-c-S fd-c-XS ai-c-L pt-0-L pt-15-S pt-15-XS px-0-L px-6-M px-4-S px-4-XS">
-        <nuxt-link class="w-a-L w-100-S w-100-XS mr-4-L mr-0-S mr-0-XS mb-0-L mb-4-S mb-4-XS tt-u f-gray-600 fw-500 fs-5-L fs-7-S fs-7-XS link hv ts-3" v-for="(item, i) in items" :key="i" :to="item.to">
+  <div class="w-100 h-a-S h-100-XS fd-r jc-c py-5 px-10 z-10">
+    <span class="w-100 h-100 p-f t-0 gradient-400 d-n-S ts-3" :class="{'l-100': !open, 'l-0': open}" />
+    <div class="w-100 h-a-S h-100-XS fd-r-S fd-c-XS ai-c p-r-S p-f-XS l-0 t-0 ts-3 ovh-y-v-S ovh-y-a-XS" :class="{'l-100': !open, 'l-0': open}">
+      <div class="w-100 fd-r-S fd-c-XS p-0-S p-20-XS pt-0-S pt-40-XS">
+        <nuxt-link class="w-a tt-u f-gray-600 fw-500 fs-5-M fs-7-S fs-25-XS link hv ts-3 mr-4 my-0-S my-10-XS" v-for="(item, i) in items" :key="i" :to="item.to">
           {{ item.title }}
         </nuxt-link>
       </div>
-      <div class="w-a-L w-50-M w-100-S w-100-XS fsh-0 mt-0-L mt-4-S mt-4-XS px-0-M px-4-S px-4-XS">
+      <div class="w-a-S w-100-XS fsh-0 px-0-S px-20-XS">
         <AmButton color="mcolor-100" opacityEffect scaleEffect :full="mobile" @click="$emit('connect', 'connect')" v-if="!publicKey">
           <span class="fw-800 pr-1 f-mcolor-300">SOL</span> Connect Wallet
         </AmButton>
-        <AmButton color="mcolor-100" opacityEffect scaleEffect :full="mobile" to="/my" v-if="publicKey" :title="publicKey">
-          SOL {{ publicKey.substr(0, 6) }} ...... {{ publicKey.substr(-4) }}
-        </AmButton>
+        <div class="w-a-S w-100-XS d-ib rad-fix-2 br-4 brs-s mcolor-100 shadow-purple-100 br-purple-700 f-white-200 px-0-S px-10-XS" v-if="publicKey">
+          <span class="w-a-S w-100-XS d-f fd-c-S fd-r-XS ai-c jc-c ta-c px-6 fs-4-S fs-20-XS fw-500 z-2 h-fix-s-28min-S h-fix-s-100min-XS">
+            <nuxt-link class="w-100 fd-r tt-u" to="/my">
+              <span class="fw-800 pr-1-S pr-5-XS f-mcolor-300">SOL</span> {{ publicKey.substr(0, 6) }} ...... {{ publicKey.substr(-4) }}
+            </nuxt-link>
+            <div class="w-100 fd-r jc-r pt-1 fs-5-S fs-20-XS">
+              <span class="hv ts-3" @click="$emit('logout')">
+                Disconnect
+              </span>
+            </div>
+          </span>
+        </div>
       </div>
-      <div class="w-fix-70-L w-50-M w-100-S w-100-XS fsh-0 ml-2-L ml-0-S ml-0-XS mt-0-L mt-4-S mt-4-XS px-0-M px-4-S px-4-XS pb-0-M pb-10-S pb-10-XS">
+      <div class="w-fix-70-S w-100-XS fsh-0 ml-2-S ml-0-XS px-0-S px-20-XS mt-0-S mt-20-XS">
         <AmSelectbox :data="languages" :update="false" :bottom="mobile" />
       </div>
     </div>
-    <svg @click="open = !open" xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 20 18" fill="none" class="z-12 w-fix-10 p-a r-fix-s-5 t-fix-s-5 d-n-L d-b-s d-b-XS">
+    <svg @click="open = !open" xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 20 18" fill="none" class="z-12 w-fix-40 p-a r-fix-s-25 t-fix-s-25 d-n-S d-b-s d-b-XS">
       <rect width="20" height="2" rx="1" fill="white"/>
-      <rect x="4" y="8" width="16" height="2" rx="1" fill="white"/>
-      <rect y="16" width="20" height="2" rx="1" fill="white"/>
+      <rect x="4" y="8" width="16" height="2" rx="1" fill="white" />
+      <rect y="16" width="20" height="2" rx="1" fill="white" />
     </svg>
   </div>
 </template>
@@ -69,12 +78,12 @@ export default {
   },
   methods: {
     resize () {
-      if (window.innerWidth < 1280) {
+      if (window.innerWidth < 600) {
         this.mobile = true
       } else {
         this.mobile = false
       }
-      if (window.innerWidth < 1024) {
+      if (window.innerWidth < 600) {
         this.open = false
       } else {
         this.open = true

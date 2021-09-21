@@ -1,22 +1,30 @@
 <template>
   <div class="w-100 h-100min">
     <div class="w-100 h-100min p-f l-0 t-0 ovh-y-a bg-r" />
-    <Menu :publicKey="publicKey" />
-    <div class="w-100 fd-r jc-c pt-10" v-if="publicKey && wallet">
-      <div class="container fd-r">
-        <div class="w-20-M w-100-XS p-r-M p-f-S p-f-XS b-0-S b-0-XS l-0-S l-0-XS z-5">
-          <Sidebar class="r-fix-s-15-M" @logout="logout" />
+    <Menu :publicKey="publicKey" @logout="logout" />
+    <div class="w-100 fd-r jc-c pt-0" v-if="publicKey && wallet">
+      <div class="w-100 fd-r">
+        <div class="w-20-L w-15-M w-15-S w-0-XS fsh-0 z-10 pt-5">
+          <Sidebar class="r-fix-s-15-M" />
+          <div class="w-100 pl-10 d-f-S d-n-XS">
+            <Balance />
+          </div>
         </div>
-        <div class="w-85-L w-100-S w-100-XS mcolor rad-fix-10 p-8-M p-3-S p-3-XS">
-          <Nuxt />
+        <div class="w-80-L w-85-M w-85-S w-100-XS fd-r jc-c">
+          <div class="w-80-S w-100-XS px-0-S px-20-XS pt-8-S pt-50-XS">
+            <Nuxt />
+          </div>
         </div>
       </div>
     </div>
-    <Footer />
+    <div class="w-100 pb-0-S pb-40-XS">
+      <Footer />
+    </div>
   </div>
 </template>
 
 <script>
+import Balance from '@/components/my/Balance.vue'
 import Menu from '@/components/Menu'
 import Footer from '@/components/Footer'
 import Sidebar from '@/components/Sidebar'
@@ -30,6 +38,7 @@ export default {
     }
   },
   components: {
+    Balance,
     Menu,
     Footer,
     Sidebar

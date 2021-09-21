@@ -32,17 +32,17 @@ a {
   .ovh-y-v-S{overflow-y: visible;}
 }
 @media (min-width: $medium) {
-  .container{width: 100%;}
+  .container{width: 80%;}
   .ovh-y-a-M{overflow-y: auto;}
   .ovh-y-v-M{overflow-y: visible;}
 }
 @media (min-width: $large) {
-  .container{width: $containerSize;}
+  .container{width: $containerSize;max-width: 1400px;}
   .ovh-y-a-L{overflow-y: auto;}
   .ovh-y-v-L{overflow-y: visible;}
 }
 @media (min-width: $xlarge) {
-  .container{width: $containerSize;}
+  .container{width: $containerSize;max-width: 1900px;}
   .ovh-y-a-XL{overflow-y: auto;}
   .ovh-y-v-XL{overflow-y: visible;}
 }

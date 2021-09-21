@@ -1,52 +1,52 @@
 <template>
   <div class="w-100">
-    <div class="w-100 fs-9-M fs-9-S fs-7-XS fw-600 f-white-200 pb-8 ta-c-XS">
+    <div class="w-100 fs-8-S fs-25-XS fw-600 f-white-200 pb-8-S pb-15-XS ta-l-S ta-c-XS">
       You have three earnings
     </div>
-    <div class="w-100 fs-7-M fw-600 f-white-200 pb-2 fd-r ai-c jc-c-XS">
+    <div class="w-100 fs-6-S fs-20-XS fw-600 f-white-200 pb-2-S pb-10-XS fd-r ai-c jc-l-S jc-c-XS">
       1. Liquidation Incentive
       <Hint>
         ???????????????????????
       </Hint>
     </div>
-    <div class="w-100 fs-7 f-white-200 fd-r ai-c fd-600 py-1 pl-3-S pl-0 jc-c-XS">
+    <div class="w-100 fs-6-S fs-20-XS f-white-200 fd-r ai-c fd-600 py-1 pl-3-S pl-0 jc-l-S jc-c-XS pb-1-S pb-10-XS">
       <span class="f-mcolor-300 pr-2">{{getCoin}}</span> SOL
     </div>
-    <div class="w-100 fs-7-M fw-600 f-white-200 pb-2 fd-r ai-c pt-4 jc-c-XS">
+    <div class="w-100 fs-6-S fs-20-XS fw-600 f-white-200 pb-2-S pb-10-XS fd-r ai-c pt-4 jc-l-S jc-c-XS">
       2. Transaction Fee
       <Hint>
         You receive transaction fee of Borrowing and Repaying.
       </Hint>
     </div>
-    <div class="w-100 fs-7 f-white-200 fd-r ai-c fd-600 py-1 pl-3-S pl-0 jc-c-XS">
+    <div class="w-100 fs-6-S fs-20-XS f-white-200 fd-r ai-c fd-600 py-1 pl-3-S pl-0 jc-l-S jc-c-XS pb-1-S pb-10-XS">
       <span class="f-mcolor-300 pr-2">{{getGens}}</span> Gens
     </div>
-    <div class="w-100 fs-7-M fw-600 f-white-200 pb-2 fd-r ai-c pt-4 jc-c-XS">
+    <div class="w-100 fs-6-S fs-20-XS fw-600 f-white-200 pb-2-S pb-10-XS fd-r ai-c pt-4 jc-l-S jc-c-XS">
       3. Rewards
       <Hint>
         ARP (Annual Percentage Rate) is just a simple interest that you will be receiving every year paid in the token of your choice. But the APR is subject to change and fluctuations.
         The “Monthly” and “Daily” are simply calculated to show how much you will be receiving at the term.
       </Hint>
     </div>
-    <div class="w-100 fs-7 f-white-200 fd-r ai-b fd-600 py-1 pl-3-S pl-0 jc-c-XS">
-      <span class="f-mcolor-300 pr-2">{{getHgen}}</span> HGEN <span class="fs-5 pl-2">(<span class="f-mcolor-100">32.50%</span> APR)</span>
+    <div class="w-100 fs-6-S fs-20-XS f-white-200 fd-r ai-b fd-600 py-1 pl-3-S pl-0 jc-l-S jc-c-XS pb-1-S pb-10-XS">
+      <span class="f-mcolor-300 pr-2">{{getHgen}}</span> HGEN <span class="fs-5-S fs-20-XS pl-2">(<span class="f-mcolor-100">32.50%</span> APR)</span>
     </div>
-    <div class="w-100 fs-7 f-white-200 fd-r ai-b fd-600 py-1 pl-3-S pl-0 jc-c-XS">
-      <span class="f-mcolor-300 pr-2">{{getHgen}}</span> HGEN <span class="fs-5 pl-2">(<span class="f-mcolor-100">32.50%</span> Monthly)</span>
+    <div class="w-100 fs-6-S fs-20-XS f-white-200 fd-r ai-b fd-600 py-1 pl-3-S pl-0 jc-l-S jc-c-XS pb-1-S pb-10-XS">
+      <span class="f-mcolor-300 pr-2">{{getHgen}}</span> HGEN <span class="fs-5-S fs-20-XS pl-2">(<span class="f-mcolor-100">32.50%</span> Monthly)</span>
     </div>
-    <div class="w-100 fs-7 f-white-200 fd-r ai-b fd-600 py-1 pl-3-S pl-0 jc-c-XS">
-      <span class="f-mcolor-300 pr-2">{{getHgen}}</span> HGEN <span class="fs-5 pl-2">(<span class="f-mcolor-100">1.50%</span> Daily)</span>
+    <div class="w-100 fs-6-S fs-20-XS f-white-200 fd-r ai-b fd-600 py-1 pl-3-S pl-0 jc-l-S jc-c-XS pb-1-S pb-10-XS">
+      <span class="f-mcolor-300 pr-2">{{getHgen}}</span> HGEN <span class="fs-5-S fs-20-XS pl-2">(<span class="f-mcolor-100">1.50%</span> Daily)</span>
     </div>
-    <AmDivider class="my-4" />
-    <div class="w-100 fs-7-M fw-600 f-gray-500 pb-3 fd-r ai-c jc-c-XS">
+    <AmDivider class="my-4-S my-10-XS" />
+    <div class="w-100 fs-6-S fs-20-XS fw-600 f-gray-500 pb-3-S pb-10-XS fd-r ai-c jc-l-S jc-c-XS">
       pool share
       <Hint>
         Percentage of your share on Safe Pool.
       </Hint>
     </div>
-    <div class="w-100 fs-6-M fs-6-S fs-4-XS f-white-200 ta-c-XS">
-      <span class="fs-9-M fs-9-S fs-10-XS fw-800 f-mcolor-100">{{getPercent}}</span>
-      <span class="fs-9-M fs-9-S fs-10-XS fw-600 px-1">%</span>
+    <div class="w-100 fs-6-S fs-20-XS f-white-200 ta-l-S ta-c-XS">
+      <span class="fs-8-S fs-25-XS fw-800 f-mcolor-100">{{getPercent}}</span>
+      <span class="fs-8-S fs-25-XS fw-600 px-1">%</span>
     </div>
   </div>
 </template>

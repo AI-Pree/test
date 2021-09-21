@@ -1,25 +1,25 @@
 <template>
-  <div class="w-100 br-6 gradient-200 rad-fix-8 p-8-S p-4-XS">
-    <div class="w-100 fs-9-M fs-9-S fs-7-XS fw-600 f-white-200 pb-4 ta-c-XS">
+  <div class="w-100 br-6 gradient-200 rad-fix-8 p-8-S p-20-XS">
+    <div class="w-100 fs-8-S fs-25-XS fw-600 f-white-200 pb-4-XL pb-2-M pb-4-S pb-4-XS ta-c-XS">
       Raydium Swap
     </div>
-    <div class="w-100 mt-4 mb-2 mcolor-700 rad-fix-2 px-4">
-      <div class="w-100 fs-5 f-gray-600 pb-2 pt-3">
+    <div class="w-100 mt-2-S mt-10-XS mb-1 mcolor-700 rad-fix-2-S rad-fix-15-XS px-4-S px-10-XS">
+      <div class="w-100 fs-5-S fs-20-XS f-gray-600 pb-2-S pb-10-XS pt-3-S pt-10-XS">
         from
       </div>
       <div class="w-100 pb-3-S pb-0">
-        <input class="w-fix-s-10min fs-7 fw-600 f-mcolor-300 br-0 oul-n white-100" placeholder="0" v-model="from" maxlength="15" type="text" />
+        <input class="w-fix-s-10min fs-6-S fs-25-XS fw-600 f-mcolor-300 br-0 oul-n white-100" placeholder="0" v-model="from" maxlength="15" type="text" />
         <div class="p-a-S p-r-XS r-0 b-0 w-fix-35-S w-100-XS">
           <AmSelectbox v-bind:data.sync="currencyFrom" :update="true" :shadow="false" :padding="false" />
         </div>
       </div>
     </div>
-    <div class="w-100 mt-4 mb-2 mcolor-700 rad-fix-2 px-4">
-      <div class="w-100 fs-5 f-gray-600 pb-2 pt-3">
+    <div class="w-100 mt-2-S mt-10-XS mb-1 mcolor-700 rad-fix-2-S rad-fix-15-XS px-4-S px-10-XS">
+      <div class="w-100 fs-5-S fs-20-XS f-gray-600 pb-2-S pb-10-XS pt-3-S pt-10-XS">
         to (estimate)
       </div>
       <div class="w-100 pb-3-S pb-0">
-        <div class="w-fix-s-10min fs-7 fw-600 br-0 oul-n" :class="{'f-mcolor-300': Number(to) > 0, 'f-gray-800': Number(to) === 0}">
+        <div class="w-fix-s-10min fs-6-S fs-25-XS fw-600 br-0 oul-n" :class="{'f-mcolor-300': Number(to) > 0, 'f-gray-800': Number(to) === 0}">
           {{ to }}
         </div>
         <div class="p-a-S p-r-XS r-0 b-0 w-fix-35-S w-100-XS">
@@ -27,54 +27,54 @@
         </div>
       </div>
     </div>
-    <div class="w-100 pt-2 pb-6 ta-c fs-6 fw-500 f-white-200" v-if="currencyFrom.value === tokens[0].value">
+    <div class="w-100 pt-2-S pt-15-XS ta-c fs-5-S fs-20-XS fw-500 f-white-200 pb-2-S pb-15-XS" v-if="currencyFrom.value === tokens[0].value">
       1 RAY ≈ {{ convertRay }} SOL
     </div>
-    <div class="w-100 pt-2 pb-6 ta-c fs-6 fw-500 f-white-200" v-if="currencyFrom.value === tokens[1].value">
+    <div class="w-100 pt-2-S pt-15-XS ta-c fs-5-S fs-20-XS fw-500 f-white-200 pb-2-S pb-15-XS" v-if="currencyFrom.value === tokens[1].value">
       1 SOL ≈ {{ convertSOL }} RAY
     </div>
-    <div class="w-100 fd-r-S fd-c-XS py-2">
-      <div class="w-100 fs-6 fw-400 f-white-200 fd-r ai-c jc-c-XS">
+    <div class="w-100 fd-r py-1-S py-5-XS">
+      <div class="w-100 fs-5-S fs-20-XS fw-400 f-white-200 fd-r ai-c">
         Slippage Tolerance
         <Hint>
           Difference on price of 2 different coins you are using in transaction during time it takes to complete transaction.
         </Hint>
       </div>
-      <div class="w-a fs-6 fsh-0 fw-400 f-mcolor-100 fd-r ai-c pt-2-XS jc-c-XS">
+      <div class="w-a fs-5-S fs-20-XS fsh-0 fw-400 f-mcolor-100 fd-r ai-c pt-2-XS jc-c-XS">
         1 <span class="f-white-200 pl-1">%</span>
       </div>
     </div>
-    <div class="w-100 fd-r-S fd-c-XS py-2">
-      <div class="w-100 fs-6 fw-400 f-white-200 fd-r ai-c jc-c-XS">
+    <div class="w-100 fd-r py-1-S py-5-XS">
+      <div class="w-100 fs-5-S fs-20-XS fw-400 f-white-200 fd-r ai-c">
         Slippage Tolerance
       </div>
-      <div class="w-a fs-6 fsh-0 fw-400 f-white-200 fd-r ai-c pt-2-XS jc-c-XS">
+      <div class="w-a fs-5-S fs-20-XS fsh-0 fw-400 f-white-200 fd-r ai-c pt-2-XS jc-c-XS">
         Serum DEX
       </div>
     </div>
-    <div class="w-100 fd-r-S fd-c-XS py-2">
-      <div class="w-100 fs-6 fw-400 f-white-200 fd-r ai-c jc-c-XS">
+    <div class="w-100 fd-r py-1-S py-5-XS">
+      <div class="w-100 fs-5-S fs-20-XS fw-400 f-white-200 fd-r ai-c">
         Minimum Received
         <Hint>
           Your transaction will revert if there is a large, unfavourable price movement before it is confirmed.
         </Hint>
       </div>
-      <div class="w-a fs-6 fsh-0 fw-400 f-mcolor-100 fd-r ai-c pt-2-XS jc-c-XS">
+      <div class="w-a fs-5-S fs-20-XS fsh-0 fw-400 f-mcolor-100 fd-r ai-c pt-2-XS jc-c-XS">
         0.0983070000 <span class="f-white-200 pl-1">SOL</span>
       </div>
     </div>
-    <div class="w-100 fd-r-S fd-c-XS py-2">
-      <div class="w-100 fs-6 fw-400 f-white-200 fd-r ai-c jc-c-XS">
+    <div class="w-100 fd-r py-1-S py-5-XS">
+      <div class="w-100 fs-5-S fs-20-XS fw-400 f-white-200 fd-r ai-c">
         Price Impact
         <Hint>
           If the pool is $1,000 and you sell $1 worth, thay will "impact" the pool 0.1%.
         </Hint>
       </div>
-      <div class="w-a fs-6 fsh-0 fw-400 f-mcolor-100 fd-r ai-c pt-2-XS jc-c-XS">
+      <div class="w-a fs-5-S fs-20-XS fsh-0 fw-400 f-mcolor-100 fd-r ai-c pt-2-XS jc-c-XS">
         0.00 <span class="f-white-200 pl-1">%</span>
       </div>
     </div>
-    <div class="w-100 pt-8 fd-r jc-c">
+    <div class="w-100 pt-6-S pt-20-XS fd-r jc-c">
       <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect @click="confirm" :full="true">
         CREATE RAY aCCOUNT
       </AmButton>

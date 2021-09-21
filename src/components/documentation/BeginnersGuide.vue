@@ -1,9 +1,9 @@
 <template>
   <div class="w-100 d-f fd-r-L fd-r-M fd-c-S fd-c-XS">
     <div class="w-50-L w-50-M w-100-S w-100-XS">
-      <div 
+      <div
         v-for="(bg, index) in beginnersGuide"
-        :key="bg.title" 
+        :key="bg.title"
         class="mcolor rad-fix-2 py-2 pl-4 pr-6 br-1 brs-s"
         :class="{ 'br-mcolor-400' : activeTab === bg.title, 'mt-2-L mt-2-M mt-2-S mt-2-XS': index !== 0, 'br-white-100' : activeTab !== bg.title }">
         <div class="ai-c d-f jc-sb">

@@ -3,7 +3,7 @@
     <div class="container px-0-L px-0-L px-4-S px-4-XS">
       <div class="d-f ta-l fs-12-L fs-10-M fs-8-S fs-8-XS f-gray-600 fw-400 mt-4-M">
         <div
-          class="mr-9-L mr-8-M mr-4-S mr-4-XS pb-1 c-p" 
+          class="mr-9-L mr-8-M mr-4-S mr-4-XS pb-1 c-p"
           :class="{'br-mcolor-400 brbs-s f-white-200': activeTab === 'faq'}"
           @click="activeTab = 'faq'">
           FAQ
@@ -15,7 +15,7 @@
           Beginners Guide
         </div>
         <div
-          class="mr-9-L mr-8-M mr-4-S mr-4-XS pb-1 c-p" 
+          class="mr-9-L mr-8-M mr-4-S mr-4-XS pb-1 c-p"
           :class="{'br-mcolor-400 brbs-s f-white-200': activeTab === 'audit'}"
           @click="activeTab = 'audit'">
           Audit

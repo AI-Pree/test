@@ -18,7 +18,7 @@
         </filter>
       </defs>
     </svg>
-    <div class="w-100 p-a b-0 l-50 pl-6-M pl-4-S pl-2-XS pb-1 fs-6-L fs-4-M fs-4-S fs-2-XS f-gray-500">
+    <div class="w-100 p-a b-0 l-50 pl-6-S pl-10-XS pb-1-L pb-2-M pb-3-S pb-5-XS fs-6-S fs-10-XS f-gray-500">
       {{ text }} <span class="fw-600 f-white-200">{{tokens}} tokens</span>
     </div>
   </div>

@@ -1,19 +1,21 @@
 <template>
   <div class="w-100">
-    <Balance />
-    <div class="w-100 fd-r fw-w pt-10">
-      <div class="w-55-M w-100-S w-100-XS">
+    <div class="w-100 d-n-S d-b-XS">
+      <Balance />
+    </div>
+    <div class="w-100 fd-r fw-w pt-0-S pt-30-XS">
+      <div class="w-55-S w-100-XS">
         <Pay @gens="to = $event" @sol="from = $event"/>
       </div>
-      <div class="w-45-M w-100-S w-100-XS pl-8-M pl-0-XS pt-4-M pt-8-S pt-8-XS">
+      <div class="w-45-S w-100-XS pl-8-S pl-0-XS pt-4-S pt-30-XS">
         <Info :to="Number(to)" :from="Number(from)" />
       </div>
     </div>
-    <div class="w-100 fd-r-M fd-c-S fd-c-XS pt-10 ai-s">
-      <div class="w-50-M w-100-S w-100-XS pr-4-M pr-0-S pr-0-XS">
+    <div class="w-100 fd-r-S fd-c-XS pt-30 ai-s">
+      <div class="w-50-S w-100-XS pr-4-M pr-0-S pr-0-XS">
         <Notification />
       </div>
-      <div class="w-50-M w-100-S fd-r ai-s pl-4 pl-0-S pl-0-XS pt-0-M pt-10-S pt-10-XS">
+      <div class="w-50-S fd-r ai-s pl-8-S pl-0-XS pt-0-S pt-30-XS">
         <UseFull />
       </div>
     </div>
