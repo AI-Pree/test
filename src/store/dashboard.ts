@@ -2,7 +2,7 @@
 import { getterTree, mutationTree, actionTree } from 'typed-vuex'
 
 // Import Utils
-import { claimDepositRewardUtil } from '@/utils/claimDepositReward'
+// import { claimDepositRewardUtil } from '@/utils/claimDepositReward'
 
 // State
 export const state = () => ({
@@ -31,7 +31,7 @@ export const actions = actionTree(
     async claim ({ commit, state }) {
       if (this.$accessor.pool.depositKey) {
         commit('setLoading', true)
-        await this.$axios.post('deposit/claim', {deposit: this.$accessor.pool.depositKey.deposit}).then(({ res }) => {
+        await this.$axios.post('deposit/claim', {deposit: this.$accessor.pool.depositKey.deposit}).then((res) => {
           console.log(res, 'claimDeposit Backend')
         }).finally(() => {
           commit('setLoading', false)

@@ -70,16 +70,12 @@
           </AmButton>
         </div>
       </div>
-<<<<<<< HEAD
-      <div class="w-100 pt-6-S pt-15-XS" v-if="getIsBorrow">
-=======
       <div class="w-100 mt-4" v-if="getIsBorrow">
         <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full @click="updateTroveFunc">
           update trove
         </AmButton>
       </div>
       <div class="w-100 mt-4" v-if="getIsBorrow">
->>>>>>> ddfcfaa84014d08604bec39b2e62c945e49498f3
         <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full @click="closeTroveFunc">
           Close trove
         </AmButton>

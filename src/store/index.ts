@@ -16,7 +16,7 @@ import * as admin from './admin'
 export const state = () => ({
   modal: '',
   totalDeposit: 0,
-  debtRatio: 0,
+  debtRatio: false,
   gasFee: 0,
   governanceReward: 0,
   solReward: 0,

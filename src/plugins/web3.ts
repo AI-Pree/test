@@ -5,7 +5,7 @@ const web3Plugin: Plugin = async (ctx, inject) => {
 
   const web3 = await new Connection(clusterApiUrl('devnet'), 'confirmed')
 
-  ctx.$web3 = web3
+//   ctx.$web3 = web3
   inject('web3', web3)
 }
 

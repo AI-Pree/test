@@ -10,7 +10,7 @@ import BN from "bn.js";
 
 // State
 export const state = () => ({
-  depositKey: '',
+  depositKey: {"deposit":""},
   gen: '',
   hgen: '',
   rewardCoinAmount: 0,
@@ -25,7 +25,7 @@ export const getters = getterTree(state, {})
 
 // Mutation
 export const mutations = mutationTree(state, {
-  setDepositKey (state, newValue: string) {
+  setDepositKey (state, newValue: any) {
     state.depositKey = newValue
   },
   setGen (state, newValue: string) {
@@ -86,7 +86,7 @@ export const actions = actionTree(
             if (data && (data.depositAccountPubkey)) {
               commit('setDepositKey', data.depositAccountPubkey || '')
               console.log(data, 'newDeposit')
-              await this.$axios.post('deposit/upsert', {deposit: data.depositAccountPubkey}).then(({ res }) => {
+              await this.$axios.post('deposit/upsert', {deposit: data.depositAccountPubkey}).then((res) => {
                 console.log(res, 'newDeposit Backend')
               }).finally(() => {
                 commit('setLoading', false)

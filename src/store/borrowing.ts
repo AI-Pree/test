@@ -11,7 +11,7 @@ import {PublicKey} from "@solana/web3.js";
 // State
 export const state = () => ({
   troveId: '',
-  trove: {},
+  trove: {"troveAccountPubkey":""},
   debt: 0,
   loading: false,
   loadingSub: false
@@ -22,11 +22,11 @@ export const getters = getterTree(state, {})
 
 // Mutation
 export const mutations = mutationTree(state, {
-  setTroveId (state, newValue: string) {
+  setTroveId (state, newValue: any) {
     state.troveId = newValue
   },
 
-  setTrove (state, newValue: TroveLayout) {
+  setTrove (state, newValue: any) {
     state.trove = newValue
     console.log({newValue})
   },
@@ -88,7 +88,7 @@ export const actions = actionTree(
             this.$accessor.wallet.getBalance()
             dispatch('setTroveById', new PublicKey(data.troveAccountPubkey))
             this.$accessor.dashboard.setBorrow(true)
-            await this.$axios.post('trove/upsert', {trove: data.troveAccountPubkey, user: value.mint}).then(({ res }) => {
+            await this.$axios.post('trove/upsert', {trove: data.troveAccountPubkey, user: value.mint}).then((res) => {
               console.log(res, 'newTrove Backend')
             })
           }
@@ -110,15 +110,15 @@ export const actions = actionTree(
           if(data === null) {
             console.log(data, 'closeTrove')
             commit('setTroveId', '')
-            await this.$axios.post('trove/liquidate', {trove: state.trove.troveAccountPubkey}).then(({ res }) => {
+            await this.$axios.post('trove/liquidate', {trove: state.trove.troveAccountPubkey}).then((res) => {
               console.log(res, 'newTrove Backend')
             })
-            commit('setTrove', {})
+            commit('setTrove',{})
             this.$accessor.wallet.getBalance()
             this.$accessor.dashboard.setBorrow(false)
           } else {
             dispatch('setTroveById', new PublicKey(data.troveAccountPubkey))
-            await this.$axios.post('trove/upsert', {trove: data.troveAccountPubkey, user: value.mint}).then(({ res }) => {
+            await this.$axios.post('trove/upsert', {trove: data.troveAccountPubkey, user: value.mint}).then((res) => {
               console.log(res, 'updateTrove Backend')
             })
           }
@@ -143,7 +143,7 @@ export const actions = actionTree(
     async sendEmail ({ commit }, value) {
       if (value) {
         commit('setLoadingSub', true)
-        await this.$axios.post('/notification/subscribe', {email: value}).then(({ res }) => {
+        await this.$axios.post('/notification/subscribe', {email: value}).then((res) => {
           console.log(res, 'Subscribe')
         }).finally(() => {
           commit('setLoadingSub', false)
