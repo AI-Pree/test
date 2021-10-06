@@ -62,6 +62,6 @@ export default {
 
   server: {
     host: "0.0.0.0",
-    port: 5000
+    port: process.env.PORT || 5000
   }
 };
