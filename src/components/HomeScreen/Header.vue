@@ -1,7 +1,7 @@
 <template>
   <div class="container pt-10-S pt-40-XS">
-    <div class="w-100 f-white-200 tt-u fs-14-S fs-25-XS fw-600 ta-c px-10-XS">
-      (logo) (company_name) helps your FAMILY
+    <div class="w-100 f-white-200 tt-u fs-14-S fs-25-XS fw-600 ta-c px-10-XS jc-c ai-c">
+        <img src="@/assets/svg/company_logo.png" class="h-fix-15-S h-fix-55-XS mr-2" /> NEXFIN helps your FAMILY
     </div>
     <div class="w-100 gradient tt-u fs-13-S fs-30-XS fw-900 ta-c pt-4-S pt-15-XS">
       $ {{ getTotal }}
