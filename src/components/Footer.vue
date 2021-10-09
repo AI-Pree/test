@@ -1,5 +1,6 @@
 <template>
-  <div class="w-100 fd-r jc-c pt-20-S pt-40-XS pb-10-S pb-40-XS px-0-L px-0-M px-10-S px-20-XS">
+<div class = "w-100 fd-r jc-c">
+  <div class="w-90-L w-90-M w-90-S w-100-XS fd-r jc-c pt-20-S pt-40-XS pb-10-S pb-40-XS px-0-L px-0-M px-10-S px-20-XS">
     <div class="container fd-r-S fd-c-XS">
       <div class="w-100">
         <div class="w-100 fs-6-S fs-25-XS fw-600 tt-u f-white-200 ta-l-S ta-c-XS fd-r ai-c jc-l">
@@ -25,4 +26,5 @@
       </div>
     </div>
   </div>
+</div>
 </template>
