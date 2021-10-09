@@ -1,5 +1,6 @@
 <template>
-  <div class="w-100 h-a-S h-100-XS fd-r jc-c py-5 px-10 z-10">
+<div class = "w-100 fd-r jc-c">
+  <div class="w-75 w-100-XS h-a-S h-100-XS fd-r py-5 px-10 z-10">
     <span class="w-100 h-100 p-f t-0 gradient-400 d-n-S ts-3" :class="{'l-100': !open, 'l-0': open}" />
     <div class="w-100 h-a-S h-100-XS fd-r-S fd-c-XS ai-c p-r-S p-f-XS l-0 t-0 ts-3 ovh-y-v-S ovh-y-a-XS" :class="{'l-100': !open, 'l-0': open}">
       <div class="w-100 fd-r-S fd-c-XS p-0-S p-20-XS pt-0-S pt-40-XS ai-c">
@@ -43,6 +44,7 @@
       <rect y="16" width="20" height="2" rx="1" fill="white" />
     </svg>
   </div>
+</div>
 </template>
 
 <script>
