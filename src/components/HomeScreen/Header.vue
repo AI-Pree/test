@@ -6,7 +6,7 @@
     <div class="w-100 gradient tt-u fs-13-S fs-30-XS fw-900 ta-c pt-4-S pt-15-XS">
       $ {{ getTotal }}
     </div>
-    <div class="w-100 f-gray-400 ta-c fs-6-S fs-15-XS fw-500 pt-2-S pt-10-XS">
+    <div class="w-100 f-gray-400 ta-c fs-6-S fs-15-XS fw-500 pt-10-XS">
         Total Deposited Value at GENS
     </div>
     <div class = "fd-r jc-c">

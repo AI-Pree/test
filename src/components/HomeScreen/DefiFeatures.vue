@@ -1,5 +1,5 @@
 <template>
-  <div class="container pt-20-M pt-20-S pt-40-XS">
+  <div class="container pt-20-M pt-20-S pt-40-XS mb-10-S mb-20-XS">
     <div class="w-100 tt-u fs-14-S fs-30-XS fw-600 f-white-200 ta-c">
       DeFi FEATURES
     </div>

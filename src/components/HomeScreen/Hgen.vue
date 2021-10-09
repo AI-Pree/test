@@ -1,7 +1,7 @@
 <template>
-  <div class="container pt-20-S pt-40-XS">
+  <div id = "tokenomics" class="container">
     <div class="w-100 fd-r jc-c ai-c fs-14-S fs-30-XS f-white-200 fw-600">
-      <img src="@/assets/svg/hgen.svg" class="h-fix-20-S h-fix-20-S h-fix-35-XS mr-2-S mr-5-XS" />
+      <img src="@/assets/svg/symbol-hgen.png" class="h-fix-20-S h-fix-20-S h-fix-35-XS mr-2-S mr-5-XS" />
       HGEN
     </div>
     <div class="w-100 fs-5-M fs-6-S fs-15-XS ta-c f-gray-500 pt-3-S pt-10-XS">
