@@ -8,7 +8,7 @@
         <div class="w-100 fs-6-S fs-20-XS f-gray-500 fw-400 f-lh-18-S f-lh-45-XS pt-4-S pt-15-XS ta-l-S ta-c-XS pb-15-XS">
           We have a strong integrated solution to bring our world to DeFi online platform, greatly reduces risks and environmental pollution, and results in more reliable power through the utilization of existing engineering art.
         </div>
-        <div class="w-100 fd-r-S fd-c-XS pt-6-M pt-0-S pt-6-XS d-f-S d-n-XS">
+        <div class="w-100 fd-r-S fd-c-XS mt-0-L mt-0-M mt-5-S pt-6-M pt-0-S pt-6-XS d-f-S d-n-XS">
           <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect>
             Join Telegram
           </AmButton>

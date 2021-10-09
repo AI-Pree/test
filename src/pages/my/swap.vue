@@ -8,7 +8,7 @@
         <Raydium @createRayFunc="createRayFunc" />
       </div>
     </div>
-    <img src="@/static/swap.png" class="p-a b-0 r-75 w-30 d-b-M d-n-S d-n-XS" />
+    <img src="@/static/swap.png" class="p-a b-0 w-30 d-b-M d-n-S d-n-XS" />
   </div>
 </template>
 
