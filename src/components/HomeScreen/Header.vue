@@ -33,6 +33,6 @@ export default {
         }
         return res.toString().replace(/(.)(?=(\d{3})+$)/g,'$1,')
         }
-    }
+    },
 }
 </script>

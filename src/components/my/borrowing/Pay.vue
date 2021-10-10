@@ -6,50 +6,24 @@
       </div>
       <div class="w-100 pt-6-S pb-15-XS fd-r-S fd-c-XS">
         <div class="w-50-S w-100-XS mr-2-L mr-2-S mr-0-XS">
-          <AmButton color="mcolor-200" bColor="mcolor-100" full disabled v-if="getIsBorrow">
+          <AmButton color="mcolor-200" bColor="mcolor-100" full v-if="getIsBorrow && !getBorrowOrPay" @click="changeBorrowOrPayFunc">
             Borrow
           </AmButton>
-          <AmButton color="gray-800" bColor="gray-800" colorText="gray-500" full disabled v-if="!getIsBorrow">
+          <AmButton color="gray-800" bColor="gray-800" colorText="gray-500" full disabled v-if="getIsBorrow && getBorrowOrPay">
             Borrow
           </AmButton>
         </div>
         <div class="w-50-S w-100-XS ml-2-L ml-2-S ml-0-XS mt-0-S mt-8-XS">
-          <AmButton color="gray-800" bColor="gray-800" colorText="gray-500" full disabled v-if="getIsBorrow">
+          <AmButton color="gray-800" bColor="gray-800" colorText="gray-500" full disabled v-if="getIsBorrow && !getBorrowOrPay">
             Pay Debt
           </AmButton>
-          <AmButton color="mcolor-200" bColor="mcolor-100" full disabled v-if="!getIsBorrow">
+          <AmButton color="mcolor-200" bColor="mcolor-100" full v-if="getIsBorrow && getBorrowOrPay" @click="changeBorrowOrPayFunc">
             Pay Debt
           </AmButton>
         </div>
       </div>
-      <div class="w-100 mt-4 mb-2 mcolor-700 rad-fix-2 px-4-S px-10-XS py-3-S py-10-XS">
-        <div class="w-100 fs-5-S fs-20-XS f-gray-600 pb-1-S pb-5-XS">
-          set wallet gens
-        </div>
-        <div class="w-100 fd-r ai-c">
-          <input type="text" class="w-100 white-100 br-0 oul-n fs-6-S fs-20-XS fw-600 f-mcolor-300" placeholder="XXXXXXXXX..." v-model="mint" />
-        </div>
-      </div>
-      <div class="w-100 mt-4 mb-2 mcolor-700 rad-fix-2 px-4-S px-10-XS py-3-S py-10-XS" v-if="!getIsBorrow">
-        <div class="w-100 fs-5-S fs-20-XS f-gray-600 pb-1-S pb-5-XS">
-          set amount you want to deposit
-        </div>
-        <div class="w-100 fd-r ai-c">
-          <span class="w-15-S w-25-XS fs-6-S fs-20-XS fw-600 f-white-200 fsh-0">SOL</span>
-          <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-6-S fs-20-XS fw-600 f-mcolor-300" placeholder="0" v-model="from" maxlength="12" />
-          <span class="fs-6-S fs-20-XS f-mcolor-100 td-u ts-3 hv d-n-XS fsh-0" @click="setMax">max</span>
-        </div>
-      </div>
-      <div class="w-100 mb-4 mcolor-700 rad-fix-2 px-4-S px-10-XS py-3-S py-10-XS" v-if="!getIsBorrow">
-        <div class="w-100 fs-5-S fs-20-XS f-gray-600 pb-1-S pb-5-XS">
-          amount received
-        </div>
-        <div class="w-100 fd-r ai-c">
-          <span class="w-15-S w-25-XS fs-6-S fs-20-XS fw-600 f-white-200 fsh-0">GENS</span>
-          <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-6-S fs-20-XS fw-600 f-mcolor-300" placeholder="0" v-model="to" maxlength="20" />
-        </div>
-      </div>
-      <div class="w-100 mb-4 mcolor-700 rad-fix-2 px-4-S px-10-XS py-3-S py-10-XS" v-if="getIsBorrow">
+      
+      <!-- <div class="w-100 mb-4 mcolor-700 rad-fix-2 px-4-S px-10-XS py-3-S py-10-XS" v-if="getIsBorrow">
         <div class="w-100 fs-5-S fs-20-XS f-gray-600 pb-1-S pb-5-XS">
           New amount (+200 GENS fee)
         </div>
@@ -57,8 +31,29 @@
           <span class="w-15-S w-25-XS fs-6-S fs-20-XS fw-600 f-white-200 fsh-0">GENS</span>
           <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-6-S fs-20-XS fw-600 f-mcolor-300" v-model="to" />
         </div>
+      </div> -->
+
+    <!-- This section is for the borrow  -->
+      <div class="w-100 mt-4 mb-2 mcolor-700 rad-fix-2 px-4-S px-10-XS py-3-S py-10-XS" v-if="getIsBorrow && getBorrowOrPay">
+        <div class="w-100 fs-5-S fs-20-XS f-gray-600 pb-1-S pb-5-XS">
+          Collateral
+        </div>
+        <div class="w-100 fd-r ai-c">
+          <span class="w-15-S w-25-XS fs-6-S fs-20-XS fw-600 f-white-200 fsh-0">SOL</span>
+          <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-6-S fs-20-XS fw-600 f-mcolor-300" placeholder="0.0000" v-model="from" maxlength="12" />
+          <span class="fs-6-S fs-20-XS f-mcolor-100 td-u ts-3 hv d-n-XS fsh-0" @click="setMax">Max</span>
+        </div>
       </div>
-      <div class="w-100 fd-r-S fd-c-XS mt-0-S mt-15-XS" v-if="!getIsBorrow">
+      <div class="w-100 mb-4 mcolor-700 rad-fix-2 px-4-S px-10-XS py-3-S py-10-XS" v-if="getIsBorrow && getBorrowOrPay">
+        <div class="w-100 fs-5-S fs-20-XS f-gray-600 pb-1-S pb-5-XS">
+          Amount received
+        </div>
+        <div class="w-100 fd-r ai-c">
+          <span class="w-15-S w-25-XS fs-6-S fs-20-XS fw-600 f-white-200 fsh-0">GENS</span>
+          <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-6-S fs-20-XS fw-600 f-mcolor-300" placeholder="0" v-model="to" maxlength="20" />
+        </div>
+      </div>
+      <div class="w-100 fd-r-S fd-c-XS mt-0-S mt-15-XS" v-if="getIsBorrow && getBorrowOrPay">
         <div class="w-50-S w-100-XS mr-2-L mr-2-S mr-0-XS">
           <AmButton color="mcolor-200" bColor="mcolor-100" opacityEffect full @click="reset">
             reset
@@ -70,7 +65,31 @@
           </AmButton>
         </div>
       </div>
-      <div class="w-100 mt-4" v-if="getIsBorrow">
+
+    <!-- This section for the pay debt  -->
+    <div class="w-100 mt-4 mb-4 mcolor-700 rad-fix-2 px-4-S px-10-XS py-3-S py-10-XS" v-if="getIsBorrow && !getBorrowOrPay">
+        <div class="w-100 fs-5-S fs-20-XS f-gray-600 pb-1-S pb-5-XS">
+          Repay
+        </div>
+        <div class="w-100 fd-r ai-c">
+          <span class="w-15-S w-25-XS fs-6-S fs-20-XS fw-600 f-white-200 fsh-0">SOL</span>
+          <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-6-S fs-20-XS fw-600 f-mcolor-300" placeholder="0.0000" v-model="from" maxlength="12" />
+          <span class="fs-6-S fs-20-XS f-mcolor-100 td-u ts-3 hv d-n-XS fsh-0">Close Borrow</span>
+        </div>
+      </div>
+      <div class="w-100 fd-r-S fd-c-XS mt-0-S mt-15-XS" v-if="getIsBorrow && !getBorrowOrPay">
+        <div class="w-50-S w-100-XS mr-2-L mr-2-S mr-0-XS">
+          <AmButton color="mcolor-200" bColor="mcolor-100" opacityEffect full @click="reset">
+            reset
+          </AmButton>
+        </div>
+        <div class="w-50-S w-100-XS ml-2-L ml-2-S ml-0-XS mt-0-S mt-8-XS">
+          <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full >
+            confirm
+          </AmButton>
+        </div>
+      </div>
+      <!-- <div class="w-100 mt-4" v-if="getIsBorrow">
         <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full @click="updateTroveFunc">
           update trove
         </AmButton>
@@ -79,7 +98,7 @@
         <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full @click="closeTroveFunc">
           Close trove
         </AmButton>
-      </div>
+      </div> -->
     </div>
     <div class="w-100 h-100 p-a l-0 t-0 fd-r ai-c jc-c" v-if="getLoading">
       <Loading />
@@ -110,13 +129,17 @@ export default {
       return this.$accessor.borrowing.loading
     },
     getIsBorrow () {
-      return this.$accessor.borrowing.troveId
+      return true
+      //return this.$accessor.borrowing.troveId
     },
     getDebt () {
       return this.$accessor.borrowing.debt || 0
     },
     getBorrowAmount () {
       return this.$accessor.borrowing.trove.amountToClose || 0
+    },
+    getBorrowOrPay () {
+        return this.$accessor.borrowing.borrowOrPay
     }
   },
   watch: {
@@ -169,7 +192,12 @@ export default {
         this.$accessor.borrowing.closeTrove({mint: this.mint, amount: this.to})
         this.mint = null
       }
-    }
+    },
+    // For updating the borrow or pay
+    changeBorrowOrPayFunc () {
+         this.$accessor.borrowing.changeBorrowOrPay(this.$accessor.borrowing.borrowOrPay)
+    } 
+
   },
   mounted() {
     if(this.getIsBorrow) {

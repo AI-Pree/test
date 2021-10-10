@@ -1,7 +1,6 @@
 <template>
 <div class = "w-100 fd-c ai-c py-6">
   <div class="w-75-L w-90-M w-80-S fd-c ai-c py-6">
-    <Header />
     <Future />
     <DefiFeatures />
     <Hgen />

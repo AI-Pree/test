@@ -11,11 +11,11 @@
         <Info />
       </div>
     </div>
-    <div class="w-100 fd-r jc-c pt-10-S pt-30-XS">
+    <!-- <div class="w-100 fd-r jc-c pt-10-S pt-30-XS">
       <AmButton color="mcolor-200" bColor="mcolor-100" opacityEffect>
         How to use Safe Pool <img src="@/assets/svg/my/arrow-r.svg" class="w-fix-s-3 ml-1" />
       </AmButton>
-    </div>
+    </div> -->
   </div>
 </template>
 

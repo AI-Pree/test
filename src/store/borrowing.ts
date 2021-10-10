@@ -14,7 +14,8 @@ export const state = () => ({
   trove: {"troveAccountPubkey":""},
   debt: 0,
   loading: false,
-  loadingSub: false
+  loadingSub: false,
+  borrowOrPay: true,
 })
 
 // Getters
@@ -41,6 +42,10 @@ export const mutations = mutationTree(state, {
 
   setLoadingSub (state, newValue: boolean) {
     state.loadingSub = newValue
+  },
+
+  setBorrowOrPay (state, newValue: boolean) {
+      state.borrowOrPay = newValue
   }
 })
 
@@ -149,6 +154,11 @@ export const actions = actionTree(
           commit('setLoadingSub', false)
         })
       }
+    },
+
+    // Change the deposit and withdraw tab
+    async changeBorrowOrPay ({ state, commit }, value) {
+        commit('setBorrowOrPay', !value)
     }
   }
 )

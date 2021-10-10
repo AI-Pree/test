@@ -1,7 +1,7 @@
 <template>
   <div class="w-90-S w-100-XS h-100min fd-c l-0-S">
     <div class="w-100 fs-8-S fs-25-XS fw-600 f-white-200 pb-5-S pb-10-XS ta-c">
-      Safe Pool
+      Pool
     </div>
     <div class="w-100 fs-6-S fs-20-XS f-white-200 pb-8-S pb-15-XS ta-c px-10-S px-0-XS">
       You can earn SOL and HGEN coins by depositing GENS

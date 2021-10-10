@@ -39,7 +39,7 @@ export default {
   // nuxt scroll behaviour for anchoring
   router: {
     scrollBehavior: async function(to, from, savedPosition) {
-      const ADDITIONAL_OFFSET = 70;
+      const ADDITIONAL_OFFSET = 80;
       if (savedPosition) {
         return savedPosition;
       }

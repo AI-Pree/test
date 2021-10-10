@@ -17,7 +17,8 @@ export const state = () => ({
   rewardHgenAmount: 0,
   rewardGensAmount: 0,
   depositAmount: 0,
-  loading: false
+  loading: false,
+  depositOrWithdraw: true,
 })
 
 // Getters
@@ -49,6 +50,9 @@ export const mutations = mutationTree(state, {
   setLoading (state, newValue: boolean) {
     state.loading = newValue
   },
+  setDepositOrWithdraw(state, newValue: boolean) {
+      state.depositOrWithdraw = newValue
+  }
 })
 
 // Actions
@@ -167,6 +171,11 @@ export const actions = actionTree(
           })
         }
       }
+    },
+
+    // Change the deposit and withdraw tab
+    async changeWithdrawAndDeposit ({ state, commit }, value) {
+        commit('setDepositOrWithdraw', !value)
     }
   }
 )

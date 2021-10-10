@@ -1,5 +1,9 @@
 <template>
   <div class="w-100">
+    <div class="w-100 fs-8-S fs-25-XS fw-600 f-white-200 pb-0-L pb-0-M pb-8-S pb-15-XS ta-l-S ta-c-XS">
+        <Balance />
+    </div>
+    <AmDivider class="my-4-S my-10-XS" />
     <div class="w-100" v-if="!getIsBorrow">
       <div class="w-100 f-mcolor-500 fs-12-S fs-30-XS fw-600 ta-l-S ta-c-XS">
         {{ getDebt }} %
@@ -76,11 +80,13 @@
 
 <script>
 import Hint from '@/components/Hint'
+import Balance from '@/components/my/borrowing/Balance.vue'
 import { getCollateral } from "@/utils/layout"
 
 export default {
   components: {
-    Hint
+    Hint,
+    Balance
   },
   props: {
     to: {type: Number, default: null},

@@ -6,9 +6,6 @@
       <div class="w-75-L w-75-M w-75-S w-100-XS fd-r jc-c">
         <div class="w-20-L w-20-M w-15-S w-0-XS fsh-0 z-10 pt-5 ">
           <Sidebar class="r-fix-s-15-M" />
-          <div class="w-100 pl-10 d-f-S d-n-XS">
-            <Balance />
-          </div>
         </div>
         <div class="w-80-L w-80-M w-85-S w-100-XS fd-r jc-r">
           <div class="w-95-L w-95-M w-95-S w-100-XS px-0-S px-20-XS pt-8-S pt-50-XS">
