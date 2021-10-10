@@ -41,7 +41,7 @@
       </div>
       <AmDivider class="mt-5-S mt-10-XS mb-2-S mb-10-XS" />
     </div>
-    <div class="w-100" v-if="!getWithdrawOrDeposit">
+    <div class="w-100" v-if="getIsBorrow && !getWithdrawOrDeposit">
       <div class="w-100 f-white-200 fs-8-S fs-25-XS fw-600 ta-l-S ta-c-XS">
         Amount Remained
       </div>
@@ -75,11 +75,11 @@
     </div>
     <div class="w-100 fd-r pt-4-S pt-10-XS">
       <div :class="{'w-100-S w-100-XS': getIsBorrow, 'w-100': !getIsBorrow}">
-        <div class="w-100 fs-6-S fs-20-XS f-gray-600 pb-2-S pb-10-XS ta-l-S ta-c-XS">
+        <div class="w-100 fs-6-S fs-20-XS fw-400 f-gray-500 fd-r ai-c">
           Fee
         </div>
         <div class="w-100 fs-6-S fs-20-XS f-white-200 ta-l-S ta-c-XS fd-r pb-2-S pb-10-XS">
-          <div class = "w-100">
+          <div class = "w-100 fs-6-S fs-20-XS fw-400 f-gray-500 fd-r ai-c">
             <span class="fs-8-S fs-25-XS fw-800 f-mcolor-100">{{ getFee }}</span>
             <span class="fs-8-S fs-25-XS fw-600 px-1">%</span>
           </div>
@@ -90,7 +90,7 @@
         </div>
       </div>
     </div>
-    <div class="w-100" v-if="getIsBorrow">
+    <div class="w-100" v-if="getIsBorrow && getWithdrawOrDeposit">
       <!-- <div class="w-100 f-white-200 fs-6-S fs-20-XS fw-600 pt-4-S pt-12-XS pb-4-S pb-12-XS ta-l-S ta-c-XS">
         You will receive GENS stable coin.
       </div> -->
@@ -170,8 +170,8 @@ export default {
       return this.$accessor.borrowing.trove.borrowAmount ?
         getCollateral(this.$accessor.borrowing.trove.borrowAmount.toString(), this.$accessor.borrowing.trove.lamports.toString(), parseInt(this.$accessor.usd).toString()) : 0;
     },
-    getWithdrawOrDeposit () {
-        console.log(this.$accessor.borrowing.depositOrWithdraw)
+    async getWithdrawOrDeposit () {
+        return this.$accessor.borrowing.depositOrWithdraw
     }
   }
 }

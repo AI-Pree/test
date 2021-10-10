@@ -16,7 +16,7 @@
     </div>
     <AmDivider class="my-4-S my-10-XS" />
     <div class="w-100 fs-8-S fs-25-XS fw-600 f-white-200 pb-8-S pb-15-XS ta-l-S ta-c-XS">
-      You current earnings
+      Your current earnings
     </div>
     <div class="w-100 fs-6-S fs-20-XS fw-600 f-white-200 pb-2-S pb-10-XS fd-r ai-c jc-l-S jc-c-XS">
       1. Liquidation Incentive

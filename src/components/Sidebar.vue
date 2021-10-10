@@ -14,6 +14,8 @@
           <PieActiveSvg class="w-fix-10-S w-80-XS" v-if="item.id === 4 && getActive(item)" />
           <CoinsSvg class="w-fix-10-S w-80-XS" v-if="item.id === 5 && !getActive(item)" />
           <CoinsActiveSvg class="w-fix-10-S w-80-XS" v-if="item.id === 5 && getActive(item)" />
+          <CoinsSvg class="w-fix-10-S w-80-XS" v-if="item.id === 6 && !getActive(item)" />
+          <CoinsActiveSvg class="w-fix-10-S w-80-XS" v-if="item.id === 6 && getActive(item)" />
         </div>
         <span class="fs-5-S fs-4-XS ts-3 pt-0-M pt-0-S pt-2-XS d-f-S d-n-XS" :class="{'f-mcolor-300 fw-600': getActive(item), 'f-white-200 fw-400': !getActive(item)}">
           {{ item.name }}
@@ -66,7 +68,8 @@ export default {
         {id: 3, name: 'Swap', to: '/my/swap', class: 'my-swap'},
         {id: 2, name: 'Borrowing', to: '/my/borrowing', class: 'my-borrowing'},
         {id: 4, name: 'Pool', to: '/my/pool', class: 'my-pool'},
-        {id: 5, name: 'Risky trove', to: '/my/risky', class: 'my-risky'},
+        {id: 6, name: 'Farm', to: '/my/farming', class: 'my-farming'},
+        //{id: 5, name: 'Risky trove', to: '/my/risky', class: 'my-risky'},
       ]
     }
   }
