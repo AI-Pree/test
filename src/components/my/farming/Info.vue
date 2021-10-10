@@ -21,7 +21,7 @@
       <span class="f-mcolor-300 pr-2">{{getHgen}}</span> HGEN <span class="fs-5-S fs-20-XS pl-2">(<span class="f-mcolor-100">1.50%</span> Daily)</span>
     </div>
     <AmDivider class="my-4-S my-10-XS" />
-    <div class="w-100 fs-8-S fs-25-XS fw-600 f-white-200 pb-8-S pb-15-XS ta-l-S ta-c-XS">
+    <div class="w-100 fs-8-S fs-25-XS fw-600 f-white-200 pb-5-S pb-15-XS ta-l-S ta-c-XS">
       Your current Farmings
     </div>
     <div class="w-100">

@@ -13,7 +13,7 @@
         </div>
         <div class="w-100 fd-r ai-c">
           <span class="w-15-S w-25-XS fs-6-S fs-20-XS fw-600 f-white-200 fsh-0">SOL</span>
-          <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-6-S fs-20-XS fw-600 f-mcolor-300" placeholder="0" v-model="from" />
+          <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-6-S fs-20-XS fw-600 f-mcolor-300" placeholder="0.0000" v-model="from" maxlength="12" />
           <span class="fs-6 f-mcolor-100 td-u ts-3 hv d-n-XS fsh-0">Max</span>
         </div>
       </div>
@@ -23,7 +23,7 @@
         </div>
         <div class="w-100 fd-r ai-c">
           <span class="w-15-S w-25-XS fs-6-S fs-20-XS fw-600 f-white-200 fsh-0">HGEN</span>
-          <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-6-S fs-20-XS fw-600 f-mcolor-300" placeholder="0" v-model="from" />
+          <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-6-S fs-20-XS fw-600 f-mcolor-300" placeholder="0" v-model="to" />
           <span class="fs-6 f-mcolor-100 td-u ts-3 hv d-n-XS fsh-0">Max</span>
         </div>
       </div>
@@ -39,12 +39,12 @@
       </div>
       <div class="w-100 fd-r-S fd-c-XS pt-4-S pt-20-XS" v-if="getDepositKey">
         <div class="w-50-S w-100-XS mr-2-S mr-0-XS">
-          <AmButton color="mcolor-200" bColor="mcolor-100" opacityEffect full @click="reset" v-if="getDepositKey">
+          <AmButton color="mcolor-200" bColor="mcolor-100" opacityEffect full v-if="getDepositKey">
             cancel
           </AmButton>
         </div>
         <div class="w-50-S w-100-XS ml-2-S ml-0-XS mt-0-S mt-4-XS mt-0-S mt-10-XS">
-          <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full @click="depositFunc" v-if="getDepositKey">
+          <AmButton color="mcolor-100" bColor="mcolor-100" opacityEffect full v-if="getDepositKey">
             confirm
           </AmButton>
         </div>
@@ -67,10 +67,14 @@ export default {
     return {
       gen: '',
       hgen: '',
-      from: null
+      from: null,
+      to: null,
     }
   },
   computed: {
+    getUsd () {
+      return this.$accessor.usd || 0
+    },
     getDepositKey () {
       return true
       // return this.$accessor.pool.depositKey
@@ -89,32 +93,13 @@ export default {
     },
   },
   watch: {
-    from (val) {
-      if (val) {
-        this.from = val.toString().replace(/[^+\d]/g, '')
-        if (this.from.length > 1 && this.from.substr(0, 1) === '0') {
-          this.from = 1
-        }
-      }
-    }
   },
   methods: {
     reset () {
       this.from = null
       this.to = null
     },
-    depositFunc () {
-      if (this.getDepositKey) {
-        this.$accessor.pool.addDeposit({from: this.from})
-      } else {
-        this.$accessor.pool.newDeposit({from: this.from, gen: this.gen, hgen: this.hgen})
-      }
-      this.from = null
-    },
-    closeDepositFunc () {
-      this.$accessor.pool.closeDeposit(this.from)
-      this.from = null
-    },
+    farmFunc() {}
   }
 }
 </script>
