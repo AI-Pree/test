@@ -45,7 +45,7 @@ export const mutations = mutationTree(state, {
   },
 
   setBorrowOrPay (state, newValue: boolean) {
-      state.borrowOrPay = newValue
+    state.borrowOrPay = newValue
   }
 })
 
@@ -157,8 +157,9 @@ export const actions = actionTree(
     },
 
     // Change the deposit and withdraw tab
-    async changeBorrowOrPay ({ state, commit }, value) {
-        commit('setBorrowOrPay', !value)
+    async changeBorrowOrPay ({ commit }, value) {
+        let newValue = !value;
+        commit('setBorrowOrPay', newValue)
     }
   }
 )

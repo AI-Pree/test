@@ -109,6 +109,8 @@
 <script>
 import Loading from '@/components/Loading'
 
+
+
 export default {
   components: {
     Loading
@@ -118,7 +120,7 @@ export default {
       from: null,
       to: null,
       mint: '',
-      borrow: 0
+      borrow: 0,
     }
   },
   computed: {
@@ -161,7 +163,7 @@ export default {
       }
       this.$emit('gens', this.to)
       this.$accessor.borrowing.getDebt({from: this.from, to: this.to})
-    }
+    },
   },
   methods: {
     setMax () {
@@ -196,6 +198,7 @@ export default {
     // For updating the borrow or pay
     changeBorrowOrPayFunc () {
          this.$accessor.borrowing.changeBorrowOrPay(this.$accessor.borrowing.borrowOrPay)
+         console.log("the value changes to ", this.$accessor.borrowing.borrowOrPay)
     } 
 
   },
