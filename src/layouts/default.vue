@@ -2,11 +2,6 @@
   <div class="w-100 h-100min">
     <div class="w-100 h-100min p-f l-0 t-0 ovh-y-a bg-l" />
     <Menu @connect="setModalFunc" :publicKey="publicKey" @logout="logout" />
-    <div class = "w-100 fd-c ai-c pt-6">
-        <div class="w-75-L w-90-M w-80-S fd-c ai-c pt-6">
-            <Header @connect="setModalFunc" :publicKey="publicKey" />
-        </div>
-    </div>
     <Nuxt />
     <Footer />
     <AmModal
@@ -34,7 +29,6 @@
 <script>
 import Menu from '@/components/Menu'
 import Footer from '@/components/Footer'
-import Header from '@/components/HomeScreen/Header.vue'
 import ConnectWallet from '@/components/modals/ConnectWallet'
 import ConnectError from '@/components/modals/ConnectError'
 
@@ -43,8 +37,7 @@ export default {
     Menu,
     Footer,
     ConnectWallet,
-    ConnectError,
-    Header
+    ConnectError
   },
   computed: {
     modal () {
