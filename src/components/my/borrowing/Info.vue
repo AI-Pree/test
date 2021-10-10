@@ -4,7 +4,7 @@
         <Balance />
     </div>
     <AmDivider class="my-4-S my-10-XS" />
-    <div class="w-100" v-if="getIsBorrow && getWithdrawOrDeposit">
+    <div class="w-100" v-if="getIsBorrow && withdrawOrDeposit">
       <div class="w-100 f-mcolor-500 fs-12-S fs-30-XS fw-600 ta-l-S ta-c-XS">
         0 %
       </div>
@@ -25,7 +25,7 @@
         <span class="px-1-S px-6-XS f-mcolor-100 fw-500">{{ Number(Number(from) * getUsd).toLocaleString() }}</span> GENS
       </div>
     </div>
-    <div class="w-100" v-if="!getWithdrawOrDeposit">
+    <div class="w-100" v-if="!withdrawOrDeposit">
       <div class="w-100 f-white-200 fs-8-S fs-25-XS fw-600 ta-l-S ta-c-XS">
         Amount Received
       </div>
@@ -41,9 +41,9 @@
       </div>
       <AmDivider class="mt-5-S mt-10-XS mb-2-S mb-10-XS" />
     </div>
-    <div class="w-100" v-if="getIsBorrow && !getWithdrawOrDeposit">
+    <div class="w-100" v-if="getIsBorrow && !withdrawOrDeposit">
       <div class="w-100 f-white-200 fs-8-S fs-25-XS fw-600 ta-l-S ta-c-XS">
-        Amount Remained
+        Remaining Amount
       </div>
       <div class="w-100 fd-r pt-4-S pt-10-XS fw-w">
         <div class="w-70-S w-100-XS">
@@ -90,7 +90,7 @@
         </div>
       </div>
     </div>
-    <div class="w-100" v-if="getIsBorrow && getWithdrawOrDeposit">
+    <div class="w-100" v-if="getIsBorrow">
       <!-- <div class="w-100 f-white-200 fs-6-S fs-20-XS fw-600 pt-4-S pt-12-XS pb-4-S pb-12-XS ta-l-S ta-c-XS">
         You will receive GENS stable coin.
       </div> -->
@@ -170,9 +170,10 @@ export default {
       return this.$accessor.borrowing.trove.borrowAmount ?
         getCollateral(this.$accessor.borrowing.trove.borrowAmount.toString(), this.$accessor.borrowing.trove.lamports.toString(), parseInt(this.$accessor.usd).toString()) : 0;
     },
-    async getWithdrawOrDeposit () {
-        return this.$accessor.borrowing.depositOrWithdraw
+    withdrawOrDeposit () {
+        console.log(`my testing is ${this.$accessor.borrowing.borrowOrPay}`)
+        return this.$accessor.borrowing.borrowOrPay
     }
-  }
+  },
 }
 </script>
