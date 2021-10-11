@@ -34,9 +34,7 @@
           </span>
         </div>
       </div>
-      <div class="w-fix-70-S w-100-XS fsh-0 ml-2-S ml-0-XS px-0-S px-20-XS mt-0-S mt-20-XS">
-        <AmSelectbox :data="languages" :update="false" :bottom="mobile" />
-      </div>
+      
     </div>
     <svg @click="open = !open" xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 20 18" fill="none" class="z-12 w-fix-40 p-a r-fix-s-25 t-fix-s-25 d-n-S d-b-s d-b-XS">
       <rect width="20" height="2" rx="1" fill="white"/>
@@ -56,8 +54,8 @@ export default{
     return {
       items: [
         {title: 'Dashboard', to: '/my'},
-        {title: 'Beginners Guide', to: '/documentation'},
-        {title: 'Documentation', to: '/documentation'},
+        {title: 'Beginners Guide', to: '/'},
+        {title: 'Documentation', to: '/'},
       ],
       languages: {
         theme: 'default',
@@ -83,7 +81,13 @@ export default{
           document.documentElement.style.overflow = 'auto'
         }
       }
+    },
+    '$route' () {
+        if (this.mobile){
+            this.open  = false
+        }
     }
+
   },
   methods: {
     resize () {

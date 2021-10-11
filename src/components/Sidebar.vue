@@ -1,5 +1,5 @@
 <template>
-  <div class="w-100 gradient-200 p-r-S p-f-XS l-0 t-0-S t-a-XS b-a-S b-0-XS pl-10-S pl-10-M pl-5-S pl-0-XS fd-c-S fd-r-XS my-2 py-2-S">
+  <div class="w-100 gradient-200 p-r-S p-f-XS l-0 t-0-S t-a-XS b-a-S b-0-XS pl-10-S pl-10-M pl-5-S pl-0-XS fd-c-S fd-r-XS mt-2 py-2-S">
     <span class="w-100 h-100 bg-r p-a l-0 t-0 d-n-S d-f-XS" />
     <div class="w-100" v-for="item in items" :key="item.class">
       <nuxt-link :to="item.to" class="w-a-M w-100-S w-100-XS fd-r-S fd-c-XS ai-c hv ts-3 my-2-S my-10-XS">
