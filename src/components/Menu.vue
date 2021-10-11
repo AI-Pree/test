@@ -91,12 +91,12 @@ export default{
   },
   methods: {
     resize () {
-      if (window.innerWidth < 769) {
+      if (window.innerWidth < 768) {
         this.mobile = true
       } else {
         this.mobile = false
       }
-      if (window.innerWidth < 769) {
+      if (window.innerWidth < 768) {
         this.open = false
       } else {
         this.open = true
