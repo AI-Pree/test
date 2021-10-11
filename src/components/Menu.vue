@@ -4,16 +4,16 @@
     <span class="w-100 h-100 p-f t-0 gradient-400 d-n-S ts-3" :class="{'l-100': !open, 'l-0': open}" />
     <div class="w-100 h-a-S h-100-XS fd-r-S fd-c-XS ai-c p-r-S p-f-XS l-0 t-0 ts-3 ovh-y-v-S ovh-y-a-XS" :class="{'l-100': !open, 'l-0': open}">
       <div class="w-100 fd-r-S fd-c-XS p-0-S p-20-XS pt-0-S pt-40-XS ai-c">
-        <div class="w-a-S w-100-XS fsh-0 px-0-S px-20-XS mr-4 fd-r jc-c">
+        <div class="w-a-S w-100-XS fsh-0 px-0-S px-20-XS mr-4 fd-r jc-c mb-5-XS">
             <img src="@/assets/svg/company_logo.png" class="h-fix-15-S h-fix-55-XS" />
         </div>
-        <nuxt-link class="w-a f-gray-600 fw-500 fs-5-M fs-7-S fs-25-XS link hv ts-3 mr-4 my-0-S my-10-XS" v-for="(item, i) in items" :key="i" :to="item.to">
+        <nuxt-link class="w-a f-gray-600 fw-500 fs-5-M fs-7-S fs-25-XS link hv ts-3 mr-4 my-0-S my-10-XS" v-for="(item, i) in items" :key="i" :to="item.to" @click.native="togglemenu">
           {{ item.title }}
         </nuxt-link>
-        <nuxt-link class="w-a f-gray-600 fw-500 fs-5-M fs-7-S fs-25-XS link hv ts-3 mr-4 my-0-S my-10-XS" :to="{path: '/', hash: '#tokenomics'}">
+        <nuxt-link class="w-a f-gray-600 fw-500 fs-5-M fs-7-S fs-25-XS link hv ts-3 mr-4 my-0-S my-10-XS" :to="{path: '/', hash: '#tokenomics'}"  @click.native="togglemenu">
           Tokenomics
         </nuxt-link>
-        <nuxt-link class="w-a f-gray-600 fw-500 fs-5-M fs-7-S fs-25-XS link hv ts-3 mr-4 my-0-S my-10-XS" to="/whitepaper">
+        <nuxt-link class="w-a f-gray-600 fw-500 fs-5-M fs-7-S fs-25-XS link hv ts-3 mr-4 my-0-S my-10-XS" to="/whitepaper"  @click.native="togglemenu">
           Whitepaper
         </nuxt-link>
       </div>
@@ -82,25 +82,31 @@ export default{
         }
       }
     },
-    '$route' () {
-        if (this.mobile){
-            this.open  = false
-        }
-    }
+    // '$route' () {
+    //     if (this.mobile){
+    //          this.open  = false
+    //     }
+    //  }
 
   },
   methods: {
     resize () {
-      if (window.innerWidth < 600) {
+      if (window.innerWidth < 769) {
         this.mobile = true
       } else {
         this.mobile = false
       }
-      if (window.innerWidth < 600) {
+      if (window.innerWidth < 769) {
         this.open = false
       } else {
         this.open = true
       }
+    },
+    togglemenu () {
+        if(this.mobile){
+            this.open = !open
+            console.log(this.open)
+        }
     }
   },
   mounted () {

@@ -4,7 +4,7 @@
       <div class="w-100 fs-8-S fs-25-XS fw-600 f-white-200 pb-2-S pb-10-XS ta-c-XS">
         Pool
       </div>
-      <div class="w-100 fs-5-S fs-20-XS f-gray-500 pb-2-S pb-10-XS ta-c-XS" v-if="getDepositKey">
+      <div class="w-100 fs-5-S fs-20-XS f-gray-500 pb-1-S pb-5-XS ta-c-XS" v-if="getDepositKey">
         Your current pool share
       </div>
       <div class="w-100 fs-6-S fs-20-XS f-white-200 ta-c-XS pb-2-S pb-10-XS" v-if="getDepositKey">
@@ -12,7 +12,7 @@
         (<span class="fw-800 f-mcolor-100">{{getPercent.toLocaleString()}}</span>
         <span class="fw-600 px-1">%)</span>
       </div>
-      <div class="w-100 pt-6-S pb-15-XS fd-r-S fd-c-XS">
+      <div class="w-100 pt-6-S pb-15-XS fd-r-S fd-r-XS">
         <div class="w-50-S w-100-XS mr-2-L mr-2-S mr-0-XS">
           <AmButton color="mcolor-200" bColor="mcolor-100" full v-if="!getWithdrawOrDeposit" @click="changeWithdrawFunc">
             Depost
@@ -21,7 +21,7 @@
             Deposit
           </AmButton>
         </div>
-        <div class="w-50-S w-100-XS ml-2-L ml-2-S ml-0-XS mt-0-S mt-8-XS">
+        <div class="w-50-S w-100-XS ml-2-L ml-2-S ml-0-XS">
           <AmButton color="gray-800" bColor="gray-800" colorText="gray-500" full disabled v-if="!getWithdrawOrDeposit">
             Withdraw
           </AmButton>
@@ -30,7 +30,7 @@
           </AmButton>
         </div>
       </div>
-      <div class="w-100 my-2-S my-10-XS mcolor-700 rad-fix-2 px-4-S px-10-XS py-3-S py-10-XS" v-if="!getWithdrawOrDeposit">
+      <div class="w-100  mt-4 mb-2 mcolor-700 rad-fix-2 px-4-S px-10-XS py-3-S py-10-XS" v-if="!getWithdrawOrDeposit">
         <div class="w-100 fs-5-S fs-20-XS f-gray-600 pb-1-S pb-5-XS">
           Set amount you want to withdraw
         </div>
@@ -40,7 +40,7 @@
           <span class="fs-6 f-mcolor-100 td-u ts-3 hv d-n-XS fsh-0"><span class="fw-600 px-1">0%</span></span>
         </div>
       </div>
-      <div class="w-100 my-2-S my-10-XS mcolor-700 rad-fix-2 px-4-S px-10-XS py-3-S py-10-XS" v-if="getWithdrawOrDeposit && getDepositKey">
+      <div class="w-100  mt-4 mb-2 mcolor-700 rad-fix-2 px-4-S px-10-XS py-3-S py-10-XS" v-if="getWithdrawOrDeposit && getDepositKey">
         <div class="w-100 fs-5-S fs-20-XS f-gray-600 pb-1-S pb-5-XS">
           Set amount you want to deposit
         </div>

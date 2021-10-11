@@ -1,6 +1,6 @@
 <template>
   <div class="w-100">
-    <div class="w-100 fd-r fw-w pt-0-S pt-30-XS">
+    <div class="w-100 fd-r fw-w pt-0-S">
       <div class="w-55-S w-100-XS">
         <Safe @confirmFunc="confirmFunc" />
       </div>

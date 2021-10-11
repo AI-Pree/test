@@ -4,7 +4,7 @@
       <div class="w-100 fs-8-S fs-25-XS fw-600 f-white-200 pb-4-S pb-15-XS ta-c-XS">
         Borrowing
       </div>
-      <div class="w-100 pt-6-S pb-15-XS fd-r-S fd-c-XS">
+      <div class="w-100 pt-6-S pb-15-XS fd-r-S fd-r-XS">
         <div class="w-50-S w-100-XS mr-2-L mr-2-S mr-0-XS">
           <AmButton color="mcolor-200" bColor="mcolor-100" full v-if="getIsBorrow && !getBorrowOrPay" @click="changeBorrowOrPayFunc">
             Borrow
@@ -13,7 +13,7 @@
             Borrow
           </AmButton>
         </div>
-        <div class="w-50-S w-100-XS ml-2-L ml-2-S ml-0-XS mt-0-S mt-8-XS">
+        <div class="w-50-S w-100-XS ml-2-L ml-2-S ml-0-XS ">
           <AmButton color="gray-800" bColor="gray-800" colorText="gray-500" full disabled v-if="getIsBorrow && !getBorrowOrPay">
             Pay Debt
           </AmButton>
