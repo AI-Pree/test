@@ -7,7 +7,7 @@
       <div class="w-100 fs-5-S fs-20-XS f-gray-500 pb-1-S pb-5-XS ta-c-XS" v-if="getDepositKey">
         Your current pool share
       </div>
-      <div class="w-100 fs-6-S fs-20-XS f-white-200 ta-c-XS pb-2-S pb-10-XS" v-if="getDepositKey">
+      <div class="w-100 fs-6-S fs-20-XS f-white-200 ta-c-XS pb-2-S pb-10-XS mb-10-XS" v-if="getDepositKey">
         <span class="fs-8-S fs-25-XS f-mcolor-100 fw-800 pr-1">{{getDepositAmount.toLocaleString()}}</span> GENS
         (<span class="fw-800 f-mcolor-100">{{getPercent.toLocaleString()}}</span>
         <span class="fw-600 px-1">%)</span>
@@ -37,7 +37,7 @@
         <div class="w-100 fd-r ai-c">
           <span class="w-15-S w-25-XS fs-6-S fs-20-XS fw-600 f-white-200 fsh-0">GENS</span>
           <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-6-S fs-20-XS fw-600 f-mcolor-300" placeholder="0" v-model="from" />
-          <span class="fs-6 f-mcolor-100 td-u ts-3 hv d-n-XS fsh-0"><span class="fw-600 px-1">0%</span></span>
+          <span class="fs-6 f-mcolor-100 td-u ts-3 hv d-n-XS fsh-0">Close Lend</span>
         </div>
       </div>
       <div class="w-100  mt-4 mb-2 mcolor-700 rad-fix-2 px-4-S px-10-XS py-3-S py-10-XS" v-if="getWithdrawOrDeposit && getDepositKey">

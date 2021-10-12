@@ -2,7 +2,15 @@
   <div class="w-100 br-6 gradient-200 rad-fix-8 p-8-S p-20-XS">
     <div class="w-100" :class="{'op-0': getLoading}">
       <div class="w-100 fs-8-S fs-25-XS fw-600 f-white-200 pb-4-S pb-15-XS ta-c-XS">
-        Borrowing
+        Borrow
+      </div>
+      <div class="w-100 fs-5-S fs-20-XS f-gray-500 pb-1-S pb-5-XS ta-c-XS" v-if="getIsBorrow">
+        Your current debt share
+      </div>
+      <div class="w-100 fs-6-S fs-20-XS f-white-200 ta-c-XS pb-2-S pb-10-XS ta-c-XS mb-10-XS" v-if="getIsBorrow">
+        <span class="fs-8-S fs-25-XS f-mcolor-100 fw-800 pr-1">{{getDebt.toLocaleString()}}</span> GENS
+        (<span class="fw-800 f-mcolor-100">{{getPercent.toLocaleString()}}</span>
+        <span class="fw-600 px-1">% CR)</span> 
       </div>
       <div class="w-100 pt-6-S pb-15-XS fd-r-S fd-r-XS">
         <div class="w-50-S w-100-XS mr-2-L mr-2-S mr-0-XS">
@@ -73,7 +81,7 @@
         </div>
         <div class="w-100 fd-r ai-c">
           <span class="w-15-S w-25-XS fs-6-S fs-20-XS fw-600 f-white-200 fsh-0">SOL</span>
-          <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-6-S fs-20-XS fw-600 f-mcolor-300" placeholder="0.0000" v-model="from" maxlength="12" />
+          <input type="text" class="w-100 mx-1 white-100 br-0 oul-n fs-6-S fs-20-XS fw-600 f-mcolor-300" placeholder="0.0000" v-model="repayTo" maxlength="12" />
           <span class="fs-6-S fs-20-XS f-mcolor-100 td-u ts-3 hv d-n-XS fsh-0">Close Borrow</span>
         </div>
       </div>
@@ -119,11 +127,19 @@ export default {
     return {
       from: null,
       to: null,
+      repayTo:null,
       mint: '',
       borrow: 0,
     }
   },
   computed: {
+    // for the CR percent
+    getPercent() {
+        return 0
+    },
+    getDebt () {
+      return this.$accessor.borrowing.debt || 0
+    },
     getUsd () {
       return this.$accessor.usd || 0
     },

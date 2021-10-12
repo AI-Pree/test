@@ -1,26 +1,32 @@
 <template>
   <div class="w-100">
+    <div class="w-100 f-mcolor-300 fw-800 fs-15-S fs-30-XS ta-c pt-5-S pt-20-XS pb-1-S pb-3-XS">
+      <span class="f-white-200 pr-3">$</span>{{ getTotal }}
+    </div>
+    <div class="w-100 f-white-200 fw-400 fs-6-S fs-20-XS ta-c pb-10-S pb-30-XS">
+      Total Deposited Value (Total Value Locked)
+    </div>
     <div class="w-100 fd-r-S fd-c-XS ai-s">
       <div class="w-50-S w-100-XS br-6 gradient-200 rad-fix-8 p-6-S p-20-XS mr-8">
         <Borrowing />
       </div>
-      <div class="w-50-S w-100-XS p-6-S p-20-XS fsh-0 pt-0-L pt-10-S pt-40-XS">
+      <div class="w-50-S w-100-XS gradient-200 rad-fix-8 p-6-S p-20-XS fsh-0 mt-40-XS">
         <Pool />
       </div>
     </div>
-    <div class="w-100 f-mcolor-300 fw-800 fs-15-S fs-35-XS ta-c pt-12-S pt-30-XS pb-2-S pb-5-XS">
+    <!-- <div class="w-100 f-mcolor-300 fw-800 fs-15-S fs-35-XS ta-c pt-12-S pt-30-XS pb-2-S pb-5-XS">
       <span class="f-white-200 pr-3">$</span>{{ getTotal }}
     </div>
     <div class="w-100 f-white-200 fw-400 fs-6-S fs-25-XS ta-c pb-10-S pb-30-XS">
       Total Deposited Value (Total Value Locked)
-    </div>
+    </div> -->
     <div class="w-100 fd-r-S fd-c-XS ai-s">
-      <div class="w-50-S w-100-XS br-6 brs-s br-mcolor-300 shadow-purple-100 p-6-S p-20-XS rad-fix-8-S rad-fix-20-XS mr-2-S">
+      <!-- <div class="w-50-S w-100-XS br-6 brs-s br-mcolor-300 shadow-purple-100 p-6-S p-20-XS rad-fix-8-S rad-fix-20-XS mr-2-S">
         <Current />
-      </div>
-      <div class="w-50-S w-100-XS gradient-500 p-6-S p-20-XS rad-fix-8-S rad-fix-20-XS ml-2-S mt-0-S mt-20-XS">
+      </div> -->
+      <div class="w-50-S w-100-XS gradient-200 p-6-S p-20-XS rad-fix-8-S rad-fix-20-XS  mt-5-S mt-20-XS">
         <Farming />
-        <img src="@/static/my-farming.png" class="h-100 p-a r-0 t-0" />
+        <!-- <img src="@/static/my-farming.png" class="h-100 p-a r-0 t-0" /> -->
       </div>
     </div>
   </div>

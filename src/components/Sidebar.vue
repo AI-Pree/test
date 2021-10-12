@@ -1,5 +1,5 @@
 <template>
-  <div class="w-100 gradient-200 p-r-S p-f-XS l-0 t-0-S t-a-XS b-a-S b-0-XS pl-10-M pl-5-S pl-0-XS fd-c-S fd-r-XS mt-2 py-2-S">
+  <div class="w-100 br-sb bs-sb gradient-200  p-r-S p-f-XS l-0 t-0-S t-a-XS b-a-S b-0-XS pl-10-M pl-5-S pl-0-XS fd-c-S fd-r-XS mt-2 py-2-S">
     <span class="w-100 h-100 bg-r p-a l-0 t-0 d-n-S d-f-XS" />
     <div class="w-100" v-for="item in items" :key="item.class">
       <nuxt-link :to="item.to" class="w-a-M w-100-S w-100-XS fd-r-S fd-c-XS ai-c hv ts-3 my-2-S my-10-XS">
@@ -66,12 +66,22 @@ export default {
       items: [
         {id: 1, name: 'Dashboard', to: '/my', class: 'my'},
         {id: 3, name: 'Swap', to: '/my/swap', class: 'my-swap'},
-        {id: 2, name: 'Borrowing', to: '/my/borrowing', class: 'my-borrowing'},
+        {id: 2, name: 'Borrow', to: '/my/borrowing', class: 'my-borrowing'},
         {id: 4, name: 'Pool', to: '/my/pool', class: 'my-pool'},
         {id: 6, name: 'Farm', to: '/my/farming', class: 'my-farming'},
-        //{id: 5, name: 'Risky trove', to: '/my/risky', class: 'my-risky'},
+        {id: 5, name: 'Liquidation', to: '/my/liquidation', class: 'my-risky'},
       ]
     }
   }
 }
 </script>
+
+// custom css for sidebar
+<style lang="scss">
+.bs-sb {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+.br-sb {
+    border-radius: 15px;
+}
+</style>

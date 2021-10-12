@@ -1,12 +1,15 @@
 <template>
 <div class = "w-100 fd-r jc-c">
-  <div class="w-75 w-100-XS h-a-S h-100-XS fd-r py-5 px-10 z-10">
+  <div class="w-100 w-100-XS h-a-S h-100-XS fd-r py-5 px-10 z-10 bs-menu">
     <span class="w-100 h-100 p-f t-0 gradient-400 d-n-S ts-3" :class="{'l-100': !open, 'l-0': open}" />
     <div class="w-100 h-a-S h-100-XS fd-r-S fd-c-XS ai-c p-r-S p-f-XS l-0 t-0 ts-3 ovh-y-v-S ovh-y-a-XS" :class="{'l-100': !open, 'l-0': open}">
       <div class="w-100 fd-r-S fd-c-XS p-0-S p-20-XS pt-0-S pt-40-XS ai-c">
         <div class="w-a-S w-100-XS fsh-0 px-0-S px-20-XS mr-4 fd-r jc-c mb-5-XS">
-            <img src="@/assets/svg/company_logo.png" class="h-fix-15-S h-fix-55-XS" />
+           <nuxt-link to='/'> <img src="@/assets/svg/company_logo.png" class="h-fix-15-S h-fix-55-XS" v-if="showLogo"  /></nuxt-link>
         </div>
+        <nuxt-link class="w-a f-gray-600 fw-500 fs-5-M fs-7-S fs-25-XS link hv ts-3 mr-4 my-0-S my-10-XS" :to="{path: '/my'}"  @click.native="togglemenu">
+          Dasboard
+        </nuxt-link>
         <nuxt-link class="w-a f-gray-600 fw-500 fs-5-M fs-7-S fs-25-XS link hv ts-3 mr-4 my-0-S my-10-XS" v-for="(item, i) in items" :key="i" :to="item.to" @click.native="togglemenu">
           {{ item.title }}
         </nuxt-link>
@@ -53,7 +56,7 @@ export default{
   data () {
     return {
       items: [
-        {title: 'Dashboard', to: '/my'},
+        
         {title: 'Beginners Guide', to: '/'},
         {title: 'Documentation', to: '/'},
       ],
@@ -69,7 +72,8 @@ export default{
         colorTitle: 'white-200'
       },
       mobile: false,
-      open: true
+      open: true,
+      showLogo: false,
     }
   },
   watch: {
@@ -87,6 +91,19 @@ export default{
     //          this.open  = false
     //     }
     //  }
+    '$route' () {
+        if (this.$route.fullPath === '/' || this.$route.fullPath === "/#tokenomics"){
+          this.showLogo = false
+        }
+        else if(this.$route.fullPath === '/my') {
+            this.showLogo = true
+        }
+        else {
+            this.showLogo = true
+        }
+        console.log(this.$route.fullPath)
+        console.log('the value changes',this.showLogo)
+     }
 
   },
   methods: {
@@ -107,6 +124,9 @@ export default{
             this.open = !open
             console.log(this.open)
         }
+    },
+    toggleLogo() {
+        this.showLogo = true
     }
   },
   mounted () {
@@ -115,3 +135,10 @@ export default{
   }
 }
 </script>
+
+// custom css for menu
+<style lang="scss">
+.bs-menu {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+</style>

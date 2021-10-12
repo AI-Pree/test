@@ -1,11 +1,19 @@
 <template>
   <div class="w-100 br-6 gradient-200 rad-fix-8 p-8-S p-20-XS">
     <div class="w-100" :class="{'op-0': getLoading}">
-      <div class="w-100 fs-8-S fs-25-XS fw-600 f-white-200 pb-2-S pb-10-XS ta-c-XS">
-        Farm
+      <div class = "w-100 fd-r">
+        <!-- <span class="fs-6 f-mcolor-100  ts-3 hv d-n-XS fsh-0">Close</span> -->
+        <div class="w-80 fs-8-S fs-25-XS fw-600 f-white-200 pb-4-S pb-10-XS ta-l-S ta-l-XS">
+            Farms
+        </div>
+        <span class="w-20 fs-6-S fs-25-XS f-mcolor-100  ts-3 hv fsh-0 ta-r-S" @click="closeList" v-if="getToggleValue">Close</span>
+        <span class="w-20 fs-6-S fs-25-XS f-mcolor-100  ts-3 hv fsh-0 ta-r-S" @click="openList" v-if="!getToggleValue">Open</span>        
       </div>
+      <div class = "w-100" v-if="getToggleValue">
       <div class="w-100 fs-5-S fs-20-XS f-gray-500 pb-2-S pb-10-XS ta-c-XS" v-if="getDepositKey">
-        <span class ="fw-600">SOL</span> <span class="fw-800 f-mcolor-100">TO</span> <span class ="fw-600">HGEN</span>
+        <span class ="fw-600"><img src="@/assets/svg/sol-logo.svg" class="h-fix-10-S h-fix-55-XS mr-2" /></span>
+        <span class="fw-600 fs-5-L fs-5-S fs-20-XS f-mcolor-100">TO</span> 
+        <span class ="fw-600"><img src="@/assets/svg/symbol-hgen.png" class="h-fix-10-S h-fix-55-XS ml-2" /></span>
       </div>
       <div class="w-100 my-2-S my-10-XS mcolor-700 rad-fix-2 px-4-S px-10-XS py-3-S py-10-XS" v-if="getDepositKey">
         <div class="w-100 fs-5-S fs-20-XS f-gray-600 pb-1-S pb-5-XS">
@@ -53,6 +61,7 @@
     <div class="w-100 h-100 p-a l-0 t-0 fd-r ai-c jc-c" v-if="getLoading">
       <Loading />
     </div>
+    </div>
   </div>
 </template>
 
@@ -69,6 +78,7 @@ export default {
       hgen: '',
       from: null,
       to: null,
+      open: true,
     }
   },
   computed: {
@@ -91,6 +101,9 @@ export default {
     getDepositeTotal () {
       return this.$accessor.totalDeposit || 0
     },
+    getToggleValue () {
+        return this.open
+    }
   },
   watch: {
   },
@@ -99,7 +112,13 @@ export default {
       this.from = null
       this.to = null
     },
-    farmFunc() {}
+    farmFunc() {},
+    openList() {
+        this.open = true        
+    },
+    closeList() {
+        this.open = false
+    }
   }
 }
 </script>

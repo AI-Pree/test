@@ -1,7 +1,7 @@
 <template>
   <div class="w-100">
     <div class="w-100 fs-10 fw-600 f-white-200 pb-10 ta-c-XS">
-      Risky trove
+      Liquidation
     </div>
     <div class="w-100 fd-r pb-6">
       <div class="fs-6 fw-500 f-white-200 pr-10">
@@ -9,7 +9,7 @@
       </div>
       <div class="fs-6 f-white-200">
         <span class="f-mcolor-300 fw-600 pr-1">{{ troveTotal }}</span>
-        MEMBERS
+        BORROWERS
       </div>
     </div>
     <div class="w-100 pb-8 fd-r-S fd-c-XS">
@@ -117,7 +117,7 @@ export default {
         colorFocus: 'white-100',
         colorTitle: 'mcolor-300',
       },
-      headers: ['Date', 'Holder', 'Collateral (SOL)', 'Debt (GENS)', 'Fee (GENS)', 'Debt Ratio', 'Liquidation Price (GENS)'],
+      headers: ['Date', 'Holder', 'Collateral (SOL)', 'Debt (GENS)', 'Fee (GENS)', 'Collateral Ratio', 'Liquidated Price (GENS)'],
       page: 1
     }
   },

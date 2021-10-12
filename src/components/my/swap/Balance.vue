@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="w-100 fd-c fw-w">
-      <div class="w-100-L w-100-M w-25-S w-100-XS">
+      <div class="w-100-L w-100-M w-100-S w-100-XS">
         <div class="w-100 fs-6-S fs-20-XS fw-600 f-white-200 fd-r">
           <div class="w-100 fs-6-S fs-20-XS fw-600 f-mcolor-100 fd-r ai-c">
             SOL
@@ -22,7 +22,7 @@
         </div>
         
       </div>
-      <div class="w-100-L w-100-M w-25-S w-100-XS my-3 my-5-XS">        
+      <div class="w-100-L w-100-M w-100-S w-100-XS my-2 my-5-XS">        
         <div class="w-100 fs-6-S fs-20-XS fw-600 f-white-200 fd-r ai-c">
           <div class="w-100 fs-6-S fs-20-XS fw-600 f-mcolor-100 fd-r ai-c">
             HGEN
@@ -34,7 +34,7 @@
         </div>
         
       </div>
-      <div class="w-100-L w-100-M w-25-S w-100-XS">        
+      <div class="w-100-L w-100-M w-100-S w-100-XS">        
         <div class="w-100 fs-6-S fs-20-XS fw-600 f-white-200 pb-3 fd-r">
           <div class="w-100 fs-6-S fs-20-XS fw-600 f-mcolor-100 fd-r ai-c">
             GENS
@@ -42,10 +42,8 @@
           <div class="w-100 fs-5-S fs-20-XS fw-500 f-gray-600 fd-r jc-r">
             {{ getBalanceGENS > 0 ? (getBalanceGENS).toLocaleString() : 0 }}
             ($ {{ getBalance > 0 ? getUsdBalance : 0 }})
-          </div>
-         
-        </div>
-        
+          </div>         
+        </div>        
       </div>
     </div>
   </div>
