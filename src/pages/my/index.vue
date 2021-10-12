@@ -1,6 +1,6 @@
 <template>
   <div class="w-100">
-    <div class="w-100 f-mcolor-300 fw-800 fs-15-S fs-30-XS ta-c pt-5-S pt-20-XS pb-1-S pb-3-XS">
+    <div class="w-100 f-mcolor-300 fw-800 fs-15-S fs-30-XS ta-c pt-20-XS pb-1-S pb-3-XS">
       <span class="f-white-200 pr-3">$</span>{{ getTotal }}
     </div>
     <div class="w-100 f-white-200 fw-400 fs-6-S fs-20-XS ta-c pb-10-S pb-30-XS">
