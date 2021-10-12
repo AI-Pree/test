@@ -8,7 +8,7 @@
         Total
       </div>
       <div class="fs-6 f-white-200">
-        <span class="f-mcolor-300 fw-600 pr-1">{{ troveTotal }}</span>
+        <span class="f-mcolor-300 fw-600 pr-1">{{totalBorrowers}}</span>
         BORROWERS
       </div>
     </div>
@@ -35,7 +35,7 @@
       </div>
       <div class="w-5 fsh-0" />
     </div>
-    <div class="w-100 fd-r ai-s br-t-4 brts-d br-mcolor-400" v-for="(data, d) in aTroveList" :key="d">
+    <!-- <div class="w-100 fd-r ai-s br-t-4 brts-d br-mcolor-400" v-for="(data, d) in aTroveList" :key="d">
       <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 fd-r ai-c jc-c w-100 f-gray-400">
         <div class="w-100 h-100 fd-r ai-c jc-c ta-c fw-400">
           {{ data.createdAt ? getDate(data.createdAt) : '' }}
@@ -72,10 +72,57 @@
         </div>
       </div>
       <div class="w-5 fsh-0 fd-r ai-c jc-c">
+        <img src="@/assets/svg/my/bin.svg" class="w-fix-s-10 hv ts-3" @click="false" />
         <img src="@/assets/svg/my/bin.svg" class="w-fix-s-10 hv ts-3" @click="binAction({trove: data, index: d})" />
       </div>
-    </div>
-    <div class="w-100 fd-r jc-c pt-10" v-if="aTroveList.length >= (page * 10) && aTroveList.length > 0">
+    </div> -->
+    <!-- <div class="w-100 fd-r ai-s br-t-4 brts-d br-mcolor-400" v-for="(data, d) in aTroveList" :key="d">
+      <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 fd-r ai-c jc-c w-100 f-gray-400">
+        <div class="w-100 h-100 fd-r ai-c jc-c ta-c fw-400">
+          {{ data.createdAt ? getDate(data.createdAt) : '' }}
+        </div>
+      </div>
+      <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 fd-r ai-c jc-c w-100 f-mcolor-300" :title="data.owner">
+        <div class="w-100 h-100 fd-r ai-c jc-c ta-c fw-400">
+          {{ data.owner.substr(0, 4) + '...' + data.owner.substr(-4) }}
+        </div>
+      </div>
+      <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 fd-r ai-c jc-c w-100 f-gray-400">
+        <div class="w-100 h-100 fd-r ai-c jc-c ta-c fw-400">
+          {{ getLamports(data.lamports) }}
+        </div>
+      </div>
+      <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 fd-r ai-c jc-c w-100 f-gray-400">
+        <div class="w-100 h-100 fd-r ai-c jc-c ta-c fw-400">
+          {{ data.borrowAmount }}
+        </div>
+      </div>
+      <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 fd-r ai-c jc-c w-100 f-gray-400">
+        <div class="w-100 h-100 fd-r ai-c jc-c ta-c fw-400">
+          {{ data.depositorFee }}
+        </div>
+      </div>
+      <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 fd-r ai-c jc-c w-100 f-gray-400">
+        <div class="w-100 h-100 fd-r ai-c jc-c ta-c fw-400">
+          {{ getCollateralFunc(data.borrowAmount.toString(), data.lamports.toString()) }}%
+        </div>
+      </div>
+      <div class="d-i fs-5 ta-c px-1 py-4 br-r-4 brrs-s br-mcolor-400 fd-r ai-c jc-c w-100 f-gray-400">
+        <div class="w-100 h-100 fd-r ai-c jc-c ta-c fw-400">
+          {{ Number(getLamports(data.lamports) * getUsd).toLocaleString() }}
+        </div>
+      </div>
+      <div class="w-5 fsh-0 fd-r ai-c jc-c">
+        <img src="@/assets/svg/my/bin.svg" class="w-fix-s-10 hv ts-3" @click="false" />
+        <img src="@/assets/svg/my/bin.svg" class="w-fix-s-10 hv ts-3" @click="binAction({trove: data, index: d})" />
+      </div>
+    </div> -->
+    <!-- <div class="w-100 fd-r jc-c pt-10" v-if="aTroveList.length >= (page * 10) && aTroveList.length > 0">
+      <AmButton :height="false" color="mcolor-100" bColor="mcolor-100" opacityEffect @click="nextPage" class="py-2">
+        More
+      </AmButton>
+    </div> -->
+    <div class="w-100 fd-r jc-c pt-10" v-if="false">
       <AmButton :height="false" color="mcolor-100" bColor="mcolor-100" opacityEffect @click="nextPage" class="py-2">
         More
       </AmButton>
@@ -90,15 +137,18 @@ import BN from "bn.js";
 export default {
   layout: 'my',
   computed: {
-    aTroveList() {
-      return this.$accessor.risky.troveList
-    },
-    troveTotal() {
-      return this.$accessor.risky.troveTotal
-    },
+    // aTroveList() {
+    //   return this.$accessor.risky.troveList
+    // },
+    // troveTotal() {
+    //   return this.$accessor.risky.troveTotal
+    // },
     getUsd () {
       return this.$accessor.usd || 0
     },
+    totalBorrowers () {
+        return 0
+    }
   },
   data() {
     return {
@@ -125,7 +175,7 @@ export default {
     sortValue (val) {
       if (val) {
         this.page = 1
-        this.$accessor.risky.getTroveListAction({page: this.page, clear: true, search: this.search, sort: val})
+        // this.$accessor.risky.getTroveListAction({page: this.page, clear: true, search: this.search, sort: val})
       }
     }
   },
@@ -141,19 +191,19 @@ export default {
       return new BN(lamports).div(new BN("1000000000")).toString()
     },
     binAction (val) {
-      this.$accessor.risky.closeTroveUser(val)
+    //   this.$accessor.risky.closeTroveUser(val)
     },
     find () {
       this.page = 1
-      this.$accessor.risky.getTroveListAction({page: this.page, clear: true, search: this.search})
+    //   this.$accessor.risky.getTroveListAction({page: this.page, clear: true, search: this.search})
     },
     nextPage() {
       this.page += 1
-      this.$accessor.risky.getTroveListAction({page: this.page, clear: false})
+    //   this.$accessor.risky.getTroveListAction({page: this.page, clear: false})
     }
   },
   mounted() {
-    this.$accessor.risky.getTroveListAction({page: this.page, clear: true})
+    // this.$accessor.risky.getTroveListAction({page: this.page, clear: true})
   }
 }
 </script>
