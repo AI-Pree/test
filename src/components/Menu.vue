@@ -8,7 +8,7 @@
            <nuxt-link to='/'> <img src="@/assets/svg/company_logo.png" class="h-fix-15-S h-fix-55-XS" v-if="showLogo"  /></nuxt-link>
         </div>
         <nuxt-link class="w-a f-gray-600 fw-500 fs-5-M fs-7-S fs-25-XS link hv ts-3 mr-4 my-0-S my-10-XS" :to="{path: '/my'}"  @click.native="togglemenu">
-          Dasboard
+          Dashboard
         </nuxt-link>
         <nuxt-link class="w-a f-gray-600 fw-500 fs-5-M fs-7-S fs-25-XS link hv ts-3 mr-4 my-0-S my-10-XS" v-for="(item, i) in items" :key="i" :to="item.to" @click.native="togglemenu">
           {{ item.title }}
