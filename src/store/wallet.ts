@@ -1,147 +1,102 @@
+// Import Typed
 import { getterTree, mutationTree, actionTree } from 'typed-vuex'
 
-import { AccountInfo, ParsedAccountData, PublicKey } from '@solana/web3.js'
+// Import
+import { PublicKey } from '@solana/web3.js';
+import { Wallets, WalletInfo } from '../utils/wallets'
 
-import { NATIVE_SOL } from '@/utils/tokens'
-import { TOKEN_PROGRAM_ID } from '@/utils/ids'
-import { TokenAmount, lt } from '@/utils/safe-math'
-import { cloneDeep } from 'lodash-es'
-import logger from '@/utils/logger'
-
-const AUTO_REFRESH_TIME = 60
-
+// State
 export const state = () => ({
-  initialized: false,
-  loading: false,
-  modalShow: false,
-
-  autoRefreshTime: AUTO_REFRESH_TIME,
-  countdown: 0,
-  lastSubBlock: 0,
-
-  connected: false,
-  address: '',
-
-  tokenAccounts: {}
+  publicKey: null,
+  wallets: Wallets,
+  errorConnect: false,
+  loaderConnect: false,
+  balance: 0,
+  balanceHGEN: 0,
+  balanceGENS: 11
 })
 
+// Getters
 export const getters = getterTree(state, {})
 
+// Mutation
 export const mutations = mutationTree(state, {
-  setModal(state, show: boolean) {
-    state.modalShow = show
+
+  setPublicKey (state, newValue: string) {
+    state.publicKey = newValue
   },
 
-  setConnected(state, address: string) {
-    state.connected = true
-    state.address = address
+  setErrorConnect (state, newValue: boolean) {
+    state.errorConnect = newValue
   },
 
-  setDisconnected(state) {
-    state.connected = false
-    state.address = ''
+  setLoaderConnect (state, newValue: boolean) {
+    state.loaderConnect = newValue
   },
 
-  setInitialized(state) {
-    state.initialized = true
+  setBalance (state, newValue: number | null) {
+    state.balance = newValue
   },
 
-  setLoading(state, loading: boolean) {
-    if (loading) {
-      state.countdown = AUTO_REFRESH_TIME
-    }
-
-    state.loading = loading
-
-    if (!loading) {
-      state.countdown = 0
-    }
+  setBalanceHGEN (state, newValue: number | null) {
+    state.balanceHGEN = newValue
   },
 
-  setTokenAccounts(state, tokenAccounts: any) {
-    state.tokenAccounts = cloneDeep(tokenAccounts)
-  },
-
-  setCountdown(state, countdown: number) {
-    state.countdown = countdown
-  },
-
-  setLastSubBlock(state, lastSubBlock: number) {
-    state.lastSubBlock = lastSubBlock
+  setBalanceGENS (state, newValue: number | null) {
+    state.balanceGENS = newValue
   }
+
 })
 
+// Actions
 export const actions = actionTree(
   { state, getters, mutations },
   {
-    openModal({ commit }) {
-      commit('setModal', true)
-    },
-
-    closeModal({ commit }) {
-      return new Promise((resolve) => {
-        commit('setModal', false)
-        setTimeout(() => {
-          resolve(true)
-        }, 500)
+    // Connection
+    async connectWallet ({ commit }, wallet: WalletInfo) {
+      commit('setLoaderConnect', true)
+      const adapter = await wallet.getAdapter({ providerUrl: wallet.url, endpoint: 'https://api.mainnet-beta.solana.com' })
+      if (!adapter || !this.$web3) {
+        this.app.$accessor.setModal('connectError')
+        return
+      }
+      this.$wallet = adapter
+      adapter.on('connect', () => {
+        if (adapter.publicKey) {
+          commit('setPublicKey', adapter.publicKey.toBase58())
+          this.app.$accessor.setModal('')
+          this.$router.push('/my')
+        }
+        commit('setLoaderConnect', false)
       })
+      try {
+        adapter.connect()
+      } catch (error) {
+        console.log(error)
+        commit('setErrorConnect', true)
+        commit('setLoaderConnect', false)
+      }
     },
 
-    getTokenAccounts({ commit }) {
-      const conn = this.$web3
-      const wallet = (this as any)._vm.$wallet
+    // Disconnection
+    logout ({ commit }) {
+      if (this.$wallet) {
+        this.$wallet.disconnect()
+        this.$wallet = null
+      }
+      commit('setPublicKey', '')
+      this.$router.push('/')
+    },
 
-      if (wallet && wallet.connected) {
-        commit('setLoading', true)
-
-        conn
-          .getParsedTokenAccountsByOwner(
-            wallet.publicKey,
-            {
-              programId: TOKEN_PROGRAM_ID
-            },
-            'confirmed'
-          )
-          .then(async (parsedTokenAccounts: any) => {
-            const tokenAccounts: any = {}
-
-            parsedTokenAccounts.value.forEach(
-              (tokenAccountInfo: { pubkey: PublicKey; account: AccountInfo<ParsedAccountData> }) => {
-                const tokenAccountAddress = tokenAccountInfo.pubkey.toBase58()
-                const parsedInfo = tokenAccountInfo.account.data.parsed.info
-                const mintAddress = parsedInfo.mint
-                const balance = new TokenAmount(parsedInfo.tokenAmount.amount, parsedInfo.tokenAmount.decimals)
-
-                if (Object.prototype.hasOwnProperty.call(tokenAccounts, mintAddress)) {
-                  if (lt(tokenAccounts[mintAddress].balance.wei.toNumber(), balance.wei.toNumber())) {
-                    tokenAccounts[mintAddress] = {
-                      tokenAccountAddress,
-                      balance
-                    }
-                  }
-                } else {
-                  tokenAccounts[mintAddress] = {
-                    tokenAccountAddress,
-                    balance
-                  }
-                }
-              }
-            )
-
-            const solBalance = await conn.getBalance(wallet.publicKey, 'confirmed')
-            tokenAccounts[NATIVE_SOL.mintAddress] = {
-              tokenAccountAddress: wallet.publicKey.toBase58(),
-              balance: new TokenAmount(solBalance, NATIVE_SOL.decimals)
-            }
-
-            commit('setTokenAccounts', tokenAccounts)
-            logger('Wallet TokenAccounts updated')
-          })
-          .catch()
-          .finally(() => {
-            commit('setInitialized')
-            commit('setLoading', false)
-          })
+    // Get Balanse
+    getBalance ({ commit }) {
+      if (this.$web3 && this.$wallet) {
+        const data = this.$web3.getBalance(this.$wallet.publicKey)
+        data.then(value => {
+          commit('setBalance', (value / 1000000000))
+          commit('setBalanceHGEN', 0)
+          commit('setBalanceGENS', (value / 1000000000) * 0.000926)
+        })
       }
     }
   }

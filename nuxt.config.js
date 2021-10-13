@@ -1,130 +1,105 @@
-import i18n from './src/i18n'
-import lessToJson from 'less-to-json'
-import path from 'path'
-
-const lessVariables = lessToJson('src/styles/variables.less')
-
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
-
-  srcDir: './src/',
-  // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
+  srcDir: "./src/",
   ssr: false,
 
+  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'DS Consulting',
+    title: "la-front-temp",
     htmlAttrs: {
-      lang: 'en'
+      lang: "en"
     },
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { hid: "description", name: "description", content: "" },
+      { name: "format-detection", content: "telephone=no" }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
-      }
-    ]
-  },
-
-  loadingIndicator: {
-    name: 'circle',
-    color: '#5ac4be',
-    background: '#131a35'
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    'normalize.css/normalize.css',
-    {
-      src: '@/styles/scss/main.scss',
-      lang: 'scss'
-    },
-    {
-      src: '@/styles/antd.less',
-      lang: 'less'
-    },
-    {
-      src: '@/styles/global.less',
-      lang: 'less'
-    }
-  ],
+  css: ["@/scss/base.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@/plugins/axios.ts', '@/plugins/api.ts', '@/plugins/web3.ts', '@/plugins/notify.ts'],
+  plugins: ["@plugins/web3.ts"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build',
-    // https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module',
-    // https://go.nuxtjs.dev/stylelint
-    '@nuxtjs/stylelint-module',
+    "@nuxt/typescript-build",
+    // lib amber
+    "@modules/amberlib",
     // https://typed-vuex.roe.dev
-    'nuxt-typed-vuex'
+    "nuxt-typed-vuex"
   ],
+
+  // nuxt scroll behaviour for anchoring
+  router: {
+    scrollBehavior: async function(to, from, savedPosition) {
+      const ADDITIONAL_OFFSET = 80;
+      if (savedPosition) {
+        return savedPosition;
+      }
+
+      const findEl = async (hash, x = 0) => {
+        return (
+          document.querySelector(hash) ||
+          new Promise(resolve => {
+            if (x > 50) {
+              return resolve(document.querySelector("#app"));
+            }
+            setTimeout(() => {
+              resolve(findEl(hash, ++x || 1));
+            }, 100);
+          })
+        );
+      };
+
+      if (to.hash) {
+        let el = await findEl(to.hash);
+        if ("scrollBehavior" in document.documentElement.style) {
+          return window.scrollTo({
+            top: el.offsetTop + ADDITIONAL_OFFSET,
+            behavior: "smooth"
+          });
+        } else {
+          return window.scrollTo(0, el.offsetTop + ADDITIONAL_OFFSET);
+        }
+      }
+
+      return { x: 0, y: 0 };
+    }
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    '@nuxtjs/style-resources',
-    'nuxt-i18n',
-    '@nuxtjs/axios',
-    'nuxt-clipboard',
-    '@nuxtjs/dayjs',
-    '@nuxtjs/google-gtag'
-  ],
+  modules: ["@nuxtjs/axios", "@nuxtjs/svg"],
 
-  i18n,
-
-  styleResources: {
-    scss: ['./styles/scss/main.scss']
+  axios: {
+    //baseUrl: process.env.baseUrl || 'http://34.64.168.231:1335/'
+    baseUrl: process.env.baseUrl || "https://liquity-back.ambersoft.llc/"
   },
 
-  clipboard: {
-    autoSetContainer: true
-  },
-
-  dayjs: {
-    locales: ['en'],
-    defaultLocale: 'en',
-    plugins: ['utc']
+  // ENV
+  env: {
+    //baseUrl: process.env.BASE_URL || 'http://34.64.168.231:1335/',
+    baseUrl: process.env.BASE_URL || "https://liquity-back.ambersoft.llc/",
+    mint: "C6tfES3TrhTzQnRopAyqHAjx4ixShAzJ16QeffWvoXBk"
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: [/^ant-design-vue/, '@project-serum/sol-wallet-adapter'],
-
-    loaders: {
-      less: {
-        javascriptEnabled: true,
-        modifyVars: lessVariables
-      }
-    },
-
-    babel: {
-      plugins: [
-        [
-          'import',
-          {
-            libraryName: 'ant-design-vue',
-            libraryDirectory: 'lib',
-            style: true
-          },
-          'ant-design-vue'
-        ]
-      ]
-    },
-
-    extend(config) {
-      config.resolve.alias['@ant-design/icons/lib/dist$'] = path.resolve(__dirname, './src/utils/antd-icons.ts')
+    extend(config, { isDev, isClient }) {
+      config.node = {
+        fs: "empty"
+      };
     }
+  },
+
+  server: {
+    host: "0.0.0.0",
+    port: process.env.PORT || 5000
   }
-}
+};

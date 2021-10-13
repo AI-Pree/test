@@ -1,29 +1,81 @@
 <template>
-  <div>
-    <!--    <img src="~/assets/images/top-right.png" alt="" class="top-right-bg" />-->
-    <Nav />
-    <Setting />
+  <div class="w-100 h-100min">
+    <div class="w-100 h-100min p-f l-0 t-0 ovh-y-a bg-l" />
+    <Menu @connect="setModalFunc" :publicKey="publicKey" @logout="logout" />
     <Nuxt />
     <Footer />
-    <!--    <img src="~/assets/images/footer-bg.png" alt="" class="footer-bg" />-->
+    <AmModal
+      :show="modal === 'connect'"
+      :shadow="errorConnect ? 'shadow-red-100' : 'shadow-purple-300'"
+      max="w-fix-250-S w-90-XS"
+      @closed="setModalFunc"
+    >
+      <ConnectWallet
+        @cancel="setModalFunc"
+        @set="connectWalletFunc"
+        :wallets="wallets"
+        :error="errorConnect"
+        :loader="loaderConnect"
+      />
+    </AmModal>
+    <AmModal
+      :show="modal === 'connectError'"
+      shadow="shadow-red-100"
+      max="w-fix-250-S w-90-XS"
+      @closed="setModalFunc"
+    >
+      <ConnectError />
+    </AmModal>
   </div>
 </template>
 
-<style lang="scss" scoped>
-.top-right-bg {
-  max-width: 500px;
-  position: absolute;
-  top: -50px;
-  right: -40px;
-  z-index: -1;
-}
+<script>
+import Menu from "@/components/Menu";
+import Footer from "@/components/Footer";
+import ConnectWallet from "@/components/modals/ConnectWallet";
+import ConnectError from "@/components/modals/ConnectError";
 
-.footer-bg {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: -1;
-}
-</style>
+export default {
+  components: {
+    Menu,
+    Footer,
+    ConnectWallet,
+    ConnectError
+  },
+  computed: {
+    modal() {
+      return this.$accessor.modal;
+    },
+    publicKey() {
+      return this.$accessor.wallet.publicKey;
+    },
+    wallets() {
+      return this.$accessor.wallet.wallets;
+    },
+    errorConnect() {
+      return this.$accessor.wallet.errorConnect;
+    },
+    loaderConnect() {
+      return this.$accessor.wallet.loaderConnect;
+    }
+  },
+  methods: {
+    setModalFunc(value) {
+      if (this.loaderConnect) {
+        this.$accessor.wallet.setLoaderConnect(false);
+      } else {
+        this.$accessor.setModal(value);
+      }
+    },
+    connectWalletFunc(value) {
+      this.$accessor.wallet.connectWallet(value);
+    },
+    logout() {
+      this.$accessor.wallet.logout();
+    }
+  },
+  mounted() {
+    this.$accessor.getInfo();
+  }
+};
+</script>
