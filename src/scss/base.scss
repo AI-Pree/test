@@ -1,13 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@import "../modules/amberlib/variables.scss";
 
 html {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
-.bg-l{
+.bg-l {
   background: linear-gradient(90.57deg, #161421 0.49%, #121442 99.5%);
 }
-.bg-r{
+.bg-r {
   background: linear-gradient(298.96deg, #161421 -4.05%, #121442 100.6%);
 }
 
@@ -21,15 +23,15 @@ html {
   opacity: 0.7;
 }
 .text-purple-200 {
-  color: #CF68FF;
+  color: #cf68ff;
 }
 .text-green-400 {
-  color: #00AF12;
+  color: #00af12;
 }
 .text-red-400 {
-  color: #FF006B;
+  color: #ff006b;
 }
-.d-g  {
+.d-g {
   display: grid;
 }
 .grid-columns-2 {
@@ -43,16 +45,21 @@ html {
   border-radius: 10px;
 }
 .text-shadow-purple-100 {
-  text-shadow: 0px 0px .1rem #8F00FF;
+  text-shadow: 0px 0px 0.1rem #8f00ff;
 }
-.bg-gradient-purple{
-  background: linear-gradient(118.53deg, #8F00FF 3.99%, rgba(240, 217, 255, 0.5) 35.25%, #8F00FF 100%);
+.bg-gradient-purple {
+  background: linear-gradient(
+    118.53deg,
+    #8f00ff 3.99%,
+    rgba(240, 217, 255, 0.5) 35.25%,
+    #8f00ff 100%
+  );
 }
 .va-m {
   vertical-align: middle;
 }
 .shadow-purple-100 {
-  box-shadow: 0 0 0.5rem #B556FF;
+  box-shadow: 0 0 0.5rem #b556ff;
 }
 .shadow-purple-200 {
   box-shadow: 0 0 0.3rem 0 rgba(143, 0, 255, 1);
@@ -81,7 +88,7 @@ html {
 .divide-line {
   border-style: solid;
   border-color: #fff;
-  opacity: .2;
+  opacity: 0.2;
 }
 .mcolor-200 {
   background-color: rgba(67, 24, 118, 1);
@@ -93,7 +100,7 @@ html {
   color: rgba(67, 24, 118, 1);
 }
 .f-mcolor-500 {
-  color: #8F00FF
+  color: #8f00ff;
 }
 .svg-f-mcolor-200 {
   fill: rgba(143, 0, 255, 1);
@@ -135,12 +142,16 @@ html {
   border-color: rgba(18, 17, 45, 1);
 }
 .gradient {
-  background: linear-gradient(91.29deg, #00FFF0 -16.04%, #A900FF 75.37%);
+  background: linear-gradient(91.29deg, #00fff0 -16.04%, #a900ff 75.37%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .gradient-200 {
-  background: linear-gradient(103.86deg, rgba(209, 187, 255, 0.11) 1.36%, rgba(201, 175, 255, 0) 99.58%);
+  background: linear-gradient(
+    103.86deg,
+    rgba(209, 187, 255, 0.11) 1.36%,
+    rgba(201, 175, 255, 0) 99.58%
+  );
   &::before {
     content: "";
     position: absolute;
@@ -150,20 +161,34 @@ html {
     bottom: 0;
     border-radius: 1vw;
     padding: 0.1rem;
-    background: linear-gradient(99.43deg, rgba(219, 0, 255, 0.43) 2.37%, rgba(82, 0, 255, 0.16) 101.31%);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(rgba(82, 0, 255, 0.5) 0 0) border-box;
+    background: linear-gradient(
+      99.43deg,
+      rgba(219, 0, 255, 0.43) 2.37%,
+      rgba(82, 0, 255, 0.16) 101.31%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(rgba(82, 0, 255, 0.5) 0 0) border-box;
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
   }
 }
 .gradient-300 {
-  background: linear-gradient(100.8deg, rgba(255, 255, 255, 0.11) 1.43%, rgba(255, 255, 255, 0) 101.28%);
+  background: linear-gradient(
+    100.8deg,
+    rgba(255, 255, 255, 0.11) 1.43%,
+    rgba(255, 255, 255, 0) 101.28%
+  );
 }
 .gradient-400 {
   background: linear-gradient(90.57deg, #161421 0.49%, #121442 99.5%);
 }
 .gradient-500 {
-  background: linear-gradient(118.53deg, #8F00FF 3.99%, rgba(240, 217, 255, 0.5) 35.25%, #8F00FF 100%);
+  background: linear-gradient(
+    118.53deg,
+    #8f00ff 3.99%,
+    rgba(240, 217, 255, 0.5) 35.25%,
+    #8f00ff 100%
+  );
 }
 
 .amSelectboxBlock {
@@ -175,20 +200,22 @@ html {
   }
 }
 
-.jc-sb{justify-content: space-between}
+.jc-sb {
+  justify-content: space-between;
+}
 
 .lq-input {
-  background: #12112D;
+  background: #12112d;
   padding: 1rem;
   margin-bottom: 2rem;
 }
 
 .lq-input input {
- border: 0;
- background: transparent;
- padding: .7rem 0;
- width: 100%;
- font-size: 1rem;
+  border: 0;
+  background: transparent;
+  padding: 0.7rem 0;
+  width: 100%;
+  font-size: 1rem;
 }
 .lq-input input:focus {
   outline: none;
@@ -210,9 +237,9 @@ html {
 
   width: 260px;
   background: #151433;
-  border: 1px solid #A93CFF;
+  border: 1px solid #a93cff;
   box-sizing: border-box;
-  box-shadow: 0px 0px 9px #8F00FF;
+  box-shadow: 0px 0px 9px #8f00ff;
   color: #fff;
   text-align: left;
   padding: 8px 10px;
@@ -221,7 +248,7 @@ html {
   opacity: 0;
   font-weight: 300;
   font-size: 14px;
-  transition: opacity .6s;
+  transition: opacity 0.6s;
   line-height: 1.5rem;
 }
 .tooltip-bottom {
@@ -240,11 +267,11 @@ html {
   border-color: transparent transparent #151433 transparent;
 }
 
-#confirm[type=checkbox] {
+#confirm[type="checkbox"] {
   display: none;
 }
 
-#confirm[type=checkbox] + label:before {
+#confirm[type="checkbox"] + label:before {
   content: "\2714";
   border: 0.1em solid #cdcdcd;
   border-radius: 0.2em;
@@ -256,26 +283,28 @@ html {
   margin-right: 0.2em;
   vertical-align: bottom;
   color: transparent;
-  transition: .2s;
+  transition: 0.2s;
 }
 
-#confirm[type=checkbox] + label:active:before {
+#confirm[type="checkbox"] + label:active:before {
   transform: scale(0);
 }
 
-#confirm[type=checkbox]:checked + label:before {
-  background-color: #CF68FF;
-  border-color: #CF68FF;
+#confirm[type="checkbox"]:checked + label:before {
+  background-color: #cf68ff;
+  border-color: #cf68ff;
   color: #fff;
 }
 
 .wb-br-all {
   word-break: break-all;
 }
-.jc-sb{justify-content: space-between}
+.jc-sb {
+  justify-content: space-between;
+}
 
 .tr-all-ease {
-  transition: all ease .2s;
+  transition: all ease 0.2s;
 }
 .r-45deg {
   transform: rotate(45deg);
@@ -294,14 +323,141 @@ html {
   margin: 0 auto;
 }
 .br-mcolor-400 {
-  border-color: #CF68FF;
+  border-color: #cf68ff;
 }
 
 .bin-icon {
   width: 24px;
   height: 24px;
-  background-color: #CF68FF;
+  background-color: #cf68ff;
   -webkit-mask: url("../assets/svg/my/bin.svg") no-repeat center;
   mask: url("../assets/svg/my/bin.svg") no-repeat center;
   mask-size: contain;
+}
+
+// button for the ant icons scss
+.buttons {
+  display: flex;
+
+  .anticon {
+    font-size: 20px;
+  }
+
+  .ant-progress {
+    line-height: 1;
+  }
+
+  .ant-progress.disabled {
+    cursor: not-allowed;
+  }
+
+  .anticon,
+  .ant-progress {
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+
+    // &:hover {
+    //   background: #170646d5;
+    // }
+  }
+}
+
+// for different screen size on icons
+
+.micon i svg {
+  height: 15px;
+  width: 15px;
+}
+
+@media (max-width: $small) {
+  .cside-XS div {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    background: #161421;
+    cursor: pointer;
+    & i {
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  .micon-XS i svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+@media (min-width: $small) {
+  .cside-S div {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #161421;
+    cursor: pointer;
+
+    // & i {
+    //   height: 10px;
+    //   width: 10px;
+    // }
+  }
+  .micon-S i svg {
+    width: 10px;
+    height: 10px;
+  }
+}
+@media (min-width: $medium) {
+  .cside-M div {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background: #161421;
+    cursor: pointer;
+
+    // & i {
+    //   height: 12px;
+    //   width: 12px;
+    // }
+  }
+
+  .micon-M i svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+@media (min-width: $large) {
+  .cside-L div {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    background: #161421;
+    cursor: pointer;
+    & i {
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  .micon-L i svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+@media (min-width: $xlarge) {
+  .cside-XL div {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    background: #161421;
+    cursor: pointer;
+    & i {
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  .micon-XL i svg {
+    width: 20px;
+    height: 20px;
+  }
 }

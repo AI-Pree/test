@@ -23,7 +23,8 @@ export const state = () => ({
   tokenReward: 0,
   troveTotal: 0,
   usd: 0,
-  lightMode: false
+  lightMode: false,
+  logo: false
 })
 
 export type RootState = ReturnType<typeof state>
@@ -62,7 +63,8 @@ export const mutations = mutationTree(state, {
   },
   setDebtRatio (state, newValue: boolean) {
     state.debtRatio = newValue
-  }
+  },
+  
 })
 
 // Actions
@@ -85,7 +87,7 @@ export const actions = actionTree(
           commit('setUsd', data.solana.usd)
         }
       })
-    }
+    },
   }
 )
 

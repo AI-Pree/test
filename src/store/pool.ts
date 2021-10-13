@@ -61,6 +61,7 @@ export const actions = actionTree(
   {
     // Get Deposit
     async getDeposit ({ commit }, value) {
+    
       await this.$axios.get('deposit?user=' + this.$wallet.publicKey.toBase58()).then(async ({ data }) => {
         commit('setDepositKey', data.model || '')
         // Info
@@ -78,6 +79,7 @@ export const actions = actionTree(
         commit('setDepositAmount', new BN(decodedDepositState.tokenAmount, 10, 'le').toNumber());
         commit('setRewardCoinAmount', new BN(decodedDepositState.rewardCoinAmount, 10, 'le').toNumber());
       })
+
     },
 
     // New Deposit

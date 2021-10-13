@@ -15,20 +15,19 @@
 </template>
 
 <script>
-import Balance from '@/components/my/farming/Balance.vue'
-import Farm from '@/components/my/farming/farm.vue'
-import Info from '@/components/my/farming/Info.vue'
+import Balance from "@/components/my/farming/Balance.vue";
+import Farm from "@/components/my/farming/farm.vue";
+import Info from "@/components/my/farming/Info.vue";
 
 export default {
-  layout: 'my',
+  layout: "my",
   components: {
     Balance,
     Farm,
     Info
   },
   methods: {
-    confirmFunc (value) {
-    }
+    confirmFunc(value) {}
   }
-}
+};
 </script>

@@ -5,7 +5,7 @@
     </div>
     <div class="w-100 fd-r fw-w pt-0-S pt-30-XS">
       <div class="w-55-S w-100-XS">
-        <Pay @gens="to = $event" @sol="from = $event"/>
+        <Pay @gens="to = $event" @sol="from = $event" />
       </div>
       <div class="w-45-S w-100-XS pl-8-S pl-0-XS pt-4-S pt-30-XS">
         <Info :to="Number(to)" :from="Number(from)" />
@@ -23,11 +23,11 @@
 </template>
 
 <script>
-import Balance from "@/components/my/borrowing/Balance.vue"
-import Pay from "@/components/my/borrowing/Pay.vue"
-import Info from '@/components/my/borrowing/Info.vue'
-import Notification from '@/components/my/borrowing/Notification.vue'
-import UseFull from '@/components/my/borrowing/UseFull.vue'
+import Balance from "@/components/my/borrowing/Balance.vue";
+import Pay from "@/components/my/borrowing/Pay.vue";
+import Info from "@/components/my/borrowing/Info.vue";
+import Notification from "@/components/my/borrowing/Notification.vue";
+import UseFull from "@/components/my/borrowing/UseFull.vue";
 
 export default {
   components: {
@@ -37,12 +37,12 @@ export default {
     Notification,
     UseFull
   },
-  layout: 'my',
-  data () {
+  layout: "my",
+  data() {
     return {
       to: null,
       from: null
-    }
+    };
   }
-}
+};
 </script>

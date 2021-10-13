@@ -7,7 +7,8 @@ import { getterTree, mutationTree, actionTree } from 'typed-vuex'
 // State
 export const state = () => ({
   isBorrow: false,
-  loading: false
+  loading: false,
+  logo:false,
 })
 
 // Getters
@@ -20,7 +21,10 @@ export const mutations = mutationTree(state, {
   },
   setLoading (state, newValue: boolean) {
     state.loading = newValue
-  }
+  },
+  setLogo (state, newValue:boolean) {
+    state.logo = newValue
+    }   
 })
 
 // Actions
@@ -39,5 +43,10 @@ export const actions = actionTree(
         this.$accessor.wallet.getBalance()
       }
     },
+
+    // Change the deposit and withdraw tab
+    async changeLogoVis ({ state, commit }, value) {
+        commit('setLogo', value)
+    }
   }
 )

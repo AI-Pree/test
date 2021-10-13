@@ -16,40 +16,40 @@
 </template>
 
 <script>
-import Balance from "@/components/my/swap/Balance.vue"
-import Raydium from "@/components/my/swap/Raydium.vue"
-import Info from "@/components/my/swap/Info.vue"
+import Balance from "@/components/my/swap/Balance.vue";
+import Raydium from "@/components/my/swap/Raydium.vue";
+import Info from "@/components/my/swap/Info.vue";
 
 export default {
-  layout: 'my',
-  head(){
-    return{
+  layout: "my",
+  head() {
+    return {
       bodyAttrs: {
-          class: "isSwap"
-      },
-    }
+        class: "isSwap"
+      }
+    };
   },
   components: {
     Balance,
     Raydium,
-    Info,
+    Info
   },
   methods: {
-    swapFunc () {
-      this.$accessor.swap.swap()
+    swapFunc() {
+      this.$accessor.swap.swap();
     },
-    createRayFunc () {
-      this.$accessor.swap.createRay()
+    createRayFunc() {
+      this.$accessor.swap.createRay();
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
 .isSwap .swap-bg {
-    background-image: url("/img/XMLID.png");
-    background-repeat: no-repeat;
-    background-position: left bottom;
-    background-size: 320px;
+  background-image: url("/img/XMLID.png");
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 320px;
 }
 </style>

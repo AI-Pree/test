@@ -20,21 +20,21 @@
 </template>
 
 <script>
-import Balance from '@/components/my/pool/Balance.vue'
-import Safe from '@/components/my/pool/Safe.vue'
-import Info from '@/components/my/pool/Info.vue'
+import Balance from "@/components/my/pool/Balance.vue";
+import Safe from "@/components/my/pool/Safe.vue";
+import Info from "@/components/my/pool/Info.vue";
 
 export default {
-  layout: 'my',
+  layout: "my",
   components: {
     Balance,
     Safe,
     Info
   },
   methods: {
-    confirmFunc (value) {
-      this.$accessor.pool.confirm(value)
+    confirmFunc(value) {
+      this.$accessor.pool.confirm(value);
     }
   }
-}
+};
 </script>
